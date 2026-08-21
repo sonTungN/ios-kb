@@ -1,0 +1,90 @@
+---
+description: Retrieval protocol for the Assignment 2 group-project knowledge base — how to route a question to an address, which file wins on a conflict, and the invariants that must never be violated.
+globs:
+  - "**/*"
+alwaysApply: true
+---
+
+# Context map & retrieval protocol
+
+This project's knowledge lives in an **addressable knowledge base**, not in this rule. This rule is the **routing protocol**: it tells you how to find the right file, not what the files say.
+
+**Catalog:** `.claude/context-index.md` — full scope per address, question→address lookup, task bundles.
+**Kernel:** `CLAUDE.md` — always-loaded invariants + the compact router.
+
+---
+
+## 1 · Retrieval protocol
+
+1. **Classify the question** by domain: assignment requirement · decision status · build state · link/term.
+2. **Resolve to an address** using the router in `CLAUDE.md`. If ambiguous, or the question spans domains, read `.claude/context-index.md` §2 and pick from there.
+3. **Read the whole file.** Files are sized for a single cheap read; partial reads produce confidently wrong answers.
+4. **Follow `related:` only when the answer is genuinely incomplete.** Do not pre-load a neighbourhood.
+5. **Answer, citing addresses** (e.g. "per `BRIEF-04`…") so the user can verify.
+
+### Load rules
+
+- **Load by address. Never glob or grep the KB as a first move.**
+- **Never read `.claude/context/_source/`** — raw originals, fully migrated into `brief/01–09`.
+- **Do not load the whole KB "for background."** Progressive disclosure is the entire design.
+- **Two to four files is a normal answer.**
+
+### Never answer from memory
+
+If a question touches a requirement, a number, a filename, a deadline or a status, **read the file**. Plausible recall is the main failure mode this KB exists to prevent. In particular, do not blend in Assignment 1 rules from the sibling `MigratoryYear` project — several are **inverted** here (A1 forbade view models; A2 **mandates MVVM**; A1 forbade remote APIs; A2 **requires cloud sync**).
+
+---
+
+## 2 · Authority — who wins on a conflict
+
+```
+brief  >  reality  >  decision  >  blueprint  >  reference
+```
+
+| Tier | Files | Meaning |
+| --- | --- | --- |
+| **brief** | `BRIEF-01`…`BRIEF-07`, `BRIEF-09` | What the assignment demands. External, non-negotiable. If anything contradicts it, the other thing is wrong. |
+| **reality** | `BUILD-01`, `BUILD-02`, `BUILD-03` | What actually exists/holds right now. |
+| **decision** | `DEC-01` | The decision register. Today it records that **everything is open**. |
+| **blueprint** | *(none yet)* | `DES-xx`/`DATA-xx` will appear after the concept decision. |
+| **reference** | `REF-01`, `REF-02` | Supporting material. Never overrides anything. |
+
+**When you spot a conflict:** answer from the higher tier, then say the lower-tier file is stale and name it. Do not silently reconcile.
+
+---
+
+## 3 · Invariants — violating any of these loses marks or worse
+
+Restated from `CLAUDE.md` because they must survive being read in isolation.
+
+**Product (`BRIEF-02`–`BRIEF-05`)**
+- **MVVM is mandatory** — Models / Views / ViewModels / persistence & data services clearly separated.
+- **SwiftUI-primary; GameKit & SpriteKit are outside the taught scope** (use at own risk, unsupported).
+- The cultural element must **shape gameplay mechanics**, not decorate them — the top rubric criterion's Excellent test is "could not be transferred to an unrelated subject without the game breaking."
+- **Five required views** (Menu, Game, Leaderboard, How To Play, Settings), ≥3 distinct animations in Game View, registration/login/logout + profiles, CRUD + **cloud sync**, **two Week 7 industry requirements**.
+- Works on **iPhone 17 / 17 Pro / 17 Pro Max / 11-inch iPad Air**, both system light & dark modes; marked on **Xcode 26.4.1 / iOS 26.4.1 / iPhone 17 Pro simulator**.
+
+**Process (`BRIEF-01`, `BRIEF-06`, `BRIEF-07`)**
+- Work **only** in the assigned private repo under `rmit-vietnam-computing-technologies` — never personal/public repos; ZIP must equal the final commit.
+- Exact deliverable names: `SourceCode/`, `Document.pdf`, `GitHub.txt`, `Youtube.txt`.
+- **All 5 members appear and speak in the video** or that member scores zero for the presentation component.
+- Commit history is assessment evidence — regular commits from **every** member across the whole window.
+
+**Phase**
+- **No team decision has been made yet** (`DEC-01`). Do not present any concept, name, role, or stack as chosen; route "what did we decide?" to `DEC-01`.
+
+---
+
+## 4 · Keeping the KB true
+
+Any change must be reflected in the KB in the same turn:
+
+| Change | Update |
+| --- | --- |
+| A decision closes (concept, roles, names, stack…) | `DEC-01` (status + date + rationale) → `BUILD-01` → seed `DES-xx`/`DATA-xx` when design begins |
+| Project/repo state changes (repo cloned, Xcode project created, code written) | `BUILD-01` |
+| The plan changes or a milestone passes | `BUILD-02` |
+| A meeting happens | `BUILD-03` (retire/replace the agenda) + `DEC-01` |
+| A file added, moved or removed | frontmatter + `.claude/context-index.md` §1–2 + the `CLAUDE.md` router |
+
+**A KB that silently drifts is worse than no KB** — it converts uncertainty into confident error. If you cannot verify a "reality" claim, say so rather than repeating it.

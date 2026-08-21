@@ -1,0 +1,80 @@
+{
+  "_note": "Game-wide configuration — everything that is not specific to one dynasty. Dynasty content lives in content/<id>/dynasty.json. Run ../tools/validate_data.py to check.",
+
+  "id": "living-heritage",
+
+  "_difficultyNote": "TWO AXES, DELIBERATELY DIFFERENT JOBS. Difficulty across dynasties is PROGRESSION — it comes from the SHAPE of the win condition (see ../design/win-condition-model.md § Three shapes), never from harsher numbers, and BRIEF-05 §3 requires it. Difficulty inside a dynasty is ACCOMMODATION — the player-facing Dễ/Thường/Khó control, and it changes ONLY HOW MUCH THE GAME TELLS YOU AND HOW MUCH SLACK IT LEAVES. It never touches a starting stat, a choice cost, a flag or the victory rule. Hard mode is not a bigger bill; it is playing without hindsight. That distinction is the whole point: if difficulty scaled the numbers, a Khó victory and a Dễ victory would mean different things, the leaderboard would be meaningless, and the level's argument — that the historical path is affordable but only just — would be a different argument at every setting.",
+
+  "difficultyPolicy": {
+    "mayChange": [
+      "crisisBands",
+      "ledgerDisclosure",
+      "advisors",
+      "ambientCap"
+    ],
+    "neverChanges": {
+      "omens": true,
+      "runReview": "full"
+    },
+    "_neverChangesRationale": {
+      "omens": "Omens announce that an invasion is coming, and the historical court genuinely knew — envoys, border reports, tributary intelligence. Suppressing them at a higher difficulty would not be difficulty, it would be a false claim about what was knowable at the time.",
+      "runReview": "The run review is where a defeat becomes a lesson, which is the entire educational payload. Gating it behind a difficulty would hand the teaching to exactly the players who needed it least."
+    },
+    "mayNotChange": [
+      "stats.start",
+      "choices.effects",
+      "crises.rescue.effects",
+      "flags",
+      "finalTrial",
+      "weave",
+      "weavePolicy",
+      "card order"
+    ],
+    "_invariantRationale": "Every dial in mayChange is information or slack. Every item in mayNotChange is either a historical claim or part of the level's argument. The linter checks that no difficulty entry declares a key outside mayChange — the list is the enforcement, not a comment.",
+    "_weaveNote": "Difficulty deliberately does NOT bias the weave draw. The solvency invariant in weavePolicy is proved against a uniform draw; letting Khó deal a hostile hand would either break that proof or require re-deriving it per difficulty. Hard mode withholds help. It does not stack the deck."
+  },
+
+  "difficulties": [
+    {
+      "id": "de",
+      "name": { "vi": "Dễ", "en": "Forgiving" },
+      "blurb": {
+        "vi": "Sử chỉ đường. Sổ chuẩn bị mở sẵn từ đầu, và triều đình báo động sớm.",
+        "en": "History points the way. The ledger is open from the first card, and the court warns you early."
+      },
+      "crisisBands": { "low": 30, "high": 70 },
+      "ledgerDisclosure": "from-start",
+      "advisors": true,
+      "ambientCap": 5
+    },
+    {
+      "id": "thuong",
+      "name": { "vi": "Thường", "en": "Standard" },
+      "blurb": {
+        "vi": "Sử chỉ lúc, không chỉ đường. Sổ chuẩn bị mở ra khi m giành được điều đầu tiên.",
+        "en": "History tells you when, not what. The ledger opens once you have secured your first preparation."
+      },
+      "crisisBands": { "low": 20, "high": 80 },
+      "ledgerDisclosure": "after-first-flag",
+      "advisors": true,
+      "ambientCap": 3
+    },
+    {
+      "id": "kho",
+      "name": { "vi": "Khó", "en": "Without hindsight" },
+      "blurb": {
+        "vi": "Không cố vấn, không sổ chuẩn bị, không đường lui. Triều đình năm ấy cũng không có.",
+        "en": "No advisors, no ledger, no way back from the edge. The court of that year had none either."
+      },
+      "crisisBands": null,
+      "ledgerDisclosure": "at-final-trial",
+      "advisors": false,
+      "ambientCap": 1
+    }
+  ],
+
+  "_difficultyDesignNotes": {
+    "kho": "crisisBands: null restores the original model exactly — a stat touching 0 or 100 ends the run on the spot, no rescue. That design already existed and was too punishing as a default; as the top difficulty it is the correct version of itself.",
+    "ledgerDisclosure": "The three settings are the three answers to 'how much hindsight does the player get'. from-start names the preparations; after-first-flag reveals the shape once the player has stumbled into one and keeps the when-not-what hint policy; at-final-trial means the player finds out what was required at the moment it is judged, which is what the court itself experienced."
+  }
+}

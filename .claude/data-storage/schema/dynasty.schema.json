@@ -1,0 +1,143 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "dynasty.schema.json",
+  "title": "Dynasty (level)",
+  "description": "One playable level: its stats, its preparation flags, and the historical victory condition.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "name", "period", "stats", "flags", "finalTrial", "lesson"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+    "name": { "$ref": "#/$defs/i18n" },
+    "period": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["from", "to"],
+      "properties": {
+        "from": { "type": "integer" },
+        "to": { "type": "integer" }
+      }
+    },
+    "playPattern": {
+      "$ref": "#/$defs/i18n",
+      "description": "One line: how this level FEELS different to play. If two dynasties share a play pattern, one of them is redundant."
+    },
+    "stats": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 5,
+      "items": { "$ref": "#/$defs/stat" }
+    },
+    "flags": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/flag" }
+    },
+    "counters": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/counter" }
+    },
+    "finalTrial": { "$ref": "#/$defs/finalTrial" },
+    "lesson": {
+      "$ref": "#/$defs/i18n",
+      "description": "The single thing the player should understand after finishing. Feeds Report section 1 (Cultural Element -> Gameplay Mechanic -> Player Learning) directly."
+    }
+  },
+  "$defs": {
+    "i18n": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["vi", "en"],
+      "properties": {
+        "vi": { "type": "string", "minLength": 1 },
+        "en": { "type": "string", "minLength": 1 }
+      }
+    },
+    "stat": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "start", "failLow", "failHigh"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "$ref": "#/$defs/i18n" },
+        "icon": { "type": "string" },
+        "start": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "failLow": { "type": "integer", "default": 0 },
+        "failHigh": { "type": "integer", "default": 100 },
+        "failLowText": {
+          "$ref": "#/$defs/i18n",
+          "description": "Historical failure mode when depleted."
+        },
+        "failHighText": {
+          "$ref": "#/$defs/i18n",
+          "description": "Historical failure mode when maxed. Required: an unbounded stat removes all tension."
+        }
+      }
+    },
+    "flag": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "carrierCardId"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "$ref": "#/$defs/i18n" },
+        "carrierCardId": {
+          "type": "string",
+          "description": "The card whose choice grants this flag. Must exist, and that choice must have a negative stat effect (the cost rule)."
+        },
+        "historicalBasis": {
+          "$ref": "#/$defs/i18n",
+          "description": "What real preparation this represents."
+        }
+      }
+    },
+    "counter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "min", "max"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "$ref": "#/$defs/i18n" },
+        "min": { "type": "integer" },
+        "max": { "type": "integer" },
+        "start": { "type": "integer", "default": 0 }
+      }
+    },
+    "finalTrial": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "requireAll", "insufficientAlone", "defeatByStatsText"],
+      "properties": {
+        "name": { "$ref": "#/$defs/i18n" },
+        "year": { "type": ["integer", "null"] },
+        "requireAll": {
+          "type": "array",
+          "minItems": 2,
+          "items": { "type": "string" },
+          "description": "Preparation flags that must all be held. Fewer than 2 makes the level a single gate."
+        },
+        "requireAny": { "type": "array", "items": { "type": "string" } },
+        "requireCounter": {
+          "type": "object",
+          "additionalProperties": { "type": "integer" }
+        },
+        "statGate": {
+          "type": "object",
+          "additionalProperties": { "type": "integer" },
+          "description": "Survival floor only. Never sufficient for victory on its own."
+        },
+        "insufficientAlone": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" },
+          "description": "Stats explicitly documented as NOT winning this trial however high. The pedagogical core of the level."
+        },
+        "victoryText": { "$ref": "#/$defs/i18n" },
+        "defeatByStatsText": {
+          "$ref": "#/$defs/i18n",
+          "description": "Shown when the player arrives strong but unprepared. Must explain the historical reason. This is where the learning lands."
+        },
+        "sources": { "type": "array", "items": { "type": "object" } }
+      }
+    }
+  }
+}

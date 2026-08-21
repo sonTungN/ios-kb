@@ -1,0 +1,798 @@
+{
+  "_note": "Structure, stat model, flags and victory rule are complete and playable. Narrative prose fields are marked TODO and are written by the team from the sources in ../../research/01-tran-nguyen-mong.md. Run ../../tools/validate_data.py to check.",
+
+  "id": "tran",
+  "name": { "vi": "Nhà Trần", "en": "The Trần Dynasty" },
+  "period": { "from": 1258, "to": 1288 },
+  "playPattern": {
+    "vi": "Hy sinh để sống sót. Bắt đầu mạnh, mọi nước đi đúng đều trông như đang thua.",
+    "en": "Sacrifice to survive. You start strong, and every correct move looks like losing."
+  },
+
+  "stats": [
+    {
+      "id": "binh",
+      "name": { "vi": "Binh lực", "en": "Military" },
+      "icon": "shield",
+      "start": 55,
+      "failLow": 0,
+      "failHigh": 100,
+      "failLowText": { "vi": "TODO — không còn quân, biên ải vỡ", "en": "TODO" },
+      "failHighText": { "vi": "TODO — kiêu binh, tướng lĩnh lấn át ngai vàng", "en": "TODO" }
+    },
+    {
+      "id": "dan",
+      "name": { "vi": "Lòng dân", "en": "Popular support" },
+      "icon": "groups",
+      "start": 50,
+      "failLow": 0,
+      "failHigh": 100,
+      "failLowText": { "vi": "TODO — dân nổi dậy, hậu phương tan", "en": "TODO" },
+      "failHighText": { "vi": "TODO — triều đình không còn thu thuế hay bắt lính được", "en": "TODO" }
+    },
+    {
+      "id": "kho",
+      "name": { "vi": "Quốc khố", "en": "Treasury" },
+      "icon": "payments",
+      "start": 45,
+      "failLow": 0,
+      "failHigh": 100,
+      "failLowText": { "vi": "TODO — đói kém, không nuôi nổi quân", "en": "TODO" },
+      "failHighText": { "vi": "TODO — sưu thuế nặng nuôi một triều đình phì đại", "en": "TODO" }
+    },
+    {
+      "id": "than",
+      "name": { "vi": "Triều thần", "en": "The court" },
+      "icon": "account_balance",
+      "start": 60,
+      "failLow": 0,
+      "failHigh": 100,
+      "failLowText": { "vi": "TODO — bộ máy cai trị sụp, lệnh không ra khỏi kinh thành", "en": "TODO" },
+      "failHighText": { "vi": "TODO — quyền thần lấn át, vua thành hư vị", "en": "TODO" }
+    }
+  ],
+
+  "flags": [
+    {
+      "id": "long_dan",
+      "name": { "vi": "Lòng dân thống nhất", "en": "A nation of one mind" },
+      "carrierCardId": "dien-hong-1284",
+      "historicalBasis": {
+        "vi": "Hội nghị Diên Hồng, 1284 — Thượng hoàng Trần Thánh Tông hỏi bô lão cả nước: hòa hay đánh.",
+        "en": "The Diên Hồng conference, 1284."
+      },
+      "irrevocable": true,
+      "statFloor": { "dan": 20 },
+      "_floorRationale": "Diên Hồng is the Retired Emperor putting the war to the elders of the whole country. It needs a people still willing to answer, not an army and not a treasury — so the floor is on lòng dân and nothing else. Set low: 20 against a start of 50. It binds only on a player who has spent the people repeatedly, which is the run where the assembly genuinely would not have come.",
+      "blockedText": {
+        "vi": "Chiếu triệu bô lão đã ban đi các lộ. Rất ít người tới. Những người tới thì ngồi im. Không thể hỏi cả nước khi cả nước đã thôi trả lời.",
+        "en": "The summons went out to every province. Few elders came, and those who came said nothing. You cannot ask the nation when the nation has stopped answering."
+      }
+    },
+    {
+      "id": "tieu_tho",
+      "name": { "vi": "Vườn không nhà trống", "en": "Scorched earth" },
+      "carrierCardId": "bo-thang-long-1285",
+      "historicalBasis": {
+        "vi": "Chủ trương rút khỏi kinh thành, để lại thành trống, cắt nguồn lương của địch.",
+        "en": "Abandoning the capital and denying the invader supply."
+      },
+      "statFloor": { "dan": 25 },
+      "_floorRationale": "Scorched earth is not an order the throne executes alone — an entire capital has to walk out and leave nothing usable behind, on trust that it will come back. A population already starving and already resentful does not do that; it stays, or it riots. This is the floor that answers 'the people are starving but I know the flag is here, so I take it anyway': below 25 lòng dân, taking it is no longer something the court is able to do.",
+      "blockedText": {
+        "vi": "Lệnh bỏ thành đã truyền. Không ai đi. Dân đói không rời được chỗ có kho thóc, dù kho ấy sắp thành của giặc. Kinh thành thất thủ cùng với người trong đó.",
+        "en": "The order to empty the city was given. Nobody moved. A starving people will not walk away from the last granary, even one about to feed the invader. The capital falls with everyone still in it."
+      }
+    },
+    {
+      "id": "coc_bach_dang",
+      "name": { "vi": "Cọc Bạch Đằng", "en": "The Bạch Đằng stakes" },
+      "carrierCardId": "dong-coc-bach-dang-1288",
+      "historicalBasis": {
+        "vi": "Đóng cọc gỗ dưới lòng sông Bạch Đằng, đánh theo con nước.",
+        "en": "Stakes driven into the riverbed, timed to the tide."
+      },
+      "statFloor": { "binh": 25 },
+      "_floorRationale": "DELIBERATELY LOW — 25, not 60. The stakes need enough men to drive them, hold both banks and spring the trap on the tide. They do NOT need an army that could win a pitched battle, and encoding that would be false twice over. Historically the Trần were outnumbered through all three invasions and won by refusing open battle. Mechanically a floor near 60 would make card 8 (mở rộng quân đội, +20 binh for -20 kho) the correct play instead of the level's central trap, and would hand the run back to whoever farmed binh — which is precisely what finalTrial.insufficientAlone exists to deny. A floor says you need AN army. It must never say you need a BIG one.",
+      "blockedText": {
+        "vi": "Cọc đã đóng xong dưới lòng sông, đúng con nước. Không có ai trên hai bờ. Thuyền giặc qua bãi cọc trong đêm, không một mũi tên nào bắn ra. Gỗ không tự đánh trận — mà quân đông cũng không thay được gỗ.",
+        "en": "The stakes are driven and the tide is right. There is nobody on either bank. The fleet passes over them in the dark and not one arrow is loosed. Wood does not fight the battle for you — and no number of men fights it without the wood."
+      }
+    },
+    {
+      "id": "hau_can_dich",
+      "name": { "vi": "Chặn lương địch", "en": "Enemy supply cut" },
+      "carrierCardId": "van-don-1287",
+      "historicalBasis": {
+        "vi": "Vân Đồn, 1287 — đánh đoàn thuyền lương của quân Nguyên.",
+        "en": "Vân Đồn, 1287 — striking the Yuan supply fleet."
+      },
+      "optional": true
+    }
+  ],
+
+  "counters": [],
+
+  "_ledgerNote": "The three required preparations are not announced at briefing. The ledger UNLOCKS the first time the player secures one (card 13), and from that moment shows three slots with one filled — so the player discovers the rule by doing it, then has 15 cards to act on it. This is what turns the level from a gotcha into a goal.",
+
+  "ledger": {
+    "revealOn": "first-flag-secured",
+    "slots": ["long_dan", "tieu_tho", "coc_bach_dang"],
+    "showsOptional": ["hau_can_dich"],
+    "hintPolicy": "when-not-what",
+    "showsFloors": true,
+    "_floorDisclosureNote": "Once a slot is revealed, the ledger shows its statFloor as a requirement — 'Lòng dân ≥ 25' — but still never names the choice that fills it. That stays inside when-not-what: a floor is a fact about the court's capacity, not a hint about which way to swipe. On Khó the ledger does not open until the final trial, so the floors are only ever announced by the advisor before each carrier, and only if the player is listening.",
+    "hintText": {
+      "vi": "Cơ hội còn ở phía trước. Sử sẽ chỉ lúc, không chỉ đường.",
+      "en": "The chance is still ahead. History tells you when, not what to choose."
+    }
+  },
+
+  "_crisisNote": "A stat entering a danger band no longer kills silently — it injects a crisis card offering one costly way back. Each crisis fires AT MOST ONCE PER LEVEL (oncePerLevel), which is what stops it becoming an infinite safety net: the second time a stat runs to the edge, it ends the run. Every rescue is paid for out of another stat, so surviving a crisis narrows the board rather than resetting it.",
+
+  "crises": [
+    {
+      "id": "kho-low",
+      "stat": "kho",
+      "trigger": { "when": "lte", "value": 20 },
+      "oncePerLevel": true,
+      "name": { "vi": "Vương hầu góp của", "en": "The princes open their stores" },
+      "rescue": {
+        "label": { "vi": "Nhận của các vương hầu", "en": "Accept the princes' grain" },
+        "effects": { "kho": 25, "than": -15 }
+      },
+      "refuse": {
+        "label": { "vi": "Triều đình tự lo", "en": "The court manages alone" },
+        "effects": {}
+      },
+      "historicalBasis": {
+        "vi": "Tông thất nhà Trần nắm thái ấp, điền trang và thân binh riêng; khi quốc khố cạn, của cải và quân của các vương hầu là nguồn lực thật — nhưng triều đình mắc nợ họ.",
+        "en": "Trần princes held private estates and household troops; their wealth was real relief, at the price of a court indebted to them."
+      },
+      "historicity": "simplified",
+      "sources": []
+    },
+    {
+      "id": "kho-high",
+      "stat": "kho",
+      "trigger": { "when": "gte", "value": 80 },
+      "oncePerLevel": true,
+      "name": { "vi": "Sưu thuế quá nặng", "en": "The levy bites" },
+      "rescue": {
+        "label": { "vi": "Xá thuế một năm", "en": "Remit a year's tax" },
+        "effects": { "kho": -20, "dan": 10 }
+      },
+      "refuse": { "label": { "vi": "Giữ nguyên ngạch thuế", "en": "Hold the rate" }, "effects": {} },
+      "historicalBasis": { "vi": "TODO — nguồn về việc xá thuế sau chiến tranh", "en": "TODO" },
+      "historicity": "simplified",
+      "sources": []
+    },
+    {
+      "id": "dan-low",
+      "stat": "dan",
+      "trigger": { "when": "lte", "value": 20 },
+      "oncePerLevel": true,
+      "name": { "vi": "Dân xiêu tán", "en": "The people scatter" },
+      "rescue": {
+        "label": { "vi": "Phát chẩn, hoãn sưu dịch", "en": "Open the granaries, suspend the corvée" },
+        "effects": { "dan": 25, "kho": -20 }
+      },
+      "refuse": { "label": { "vi": "Chưa phải lúc", "en": "Not yet" }, "effects": {} },
+      "historicalBasis": { "vi": "TODO — nguồn về phát chẩn / hoãn sưu dịch thời Trần", "en": "TODO" },
+      "historicity": "simplified",
+      "sources": []
+    },
+    {
+      "id": "dan-high",
+      "stat": "dan",
+      "trigger": { "when": "gte", "value": 80 },
+      "oncePerLevel": true,
+      "name": { "vi": "Không thu được thuế, không bắt được lính", "en": "Neither tax nor levy" },
+      "rescue": {
+        "label": { "vi": "Siết lại sổ đinh", "en": "Tighten the census" },
+        "effects": { "dan": -20, "kho": 10, "binh": 5 }
+      },
+      "refuse": { "label": { "vi": "Để dân yên", "en": "Leave them be" }, "effects": {} },
+      "historicalBasis": { "vi": "TODO — nguồn về sổ đinh / hộ tịch thời Trần", "en": "TODO" },
+      "historicity": "simplified",
+      "sources": []
+    },
+    {
+      "id": "binh-low",
+      "stat": "binh",
+      "trigger": { "when": "lte", "value": 20 },
+      "oncePerLevel": true,
+      "name": { "vi": "Mộ binh từ thái ấp", "en": "Levies from the estates" },
+      "rescue": {
+        "label": { "vi": "Gọi thân binh các vương hầu", "en": "Call up the princes' household troops" },
+        "effects": { "binh": 20, "than": -10 }
+      },
+      "refuse": { "label": { "vi": "Giữ quân triều đình", "en": "Keep to the court's own army" }, "effects": {} },
+      "historicalBasis": {
+        "vi": "Các vương hầu nhà Trần nuôi thân binh riêng; lực lượng này thực sự tham chiến chống Nguyên Mông.",
+        "en": "Trần princes maintained household troops that fought in the Mongol wars."
+      },
+      "historicity": "simplified",
+      "sources": []
+    },
+    {
+      "id": "binh-high",
+      "stat": "binh",
+      "trigger": { "when": "gte", "value": 80 },
+      "oncePerLevel": true,
+      "name": { "vi": "Kiêu binh", "en": "The army grows arrogant" },
+      "rescue": {
+        "label": { "vi": "Đổi tướng, chia lại quân", "en": "Rotate the commanders, split the commands" },
+        "effects": { "binh": -20, "dan": -5 }
+      },
+      "refuse": { "label": { "vi": "Cứ để yên", "en": "Let it stand" }, "effects": {} },
+      "historicalBasis": { "vi": "TODO — nguồn về hiện tượng kiêu binh", "en": "TODO" },
+      "historicity": "invented",
+      "sources": []
+    },
+    {
+      "id": "than-low",
+      "stat": "than",
+      "trigger": { "when": "lte", "value": 20 },
+      "oncePerLevel": true,
+      "name": { "vi": "Triều đình rệu rã", "en": "The court comes apart" },
+      "rescue": {
+        "label": { "vi": "Phong tước cho tông thất", "en": "Grant titles to the royal clan" },
+        "effects": { "than": 20, "kho": -15 }
+      },
+      "refuse": { "label": { "vi": "Không phong thêm ai", "en": "Grant nothing" }, "effects": {} },
+      "historicalBasis": { "vi": "TODO — nguồn về phong tước tông thất thời Trần", "en": "TODO" },
+      "historicity": "simplified",
+      "sources": []
+    },
+    {
+      "id": "than-high",
+      "stat": "than",
+      "trigger": { "when": "gte", "value": 80 },
+      "oncePerLevel": true,
+      "name": { "vi": "Quyền thần", "en": "A minister eclipses the throne" },
+      "rescue": {
+        "label": { "vi": "Thu lại quyền, chịu triều đình bất mãn", "en": "Take the power back and wear the resentment" },
+        "effects": { "than": -20, "binh": -10 }
+      },
+      "refuse": { "label": { "vi": "Cứ để y quyết", "en": "Let him decide" }, "effects": {} },
+      "historicalBasis": { "vi": "TODO — nguồn về quyền thần trong lịch sử Đại Việt", "en": "TODO" },
+      "historicity": "invented",
+      "sources": []
+    }
+  ],
+
+  "_ambientNote": "Small, mostly-good years. Without these the stat curve only ever points down, which is what made the level feel like one mistake and you are out. They are drawn from a pool, at most one per `minCardGap` cards, and their TOTAL net gain is capped below the cost of the three carriers — so they soften the slope without erasing the sacrifice. Each is a single tap, no branching decision.",
+
+  "ambientPolicy": {
+    "minCardGap": 4,
+    "maxPerLevel": 5,
+    "maxAbsEffect": 8,
+    "totalGainMustStayUnder": 65,
+    "_capRationale": "65 is the combined stat cost of the three required carriers (binh 10 + kho 35 + than 20). Ambient gains must total less than that, or the preparations stop costing anything in real terms."
+  },
+
+  "ambient": [
+    {
+      "id": "duoc-mua",
+      "name": { "vi": "Được mùa", "en": "A good harvest" },
+      "text": {
+        "vi": "Mưa thuận gió hoà. Lúa chiêm trổ đều, kho thóc các lộ đầy hơn mọi năm.",
+        "en": "The rains came on time. The provincial granaries close fuller than last year."
+      },
+      "effects": { "dan": 5, "kho": 5 },
+      "historicity": "simplified",
+      "sources": []
+    },
+    {
+      "id": "dan-hoa-thuan",
+      "name": { "vi": "Dân hoà thuận", "en": "A quiet year" },
+      "text": {
+        "vi": "Một năm không kiện tụng, không trộm cướp. Các lộ báo về: trong ấm ngoài êm.",
+        "en": "A year with no litigation and no banditry. The provinces report calm."
+      },
+      "effects": { "dan": 5, "than": 3 },
+      "historicity": "invented",
+      "sources": []
+    },
+    {
+      "id": "thuyen-buon-van-don",
+      "name": { "vi": "Thuyền buôn về Vân Đồn", "en": "Traders at Vân Đồn" },
+      "text": {
+        "vi": "Thuyền buôn phương nam cập trang Vân Đồn. Thuế bến thu về khá, nhưng hàng ngoại tràn vào các chợ.",
+        "en": "Southern traders put in at Vân Đồn. Harbour dues are healthy; foreign goods flood the markets."
+      },
+      "effects": { "kho": 8, "dan": -2 },
+      "historicity": "simplified",
+      "sources": []
+    },
+    {
+      "id": "hoi-he-mua-xuan",
+      "name": { "vi": "Hội hè mùa xuân", "en": "The spring festivals" },
+      "text": {
+        "vi": "Hội làng mở khắp các lộ. Tốn của công, nhưng dân nhớ rằng triều đình còn đó.",
+        "en": "Village festivals open across the provinces. They cost the treasury, and they remind the people the court still stands."
+      },
+      "effects": { "dan": 8, "kho": -3 },
+      "historicity": "simplified",
+      "sources": []
+    },
+    {
+      "id": "su-chiem-thanh",
+      "name": { "vi": "Sứ Chiêm Thành sang", "en": "An envoy from Champa" },
+      "text": {
+        "vi": "Sứ Chiêm Thành mang lễ vật sang. Phương nam yên một mùa, triều đình bớt một mối lo.",
+        "en": "A Cham envoy arrives with gifts. The southern border is quiet for a season."
+      },
+      "effects": { "than": 5, "kho": 3 },
+      "historicity": "simplified",
+      "sources": []
+    },
+    {
+      "id": "de-dieu-giu-duoc",
+      "name": { "vi": "Đê giữ được", "en": "The dykes hold" },
+      "text": {
+        "vi": "Nước sông Cái lên cao rồi rút. Đê không vỡ. Không ai nhắc đến việc ấy, và đó là điều tốt nhất.",
+        "en": "The river rose and fell. The dykes did not break. Nobody mentions it, which is the best outcome there is."
+      },
+      "effects": { "dan": 5, "kho": 2 },
+      "historicity": "simplified",
+      "sources": []
+    },
+    {
+      "id": "khoa-thi-nho",
+      "name": { "vi": "Một khoa thi nhỏ", "en": "A minor examination" },
+      "text": {
+        "vi": "Mở khoa thi lấy vài chục người vào các lộ. Bộ máy chạy trơn hơn một chút.",
+        "en": "A small examination fills a few dozen provincial posts. The machine turns a little more smoothly."
+      },
+      "effects": { "than": 6, "kho": -2 },
+      "historicity": "simplified",
+      "sources": []
+    },
+    {
+      "id": "chua-moi-khanh-thanh",
+      "name": { "vi": "Khánh thành chùa mới", "en": "A new pagoda is consecrated" },
+      "text": {
+        "vi": "Một ngôi chùa dựng xong ở ngoại thành. Sư và quan cùng đến, một ngày không ai nói chuyện binh đao.",
+        "en": "A pagoda is finished outside the walls. Monks and mandarins attend, and for one day nobody speaks of war."
+      },
+      "effects": { "than": 5, "dan": 4, "kho": -3 },
+      "historicity": "simplified",
+      "sources": []
+    },
+    {
+      "id": "dan-ca-vao-lach",
+      "name": { "vi": "Cá vào lạch", "en": "The shoals come in" },
+      "text": {
+        "vi": "Cá kéo vào các cửa sông thành đàn. Làng chài được một mùa, thuế cá cũng khá hơn.",
+        "en": "Fish crowd the river mouths in shoals. The fishing villages have a season, and the fish levy comes in higher."
+      },
+      "effects": { "dan": 6, "kho": 3 },
+      "historicity": "invented",
+      "sources": []
+    },
+    {
+      "id": "duong-tram-noi-lai",
+      "name": { "vi": "Nối lại đường trạm", "en": "The relay road reopens" },
+      "text": {
+        "vi": "Các trạm dịch dọc đường cái được sửa. Tin từ biên ải về kinh nhanh hơn trước mấy ngày.",
+        "en": "The relay posts along the high road are repaired. Word from the frontier now reaches the capital days sooner."
+      },
+      "effects": { "than": 4, "binh": 3 },
+      "historicity": "simplified",
+      "sources": []
+    },
+    {
+      "id": "mua-tam-tot",
+      "name": { "vi": "Được mùa tằm", "en": "A good silk year" },
+      "text": {
+        "vi": "Dâu tốt, tằm không bệnh. Lụa các lộ nộp về nhiều hơn hẳn, thương nhân trả giá cao.",
+        "en": "The mulberry held and the worms stayed healthy. Provincial silk comes in well above quota and the traders pay for it."
+      },
+      "effects": { "kho": 7, "dan": 2 },
+      "historicity": "simplified",
+      "sources": []
+    },
+    {
+      "id": "tha-tu-nhe",
+      "name": { "vi": "Tha tù nhẹ", "en": "A minor amnesty" },
+      "text": {
+        "vi": "Nhân tiết trong năm, tha những người mắc tội nhẹ về với ruộng. Các lộ bớt được miệng ăn trong ngục.",
+        "en": "A seasonal amnesty sends petty offenders back to their fields. The provinces have fewer mouths to feed in gaol."
+      },
+      "effects": { "dan": 7, "than": -2 },
+      "historicity": "simplified",
+      "sources": []
+    }
+  ],
+
+  "_weaveNote": "THE WEAVE — undated court business, drawn fresh each run. The 28 numbered cards in cards/ are the SPINE: every one carries a year, its order is enforced against that year, and none of them is ever shuffled, skipped or moved. These are not. A weave card describes something that was ordinarily true of the Trần court — a dyke gives way, a magistrate is accused, an old general asks to go home — without claiming it happened on a particular day. It therefore has `year: null` and belongs to an ACT, not a position. That is the whole basis for randomising them: history fixes when the great events happen, it does not fix what an ordinary year looked like. Hard rules, all machine-checked: a weave card may never carry a required victory flag, may never assert a dated event in its historicalNote, and the pool as a whole may never move a stat far enough to change whether the level can be won.",
+
+  "weavePolicy": {
+    "slotsPerAct": { "I": 0, "II": 3, "III": 1, "IV": 2, "V": 0 },
+    "_slotRationale": "Act I teaches the loop and Act V is the commit — both stay clean so the player learns and then concentrates. The floating cards live in the acts that are about governing: the long peace, the war years, the rebuild.",
+    "maxAbsEffect": 10,
+    "noRepeatWithinRun": true,
+    "maxWorstCaseSwing": { "binh": 15, "dan": 15, "kho": 12, "than": 15 },
+    "_swingRationale": "THE SOLVENCY INVARIANT. For each stat the linter takes the best branch of every card in the pool, draws the most hostile set the slot count allows, and requires the total to stay inside this band. Quốc khố is the tightest at 12 because card 16 (bỏ Thăng Long) already gates on the treasury the player walks in with — a hostile draw must never be what pushes them under it. Randomness is allowed to change how a run feels and what it costs. It is not allowed to change whether the run can be won."
+  },
+
+  "weave": [
+    {
+      "id": "de-vo-ha-luu",
+      "act": "II",
+      "year": null,
+      "name": { "vi": "Vỡ đê hạ lưu", "en": "A dyke gives way downstream" },
+      "prompt": {
+        "vi": "Đê một khúc hạ lưu vỡ trong đêm. Nước tràn vào ba huyện đang kỳ lúa trổ. Hà đê chánh sứ xin điều dân phu.",
+        "en": "A stretch of dyke gave way in the night. Three districts are under water with the rice still standing. The dyke commissioner asks for corvée labour."
+      },
+      "choices": [
+        {
+          "label": { "vi": "Điều dân phu đắp lại ngay", "en": "Call up the labour and close it now" },
+          "outcome": { "vi": "Hai vạn dân phu ra đê. Vụ ấy giữ được, nhưng kho phải xuất thóc nuôi họ suốt một tháng.", "en": "Twenty thousand go out to the dyke. The harvest is saved; the granaries feed them for a month." },
+          "effects": { "dan": 6, "kho": -8 }
+        },
+        {
+          "label": { "vi": "Để lộ tự lo lấy", "en": "Let the province manage it" },
+          "outcome": { "vi": "Lộ ấy tự xoay xở, được một nửa. Nửa còn lại bỏ hoang, và người ta nhớ là triều đình đã không đến.", "en": "The province saves half of it alone. The other half is abandoned, and people remember that the court did not come." },
+          "effects": { "dan": -8, "than": -2 }
+        }
+      ],
+      "historicalNote": {
+        "vi": "Nhà Trần đặt chức Hà đê chánh sứ trông coi đê điều và huy động dân phu đắp đê là việc thường niên của triều đình, không phải việc bất thường. Đây là một năm điển hình, không phải một trận lụt có ghi trong sử.",
+        "en": "The Trần court maintained dyke commissioners and mobilised corvée labour for the dykes as routine annual administration, not as emergency response. This is a typical year, not a flood recorded in the chronicles."
+      },
+      "historicity": "simplified",
+      "sources": []
+    },
+    {
+      "id": "quan-lai-an-hoi-lo",
+      "act": "II",
+      "year": null,
+      "name": { "vi": "Quan lộ ăn hối lộ", "en": "A magistrate takes bribes" },
+      "prompt": {
+        "vi": "Một viên quan lộ bị tố nhận của đút khi xử kiện ruộng đất. Ông ta là người nhà một vị vương hầu.",
+        "en": "A provincial magistrate is accused of taking payment to decide land suits. He is a kinsman of one of the princes."
+      },
+      "choices": [
+        {
+          "label": { "vi": "Trị theo phép nước", "en": "Try him under the law" },
+          "outcome": { "vi": "Xử công khai, cách chức, sung của cải. Dân các lộ nghe tin thì mừng; vị vương hầu kia thì không.", "en": "Tried in open court, stripped of office, property forfeit. The provinces are glad of it. The prince is not." },
+          "effects": { "than": -6, "dan": 8 }
+        },
+        {
+          "label": { "vi": "Lặng lẽ chuyển đi lộ khác", "en": "Move him quietly to another province" },
+          "outcome": { "vi": "Không ai mất mặt, triều đình vẫn êm. Nhưng dân lộ ấy hiểu ra rằng kiện lên trên cũng thế thôi.", "en": "Nobody loses face and the court stays smooth. The province learns that appealing upward changes nothing." },
+          "effects": { "than": 4, "dan": -6 }
+        }
+      ],
+      "historicalNote": {
+        "vi": "Quan lại địa phương thời Trần phần nhiều xuất thân tông thất và thân thuộc, nên xử một viên quan thường đồng thời là xử một dòng họ. Đây là loại vụ việc thường gặp, không phải một vụ án cụ thể trong sử.",
+        "en": "Trần provincial office was largely held by the royal clan and its connections, so disciplining an official was usually also disciplining a family. This is a common category of case, not a specific one from the chronicles."
+      },
+      "historicity": "simplified",
+      "sources": []
+    },
+    {
+      "id": "no-ty-bo-tron",
+      "act": "II",
+      "year": null,
+      "name": { "vi": "Nô tì bỏ điền trang", "en": "Bondservants flee an estate" },
+      "prompt": {
+        "vi": "Vài trăm nô tì bỏ một điền trang trốn về các lộ, xin nhập tịch làm dân. Chủ điền trang là người trong tông thất, đòi trả lại.",
+        "en": "Several hundred bondservants have fled a princely estate and are asking to be registered as free provincial subjects. The owner, a clansman, wants them back."
+      },
+      "choices": [
+        {
+          "label": { "vi": "Trả về chủ cũ", "en": "Return them to the estate" },
+          "outcome": { "vi": "Điền trang được yên, tông thất hài lòng. Các lộ ghi nhận rằng triều đình đứng về phía ai.", "en": "The estate is settled and the clan is satisfied. The provinces note whose side the court took." },
+          "effects": { "than": 6, "dan": -8 }
+        },
+        {
+          "label": { "vi": "Cho nhập tịch làm dân lộ", "en": "Register them as provincial subjects" },
+          "outcome": { "vi": "Thêm mấy trăm suất đinh vào sổ, thêm mấy trăm suất thuế. Và thêm một vị vương hầu không quên.", "en": "Several hundred names enter the tax rolls, and several hundred levies with them. And one prince who does not forget." },
+          "effects": { "than": -8, "dan": 8, "kho": 3 }
+        }
+      ],
+      "historicalNote": {
+        "vi": "Điền trang và thái ấp của tông thất Trần dùng nô tì canh tác; sức kéo giữa ruộng tư của quý tộc và sổ đinh của nhà nước là mâu thuẫn cơ bản của kinh tế thời Trần. Đây là một trường hợp điển hình của mâu thuẫn ấy.",
+        "en": "Trần princely estates were worked by bondservants, and the pull between aristocratic private land and the state's tax registers was a structural tension of the period's economy. This is a typical instance of that tension."
+      },
+      "historicity": "simplified",
+      "sources": []
+    },
+    {
+      "id": "chua-xin-mien-thue",
+      "act": "II",
+      "year": null,
+      "name": { "vi": "Chùa xin miễn thuế điền", "en": "A monastery petitions for exemption" },
+      "prompt": {
+        "vi": "Một ngôi chùa lớn dâng biểu xin miễn thuế cho ruộng chùa, viện cớ nuôi tăng và phát chẩn cho dân quanh vùng.",
+        "en": "A large monastery petitions for exemption on its temple land, citing the monks it keeps and the relief it gives the surrounding villages."
+      },
+      "choices": [
+        {
+          "label": { "vi": "Chuẩn cho miễn", "en": "Grant the exemption" },
+          "outcome": { "vi": "Chùa mở kho phát chẩn thật. Dân quanh vùng nhớ ơn chùa — và nhớ ơn triều đình đã chuẩn.", "en": "The monastery does open its stores. The villages remember the monastery for it, and the court for allowing it." },
+          "effects": { "kho": -6, "dan": 6, "than": 3 }
+        },
+        {
+          "label": { "vi": "Bác đơn", "en": "Refuse" },
+          "outcome": { "vi": "Ruộng chùa vào sổ thuế như ruộng thường. Kho được thêm, nhưng nhà chùa im lặng một cách rất rõ ràng.", "en": "Temple land enters the rolls like any other. The treasury gains, and the monastery's silence is conspicuous." },
+          "effects": { "kho": 5, "dan": -5, "than": -4 }
+        }
+      ],
+      "historicalNote": {
+        "vi": "Phật giáo thời Trần có vị trí lớn — dòng Trúc Lâm do chính Trần Nhân Tông sáng lập — và ruộng chùa cùng việc miễn thuế cho ruộng chùa là vấn đề tài chính có thật của triều đình. Đây là một lá đơn điển hình, không phải một biểu cụ thể.",
+        "en": "Buddhism held a large place under the Trần — the Trúc Lâm school was founded by Emperor Trần Nhân Tông himself — and temple landholding and its tax status were a genuine fiscal question for the court. This is a typical petition, not a specific one."
+      },
+      "historicity": "simplified",
+      "sources": []
+    },
+    {
+      "id": "tranh-ruong-cong",
+      "act": "II",
+      "year": null,
+      "name": { "vi": "Tranh ruộng công", "en": "Two villages, one field" },
+      "prompt": {
+        "vi": "Hai làng kiện nhau về một khoảnh ruộng công đã tranh ba đời. Cả hai đều có lý, và cả hai đều đã đánh nhau một trận.",
+        "en": "Two villages are in suit over a strip of communal land contested for three generations. Both have a case, and both have already come to blows over it."
+      },
+      "choices": [
+        {
+          "label": { "vi": "Xử cho làng đóng thuế nhiều hơn", "en": "Find for the village that pays more tax" },
+          "outcome": { "vi": "Xử xong nhanh, thuế vào đều. Làng thua kiện nhớ rất lâu rằng ruộng đi theo sổ thuế.", "en": "Decided quickly and the levy comes in whole. The losing village remembers for a long time that land follows the tax roll." },
+          "effects": { "kho": 4, "dan": -6 }
+        },
+        {
+          "label": { "vi": "Chia đôi khoảnh ruộng", "en": "Split the field between them" },
+          "outcome": { "vi": "Không làng nào được như ý, nhưng cũng không làng nào thấy mình bị bỏ. Quan xử thì kêu là không dứt khoát.", "en": "Neither village gets what it wanted; neither feels abandoned. The magistrates call it indecisive." },
+          "effects": { "dan": 5, "than": -3 }
+        }
+      ],
+      "historicalNote": {
+        "vi": "Ruộng công làng xã là nền tảng của sổ đinh và thuế khoá thời Trần, và tranh chấp ruộng công giữa các làng là việc quan lộ xử thường xuyên. Đây là một vụ điển hình.",
+        "en": "Communal village land underpinned the Trần tax and conscription registers, and disputes over it were routine business for provincial magistrates. This is a typical case."
+      },
+      "historicity": "simplified",
+      "sources": []
+    },
+    {
+      "id": "lao-tuong-xin-ve",
+      "act": "II",
+      "year": null,
+      "name": { "vi": "Lão tướng xin về", "en": "An old general asks to go home" },
+      "prompt": {
+        "vi": "Một viên tướng già dâng biểu xin về trí sĩ. Ông đã đánh trận 1258, và quân dưới trướng chỉ nghe ông.",
+        "en": "An ageing general petitions to retire. He fought in 1258, and the men under him take orders from nobody else."
+      },
+      "choices": [
+        {
+          "label": { "vi": "Chuẩn cho về, hậu đãi", "en": "Let him go, with honours" },
+          "outcome": { "vi": "Ông về quê trong danh dự. Người kế nhiệm cần hai năm để quân dưới trướng chịu nghe.", "en": "He goes home with honour. His successor will need two years before the men obey him." },
+          "effects": { "binh": -6, "than": 5 }
+        },
+        {
+          "label": { "vi": "Giữ lại, phong thêm", "en": "Keep him, and raise his rank" },
+          "outcome": { "vi": "Ông ở lại, quân vẫn vững. Nhưng lớp tướng trẻ hiểu ra rằng ở triều này họ còn phải đợi lâu.", "en": "He stays and the command holds. The younger officers understand how long their own wait will be." },
+          "effects": { "binh": 5, "than": -5, "kho": -4 }
+        }
+      ],
+      "historicalNote": {
+        "vi": "Quân Trần tổ chức theo tông thất và thái ấp, nên uy tín của một viên tướng gắn với người chứ không gắn với chức. Việc chuyển giao chỉ huy vì thế là một vấn đề có thật. Đây là một trường hợp điển hình.",
+        "en": "Trần armies were organised around the royal clan and its estates, so a commander's authority attached to the man rather than the post, and handovers were a real problem. This is a typical case."
+      },
+      "historicity": "simplified",
+      "sources": []
+    },
+    {
+      "id": "linh-doi-khau-phan",
+      "act": "III",
+      "year": null,
+      "name": { "vi": "Lính đòi khẩu phần", "en": "The men ask for more rice" },
+      "prompt": {
+        "vi": "Quân các đạo kêu khẩu phần mỏng. Không phải nổi loạn — chỉ là mỗi ngày một ít người bỏ về nhà gặt.",
+        "en": "The camps report thin rations. Not mutiny — just a few men each day walking home to bring in their own harvest."
+      },
+      "choices": [
+        {
+          "label": { "vi": "Tăng khẩu phần", "en": "Raise the ration" },
+          "outcome": { "vi": "Quân số giữ được, trại yên. Kho thóc vơi đi trông thấy, và mùa chưa tới.", "en": "The numbers hold and the camps settle. The granaries visibly drop, and the harvest is not in yet." },
+          "effects": { "binh": 6, "kho": -8 }
+        },
+        {
+          "label": { "vi": "Giữ nguyên, siết quân kỷ", "en": "Hold the ration, tighten discipline" },
+          "outcome": { "vi": "Lệnh nghiêm, người bỏ về ít đi. Nhưng quân số vẫn hụt dần, chỉ là hụt chậm hơn.", "en": "The order is severe and the walking stops. The rolls still thin, only more slowly." },
+          "effects": { "binh": -6, "than": 3 }
+        }
+      ],
+      "historicalNote": {
+        "vi": "Quân Trần phần lớn là nông binh — đánh xong về ruộng — nên quân số luôn co giãn theo mùa vụ và theo cái ăn. Đây là một trường hợp điển hình của chế độ ấy, không phải một sự kiện có ghi.",
+        "en": "Trần armies were largely peasant levies who returned to their fields, so strength always flexed with the harvest and with what the men were fed. This is typical of that system, not a recorded event."
+      },
+      "historicity": "simplified",
+      "sources": []
+    },
+    {
+      "id": "dan-chay-loan",
+      "act": "III",
+      "year": null,
+      "name": { "vi": "Dân chạy loạn", "en": "The roads fill with refugees" },
+      "prompt": {
+        "vi": "Dân các lộ phía bắc bỏ làng chạy xuống. Đường cái nghẽn, và họ đang đi về phía kinh thành.",
+        "en": "The northern provinces are emptying. The high roads are choked, and the people on them are walking toward the capital."
+      },
+      "choices": [
+        {
+          "label": { "vi": "Mở kho phát chẩn", "en": "Open the granaries to them" },
+          "outcome": { "vi": "Người ta được ăn và được ở. Kho thóc dự trữ cho chiến dịch thì không còn là dự trữ nữa.", "en": "They are fed and housed. The grain set aside for the campaign is no longer set aside." },
+          "effects": { "dan": 8, "kho": -9 }
+        },
+        {
+          "label": { "vi": "Chặn ở các lộ, không cho vào kinh", "en": "Halt them in the provinces" },
+          "outcome": { "vi": "Kinh thành không nghẽn, kho còn nguyên. Những người bị chặn ngoài cửa ô sẽ nhớ họ đã đứng ở đâu.", "en": "The capital stays clear and the stores stay whole. Those held outside the gates will remember where they stood." },
+          "effects": { "dan": -8, "than": 4, "kho": 2 }
+        }
+      ],
+      "historicalNote": {
+        "vi": "Cả ba lần Nguyên Mông sang, dân các lộ biên giới đều chạy về phía nam, và việc phát chẩn hay chặn dân chạy loạn là quyết định hậu cần thường xuyên trong chiến tranh. Đây là một tình huống điển hình của các năm ấy.",
+        "en": "In all three Mongol invasions the frontier provinces emptied southward, and whether to feed or halt the refugees was a recurring logistical decision. This is typical of those years."
+      },
+      "historicity": "simplified",
+      "sources": []
+    },
+    {
+      "id": "hang-tuong-xin-theo",
+      "act": "III",
+      "year": null,
+      "name": { "vi": "Hàng tướng xin theo", "en": "A surrendered officer offers to serve" },
+      "prompt": {
+        "vi": "Một viên tướng bên kia ra hàng, xin được theo quân. Ông ta biết đường tiếp vận của địch — và cũng biết đường của ta.",
+        "en": "An enemy officer has surrendered and asks to serve. He knows their supply routes. He would also learn ours."
+      },
+      "choices": [
+        {
+          "label": { "vi": "Nhận, cho theo quân", "en": "Take him in" },
+          "outcome": { "vi": "Những gì ông ta khai là thật, và có ích. Triều thần không ai nói ra, nhưng không ai ngủ yên.", "en": "What he tells is true, and useful. Nobody at court says anything, and nobody sleeps easily." },
+          "effects": { "binh": 7, "than": -6 }
+        },
+        {
+          "label": { "vi": "Chém trước ba quân", "en": "Execute him before the army" },
+          "outcome": { "vi": "Ba quân thấy rõ triều đình nghĩ gì về hàng tướng. Những gì ông ta biết thì mất theo ông ta.", "en": "The army sees exactly what the court thinks of turncoats. What he knew goes with him." },
+          "effects": { "than": 5, "dan": 3, "binh": -3 }
+        }
+      ],
+      "historicalNote": {
+        "vi": "Hàng tướng và việc dùng hay không dùng hàng tướng là vấn đề có thật của cả ba cuộc kháng chiến — Trần Ích Tắc và Trần Kiện hàng Nguyên là ví dụ ngược lại, từ phía Đại Việt. Đây là một tình huống điển hình, không phải một nhân vật có tên trong sử.",
+        "en": "Defectors, and whether to use them, were a real problem across all three campaigns — Trần Ích Tắc and Trần Kiện going over to the Yuan are the mirror case from the Đại Việt side. This is a typical situation, not a named individual from the record."
+      },
+      "historicity": "simplified",
+      "sources": []
+    },
+    {
+      "id": "thuong-nhan-phuong-bac",
+      "act": "IV",
+      "year": null,
+      "name": { "vi": "Người phương Bắc xin ở lại", "en": "Northerners ask to stay" },
+      "prompt": {
+        "vi": "Một nhóm thương nhân và di thần nhà Tống xin được ở lại buôn bán, lập phố. Họ có vốn, có nghề, và có kẻ thù chung với ta.",
+        "en": "A group of Song merchants and exiles ask leave to settle and trade. They bring capital, crafts, and the same enemy we have."
+      },
+      "choices": [
+        {
+          "label": { "vi": "Cho ở lại, lập phố buôn", "en": "Let them settle and trade" },
+          "outcome": { "vi": "Phố buôn mọc lên, thuế thương vào đều. Triều thần bàn ra bàn vào về việc để người phương Bắc ở gần kinh.", "en": "A trading quarter grows and the commercial levy comes in steadily. The court argues about northerners living this close to the capital." },
+          "effects": { "kho": 8, "than": -6 }
+        },
+        {
+          "label": { "vi": "Đuổi về", "en": "Send them back" },
+          "outcome": { "vi": "Triều đình yên chuyện. Vốn và nghề của họ đi theo họ sang chỗ khác.", "en": "The court is settled. Their capital and their crafts go somewhere else." },
+          "effects": { "than": 5, "kho": -3, "dan": 2 }
+        }
+      ],
+      "historicalNote": {
+        "vi": "Sau khi Tống mất năm 1279, di thần và thương nhân Tống lưu tán xuống phương nam, và Đại Việt là một trong những nơi họ đến. Việc dung nạp hay không là vấn đề có thật, gắn liền với quan hệ với nhà Nguyên. Đây là một trường hợp điển hình.",
+        "en": "After the Song fell in 1279, Song loyalists and merchants dispersed southward, and Đại Việt was one destination. Whether to admit them was a genuine question, tied to relations with the Yuan. This is a typical case."
+      },
+      "historicity": "simplified",
+      "sources": []
+    },
+    {
+      "id": "cuop-bien-ven-bien",
+      "act": "IV",
+      "year": null,
+      "name": { "vi": "Cướp biển ven bờ", "en": "Raiders on the coast" },
+      "prompt": {
+        "vi": "Thuyền cướp quấy các làng chài ven biển. Không nhiều, nhưng đủ để dân không dám ra khơi, và thuế cá thì hụt.",
+        "en": "Raiding boats are working the fishing villages. Not many, but enough that the boats stay in and the fish levy comes up short."
+      },
+      "choices": [
+        {
+          "label": { "vi": "Phái thuỷ quân đi dẹp", "en": "Send the fleet after them" },
+          "outcome": { "vi": "Dẹp xong, dân ra khơi lại. Mấy chiếc thuyền chiến ấy lẽ ra đang tập trận ở cửa sông.", "en": "Cleared, and the boats go out again. Those warships were meant to be drilling at the river mouths." },
+          "effects": { "binh": -5, "kho": -5, "dan": 7 }
+        },
+        {
+          "label": { "vi": "Cho các lộ tự phòng bị", "en": "Let the coastal provinces defend themselves" },
+          "outcome": { "vi": "Các lộ tự lập đội tuần. Có hiệu quả một phần, và làng chài hiểu rằng biển là việc của họ.", "en": "The provinces raise their own patrols. It partly works, and the fishing villages learn the sea is their own affair." },
+          "effects": { "dan": -6, "kho": 3 }
+        }
+      ],
+      "historicalNote": {
+        "vi": "Vùng ven biển đông bắc — nơi có Vân Đồn, thương cảng lớn nhất thời Trần — thường xuyên có cướp biển, và thuỷ quân Trần vừa phải giữ thương lộ vừa phải chuẩn bị chiến tranh. Đây là một tình huống điển hình của vùng ấy.",
+        "en": "The north-eastern coast — where Vân Đồn, the great Trần trading port, lay — saw regular piracy, and the Trần fleet had both to protect the trade route and to prepare for war. This is typical of that coast."
+      },
+      "historicity": "simplified",
+      "sources": []
+    },
+    {
+      "id": "tong-that-tranh-cong",
+      "act": "IV",
+      "year": null,
+      "name": { "vi": "Tông thất tranh công", "en": "The clan disputes precedence" },
+      "prompt": {
+        "vi": "Hai vị vương hầu tranh nhau công trạng trận vừa rồi. Việc nhỏ, nhưng cả triều đang nhìn xem xử thế nào.",
+        "en": "Two princes are disputing the credit for the last campaign. A small matter, and the whole court is watching how it is settled."
+      },
+      "choices": [
+        {
+          "label": { "vi": "Phân xử rạch ròi, ghi vào sổ công", "en": "Settle it plainly and enter it in the record" },
+          "outcome": { "vi": "Công trạng rõ ràng, không ai cãi được nữa. Người bị xử thiệt mang quân về thái ấp của mình.", "en": "The record is unambiguous and the argument ends. The prince who lost takes his men back to his own estate." },
+          "effects": { "than": 6, "binh": -4 }
+        },
+        {
+          "label": { "vi": "Để hai bên tự dàn xếp", "en": "Let them settle it between themselves" },
+          "outcome": { "vi": "Hai bên tự thu xếp, quân không ai rút. Nhưng cả triều vừa học được rằng công trạng là thứ tự thoả thuận.", "en": "They come to terms and nobody withdraws. The court has also learned that merit is a thing you negotiate." },
+          "effects": { "than": -6, "binh": 4, "dan": -2 }
+        }
+      ],
+      "historicalNote": {
+        "vi": "Quân đội Trần dựa trên thái ấp của tông thất, nên tranh chấp trong hoàng tộc trực tiếp ảnh hưởng đến quân số triều đình huy động được. Đây là một tình huống điển hình của cơ cấu ấy.",
+        "en": "Trần military strength rested on the princely estates, so disputes within the royal clan bore directly on how many men the court could actually call up. This is typical of that structure."
+      },
+      "historicity": "simplified",
+      "sources": []
+    }
+  ],
+
+  "_interstitialNote": "Advisor, omen and echo beats carry NO stat effects and NO choices — they are pacing and information. They exist so the player's sacrifices are informed rather than blind, which is the difference between a hard game and an unfair one.",
+
+  "interstitials": [
+    { "type": "advisor", "before": "dien-hong-1284", "speaker": { "vi": "Trần Thánh Tông", "en": "Retired Emperor Trần Thánh Tông" } },
+    { "type": "advisor", "before": "bo-thang-long-1285", "speaker": { "vi": "Trần Quốc Tuấn", "en": "Trần Quốc Tuấn" } },
+    { "type": "advisor", "before": "dong-coc-bach-dang-1288", "speaker": { "vi": "Trần Quốc Tuấn", "en": "Trần Quốc Tuấn" } },
+    { "type": "omen", "before": "quan-nguyen-tran-sang", "lookahead": 1 },
+    { "type": "omen", "before": "tin-bao-lan-ba", "lookahead": 1 },
+    { "type": "echo", "after": "mo-rong-quan-doi", "delay": 3, "condition": "chose:expand" },
+    { "type": "echo", "after": "de-dieu-thuy-loi", "delay": 3, "condition": "chose:build" },
+    { "type": "echo", "after": "dien-hong-1284", "delay": 4, "condition": "flag:long_dan" }
+  ],
+
+  "finalTrial": {
+    "name": { "vi": "Nguyên Mông xâm lược lần thứ ba", "en": "The third Mongol invasion" },
+    "year": 1288,
+    "requireAll": ["long_dan", "tieu_tho", "coc_bach_dang"],
+    "requireAny": [],
+    "requireCounter": {},
+    "statGate": { "binh": 15, "dan": 15, "kho": 10, "than": 10 },
+    "_statGateRationale": "The final trial is the last mini-boss, and it checks two things: did you assemble the three preparations (requireAll — this is what DECIDES the battle), and does the court still have enough left to fight it at all (statGate — this is only a floor). Holding all three flags with every stat under 10 is a court that prepared everything correctly and then collapsed before it could act; that must not be a victory. EVERY FLOOR IS DELIBERATELY LOW, and kho lowest of all at 10: the level's whole argument is that the correct player arrives POOR. The demo run ends binh 60 / dan 55 / kho 25 / than 30 and clears by +45 / +40 / +15 / +20. Raise these and the argument inverts into 'end the game rich', which is the opposite of what the Tran did. Note also that every floor sits BELOW the crisis band (20 on Thuong), so a player heading for a gate failure always gets a crisis offered first — the gate can never kill without a prior warning.",
+    "insufficientAlone": ["binh"],
+    "victoryText": { "vi": "TODO", "en": "TODO" },
+    "defeatByStatsText": {
+      "vi": "TODO — phải nói rõ: đánh trực diện với Nguyên Mông là cách thua, và nhà Trần chưa bao giờ thắng bằng cách mạnh hơn",
+      "en": "TODO — must state that meeting this army in open battle is how the campaign is lost"
+    },
+    "defeatByExhaustionText": {
+      "vi": "Cọc đã đóng. Kinh thành đã bỏ. Cả nước đã một lòng. Ba việc ấy làm xong cả, và đến ngày nước lên thì không còn ai đứng dậy được nữa — không quân để mai phục, không thóc để nuôi quân, không triều đình để truyền lệnh. Nhà Trần đã chuẩn bị đúng tất cả những gì cần chuẩn bị, rồi kiệt sức trước khi kịp dùng đến.",
+      "en": "The stakes are in. The capital was emptied. The nation answered as one. All three were done — and when the tide came there was nobody left standing to use them: no men to spring the ambush, no grain to feed them, no court left to give the order. Everything was prepared correctly, and the dynasty was spent before it could act."
+    },
+    "sources": []
+  },
+
+  "lesson": {
+    "vi": "TODO — một câu: vì sao Đại Việt thắng mà không mạnh hơn",
+    "en": "TODO — one sentence"
+  }
+}
