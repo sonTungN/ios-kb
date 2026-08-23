@@ -507,8 +507,11 @@ def main(root):
         # --- interstitials: pacing beats carry no stat effects ---
         for it in dyn.get("interstitials", []):
             iw = "%s interstitial %s" % (where, it.get("type"))
-            if it.get("type") not in ("advisor", "omen", "echo"):
+            if it.get("type") not in ("advisor", "omen", "echo", "chapter"):
                 err(iw, "unknown interstitial type '%s'" % it.get("type"))
+            if it.get("type") == "chapter" and not (it.get("before") and it.get("title")):
+                err(iw, "a chapter banner needs 'before' (the card it precedes) and a 'title' — "
+                        "it is the era turn made visible, not a decoration")
             if it.get("effects"):
                 err(iw, "interstitials must not carry stat effects — they are information, not decisions")
             anchor = it.get("before") or it.get("after")

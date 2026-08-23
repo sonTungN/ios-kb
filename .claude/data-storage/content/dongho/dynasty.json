@@ -1,0 +1,1774 @@
+{
+  "_note": "SINGLE-RUN level (team decision 22 Aug 2026): one continuous game 1938-2025, three chapters as sub-progress (banner interstitials), 36 spine cards mapped in level-map.md and mirrored in ../../tools/trace_run.py (machine-checked reachability: canonical all-flag lines exist on Thuong and Kho). Weave prose is DRAFT quality — the team rewrites from ../../research/04-dong-ho-tranh-dan-gian.md. Spine cards (cards/*.json) are NOT yet written: EXPECTED validator errors = 7 missing carriers + 1 expiresBefore target. Schema naming debt (dynasty.json/dynastyId) unchanged.",
+  "id": "dongho",
+  "name": {
+    "vi": "Tranh Đông Hồ — Giữ lấy một dòng tranh (1938–2025)",
+    "en": "Đông Hồ — One Unbroken Line (1938–2025)"
+  },
+  "period": {
+    "from": 1938,
+    "to": 2025
+  },
+  "playPattern": {
+    "vi": "Truyền được thì sống. Chợ tàn, làng cháy, hợp tác xã giải thể, hàng mã gọi — thứ về được tới New Delhi 2025 là thứ đã được truyền tay.",
+    "en": "Transmit to survive. The market dies, the village burns, the cooperative folds, the votive trade calls — what reaches New Delhi 2025 is what changed hands."
+  },
+  "stats": [
+    {
+      "id": "nghe",
+      "name": {
+        "vi": "Nghề",
+        "en": "Craft"
+      },
+      "icon": "brush",
+      "start": 60,
+      "failLow": 0,
+      "failHigh": 100,
+      "failLowText": {
+        "vi": "Tay nghề mai một đến mức tờ giấy không còn là tranh Đông Hồ. Điệp không biết quét, thuốc cái không biết chế — cái tên còn, cái nghề đã mất.",
+        "en": "The hand forgets until the sheet is no longer a Đông Hồ print. Nobody left who can lay the điệp ground or mix the five pigments — the name survives, the craft does not."
+      },
+      "failHighText": {
+        "vi": "Khư khư nệ cổ, khước từ mọi đổi thay — tranh rời khỏi đời sống, thành đồ thờ trong tủ kính. Di sản đông cứng thì không còn là di sản sống.",
+        "en": "Purism hardens into refusal of every change — the prints leave daily life and become glass-case relics. A frozen heritage is no longer a living one."
+      }
+    },
+    {
+      "id": "sinh_ke",
+      "name": {
+        "vi": "Sinh kế",
+        "en": "Livelihood"
+      },
+      "icon": "rice_bowl",
+      "start": 50,
+      "failLow": 0,
+      "failHigh": 100,
+      "failLowText": {
+        "vi": "Hết gạo, hết giấy, hết cả dầu đèn. Cả nhà bỏ nghề đi làm thuê — như hơn chín phần mười làng sẽ làm sau này.",
+        "en": "No rice, no paper, no lamp oil. The household quits for wage work — as more than nine in ten village families one day would."
+      },
+      "failHighText": {
+        "vi": "Tiền vào như nước — từ hàng xén, hàng mã, việc phố. Xưởng tranh thành kho chứa; cái nghề chết chìm trong chính sự no đủ của nhà mình.",
+        "en": "Money pours in — from sundries, votive goods, city work. The print shop becomes a storeroom; the craft drowns in the household's own prosperity."
+      }
+    },
+    {
+      "id": "tieng",
+      "name": {
+        "vi": "Tiếng",
+        "en": "Standing"
+      },
+      "icon": "campaign",
+      "start": 55,
+      "failLow": 0,
+      "failHigh": 100,
+      "failLowText": {
+        "vi": "Không ai còn nhớ nhà này làm tranh. Phiên chợ không người hỏi, đơn hàng không ai đặt — nghề chết vì bị quên trước khi chết vì hết người làm.",
+        "en": "Nobody remembers this house makes prints. No one asks at the market, no orders come — a craft dies of being forgotten before it dies of having no hands."
+      },
+      "failHighText": {
+        "vi": "Tiếng lớn quá tay: đơn dồn ép in ẩu, kẻ ngoài in phẩm màu đội tên làng. Cái tiếng nuốt cái chất — tranh bán chạy nhất là lúc tranh không còn thật.",
+        "en": "Fame outruns the hand: rush orders force sloppy printing, outsiders sell chemical-dye fakes under the village name. Renown eats authenticity — the prints sell best just as they stop being real."
+      }
+    },
+    {
+      "id": "nguoi",
+      "name": {
+        "vi": "Người",
+        "en": "People"
+      },
+      "icon": "diversity_3",
+      "start": 50,
+      "failLow": 0,
+      "failHigh": 100,
+      "failLowText": {
+        "vi": "Không còn ai để truyền. Con đi, thợ tan, phường vắng — như lời UNESCO sẽ viết: số người thạo nghề và tận tâm đã quá ít để nghề còn truyền được.",
+        "en": "No one left to receive it. Children gone, apprentices scattered, the guild empty — as UNESCO would one day write: too few skilled and committed people remain to sustain transmission."
+      },
+      "failHighText": {
+        "vi": "Đông tay mà loãng chuẩn: ai cũng 'biết in' sau một buổi, không ai theo nổi mười năm. Truyền nghề thành trình diễn — đông người không phải là truyền thừa.",
+        "en": "Many hands, thin standards: everyone 'can print' after an afternoon, no one stays ten years. Transmission becomes performance — a crowd is not an heir."
+      }
+    }
+  ],
+  "flags": [
+    {
+      "id": "giu_van",
+      "name": {
+        "vi": "Giữ ván",
+        "en": "The blocks survive"
+      },
+      "carrierCardId": "lang-chay",
+      "historicalBasis": {
+        "vi": "Ván khắc cổ thất tán trong chiến tranh 1945–54; những bộ còn lại về sau phải gom lại từng tấm (cụ Sam ~600 bản, cụ Chế ~400 bộ). Giữ được ván qua binh lửa là điều kiện để nghề sống lại.",
+        "en": "The old woodblocks scattered in the 1945–54 war; what survived later had to be bought back sheet by sheet (Sam ~600 blocks, Chế ~400 sets). Blocks that crossed the fire are what the revival stood on."
+      },
+      "statFloor": {
+        "nguoi": 20
+      },
+      "_floorRationale": "Blocks are heavy and the family carries them on foot. The floor is on nguoi and nothing else — it needs hands, not money and not fame. Set low (20 against a start of 50): it binds only on a run that has already scattered the household, which is the run where the blocks genuinely burn.",
+      "blockedText": {
+        "vi": "Ván chất giữa sân. Không đủ tay mà gánh — người già yếu, trẻ đã đi. Lửa không đợi. Nhà chạy được, ván thì không.",
+        "en": "The blocks are stacked in the yard. Not enough hands to carry them — the old too weak, the young already gone. Fire does not wait. The family gets out; the blocks do not."
+      }
+    },
+    {
+      "id": "giu_bi_quyet",
+      "name": {
+        "vi": "Giữ bí quyết",
+        "en": "The recipe survives"
+      },
+      "carrierCardId": "tan-cu-day-nghe",
+      "historicalBasis": {
+        "vi": "Chuỗi tri thức của nghề — giấy dó Đống Cao, quét điệp bằng thét, năm thuốc cái, in màu trước nét đen sau — sống qua thời tản cư trong trí nhớ người thạo nghề: năm 1967 vẫn còn 50 nghệ nhân lập được HTX.",
+        "en": "The craft's knowledge chain — Đống Cao paper, the pine-brush điệp ground, the five pigments, colours first and the black line last — survived evacuation in living memory: in 1967 there were still fifty artisans to found the cooperative."
+      },
+      "statFloor": {
+        "nghe": 25
+      },
+      "minigame": {
+        "type": "match",
+        "contentRef": [
+          "vinh-hoa",
+          "phu-quy",
+          "lon-dan",
+          "ga-dai-cat"
+        ]
+      },
+      "_minigameNote": "The Chương I home of mg_match (card 9): the elder teaches the young to recognise the mẫu and their meanings — 4 graded pairs only. Đám cưới chuột is deliberately EXCLUDED from grading (its satire-vs-festive reading is scholarly contested; the codex and the khach-dat-tranh-cuoi weave card carry both layers). Retryable until complete at every difficulty; Khó strips labels only.",
+      "_floorRationale": "You cannot teach a recipe you no longer hold. The floor is on nghe, set at 25 against a start of 60 — it binds only on a run that has already let the hand rot, never on a merely poor one. It must never rise toward the middle of the range: mastery gates the TEACHING, it does not win the level (sinh_ke is the insufficientAlone stat here, and nghe must not become a second score to farm).",
+      "blockedText": {
+        "vi": "Lớp học mở giữa trại tản cư. Nhưng người dạy cầm thét mà tay đã quên đường quét, nhớ hoa hòe mà quên lửa sao. Không ai truyền được cái mình đã để mất.",
+        "en": "The class gathers in the evacuation camp. But the teacher's hand has forgotten the brush stroke, remembers the sophora but not the roasting fire. No one can pass on what they have already lost."
+      }
+    },
+    {
+      "id": "giu_mau_co",
+      "optional": true,
+      "name": {
+        "vi": "Giữ mẫu cổ",
+        "en": "The classics kept"
+      },
+      "carrierCardId": "luu-mau-co",
+      "historicalBasis": {
+        "vi": "Thời HTX có lệnh 'cải tiến' mẫu; những nhà lặng lẽ lưu bộ mẫu cổ là lý do các mẫu kinh điển còn in được hôm nay.",
+        "en": "The cooperative era ordered 'improved' designs; the households that quietly archived the classics are why they still print today."
+      },
+      "statFloor": {
+        "nghe": 25
+      },
+      "blockedText": {
+        "vi": "Muốn lưu mẫu thì phải biết mẫu nào đáng lưu. Tay đã quên nghề thì chồng giấy nào cũng như nhau.",
+        "en": "Archiving takes a hand that knows which sheets matter. To a hand that has forgotten the craft, every pile looks alike."
+      }
+    },
+    {
+      "id": "phuc_hoi_van",
+      "name": {
+        "vi": "Chuộc ván về",
+        "en": "The blocks brought home"
+      },
+      "carrierCardId": "nhat-ve-tung-tam",
+      "historicalBasis": {
+        "vi": "Từ khoảng 1990, ván khắc thất tán được gom lại từng tấm — cụ Sam đi từng nhà (~600 bản), cụ Chế mua lại từ các nhà bỏ nghề (lên tới ~400 bộ). Con đường thứ hai của những bộ ván.",
+        "en": "From around 1990 the scattered blocks were gathered back piece by piece — Sam door to door (~600), Chế buying from quitting families (~400 sets). The blocks' second road home."
+      },
+      "statFloor": {
+        "sinh_ke": 20
+      },
+      "blockedText": {
+        "vi": "Lái đồ cũ đồng ý bán lại bộ ván — giá hời. Nhưng thúng gạo nhà đã cạn. Ván của tổ tiên nằm đó, và mình đứng nhìn.",
+        "en": "The dealer will sell the blocks back — a fair price, even. But the rice basket is empty. Your ancestors' blocks sit there, and you stand looking."
+      },
+      "_requireAnyNote": "Pairs with giu_van in finalTrial.requireAny — losing the blocks in 1951 opens this costlier road instead of ending the run."
+    },
+    {
+      "id": "truyen_nhan",
+      "name": {
+        "vi": "Truyền nhân",
+        "en": "An heir"
+      },
+      "carrierCardId": "chau-noi-nghe",
+      "historicalBasis": {
+        "vi": "Các cuộc nối nghiệp có thật của hai dòng họ còn giữ nghề — đời thứ 14 họ Nguyễn Hữu, con cháu cụ Chế, người vào nghề từ năm mười bốn tuổi.",
+        "en": "The real successions of the two remaining lineages — the Nguyễn Hữu 14th generation, Chế's children and grandchildren, an artisan who began at fourteen."
+      },
+      "statFloor": {
+        "nguoi": 20
+      },
+      "minigame": {
+        "type": "assemble",
+        "contentRef": [
+          "ga-dai-cat"
+        ]
+      },
+      "_minigameNote": "mg_assemble — the grandchild's first print: 3x3 rotate-and-assemble of one real mẫu. Retryable until complete at every difficulty; Kho shows no reference image.",
+      "blockedText": {
+        "vi": "Lễ nhận nghề soạn xong, hương đã thắp. Nhưng quanh hương án không còn đứa trẻ nào — người đi hết cả rồi. Nghề không truyền được cho ghế trống.",
+        "en": "The rite is prepared, the incense lit. But no child stands at the altar — everyone has gone. A craft cannot be handed to an empty chair."
+      }
+    },
+    {
+      "id": "ho_so",
+      "name": {
+        "vi": "Hồ sơ UNESCO",
+        "en": "The dossier"
+      },
+      "carrierCardId": "ho-so-khoi-dong",
+      "expiresBefore": "trung-tam-nha-nuoc",
+      "historicalBasis": {
+        "vi": "Hồ sơ quốc gia khởi động từ 2017, nộp UNESCO trước hạn 31/3/2020 — và được ghi danh Danh sách cần bảo vệ khẩn cấp ngày 9/12/2025 tại New Delhi (Quyết định 20.COM 7.A.1). Cửa sổ có thật, hạn chót có thật.",
+        "en": "The national dossier began in 2017, reached UNESCO before the 31 Mar 2020 deadline — and was inscribed on the Urgent Safeguarding List on 9 Dec 2025 in New Delhi (Decision 20.COM 7.A.1). A real window, a real deadline."
+      },
+      "statFloor": {
+        "tieng": 25
+      },
+      "blockedText": {
+        "vi": "Đoàn khảo sát về làng, hỏi ai còn giữ nghề. Không ai quanh vùng nhắc tên nhà mình. Hồ sơ cần một cái nghề mà người ta còn nhìn thấy.",
+        "en": "The survey team asks who still keeps the craft. Nobody in the district names this house. A dossier needs a craft the world can still see."
+      },
+      "_lastChanceNote": "Card 33 (han-chot-31-3) is a conditional pair in one spine slot: for non-holders it offers ho_so once more at roughly double cost; after it, the GRANT WINDOW closes (expiresBefore semantics — a held ho_so is never removed). The card-33 grant is documented in level-map.md; carrierCardId points at the 2017 card."
+    },
+    {
+      "id": "mo_cua",
+      "optional": true,
+      "name": {
+        "vi": "Mở cửa xưởng",
+        "en": "The workshop opens"
+      },
+      "carrierCardId": "mo-cua-don-khach",
+      "historicalBasis": {
+        "vi": "Trung tâm tư nhân mở 2008; các lớp trải nghiệm cho học sinh in tranh — nghề tự mở cửa cho đời sống hôm nay.",
+        "en": "The private center opened in 2008; experience classes let schoolchildren print their own sheets — the craft opening its own doors to the present."
+      },
+      "statFloor": {
+        "tieng": 20
+      },
+      "minigame": {
+        "type": "match",
+        "contentRef": [
+          "vinh-hoa",
+          "phu-quy",
+          "lon-dan",
+          "ga-dai-cat"
+        ]
+      },
+      "blockedText": {
+        "vi": "Biển lớp trải nghiệm treo lên. Ba ngày, không một ai ghé. Không ai đến thăm một xưởng mà không ai từng nghe tên.",
+        "en": "The class sign goes up. Three days, not one visitor. No one visits a workshop no one has heard of."
+      }
+    }
+  ],
+  "counters": [
+    {
+      "id": "truyen_thua",
+      "name": {
+        "vi": "Truyền thừa",
+        "en": "Transmission"
+      },
+      "min": 0,
+      "max": 3,
+      "start": 0,
+      "_note": "Ticks: ve-lang 1954 (+1) · day-con-trong-xuong 1972 (+1) · con-muon-o-lai 1987 (+1). The 1990 trap (htx-giai-the choice A) takes one back (-1). finalTrial requires >= 2."
+    }
+  ],
+  "ledger": {
+    "revealOn": "first-flag-secured",
+    "slots": [
+      "giu_bi_quyet",
+      "truyen_nhan",
+      "ho_so"
+    ],
+    "showsOptional": [
+      "giu_van",
+      "phuc_hoi_van",
+      "giu_mau_co",
+      "mo_cua"
+    ],
+    "hintPolicy": "when-not-what",
+    "showsFloors": true,
+    "_precedenceNote": "game.json ledgerDisclosure per difficulty WINS over revealOn — revealOn states the Thường default (= after-first-flag); Dễ opens from the start, Khó not until the trial.",
+    "_floorDisclosureNote": "Same policy as the Trần ledger: a revealed slot shows its statFloor ('Người ≥ 20') but never names the card or the choice. On Khó the ledger stays shut until the trial; the advisors are the only warning, and Khó suppresses them — that is the setting's premise.",
+    "hintText": {
+      "vi": "Cơ hội còn ở phía trước. Nghề sẽ chỉ lúc, không chỉ đường.",
+      "en": "The chance is still ahead. The craft tells you when, not what to choose."
+    },
+    "_requireAnyNote": "giu_van and phuc_hoi_van display as ONE paired slot ('Ván khắc — giữ hoặc chuộc'): either fills it. The counter truyen_thua displays as a 3-notch meter beside the slots. NOTE: giu_van/phuc_hoi_van sit in showsOptional for DISPLAY wiring only — one of the pair is mandatory (requireAny)."
+  },
+  "crises": [
+    {
+      "id": "sinh-ke-low",
+      "stat": "sinh_ke",
+      "trigger": {
+        "when": "lte",
+        "value": 20
+      },
+      "oncePerLevel": true,
+      "name": {
+        "vi": "Vay phường",
+        "en": "The guild lends"
+      },
+      "rescue": {
+        "label": {
+          "vi": "Vay thóc phường nghề, hẹn mùa tranh sau",
+          "en": "Borrow against next season's prints"
+        },
+        "effects": {
+          "sinh_ke": 25,
+          "tieng": -10
+        }
+      },
+      "refuse": {
+        "label": {
+          "vi": "Nhà tự lo",
+          "en": "The house manages alone"
+        },
+        "effects": {}
+      },
+      "historicalBasis": {
+        "vi": "Làng nghề sống bằng quan hệ phường — vay được, nhưng cả làng biết nhà nào túng.",
+        "en": "A craft village runs on guild credit — the loan is real, and so is the whole village knowing who needed it."
+      },
+      "historicity": "simplified",
+      "sources": []
+    },
+    {
+      "id": "sinh-ke-high",
+      "stat": "sinh_ke",
+      "trigger": {
+        "when": "gte",
+        "value": 80
+      },
+      "oncePerLevel": true,
+      "name": {
+        "vi": "Của nả đổi nghiệp",
+        "en": "Money asks for the workshop"
+      },
+      "rescue": {
+        "label": {
+          "vi": "Bớt hàng xén, giữ giờ cho ván in",
+          "en": "Cut the side trade, keep hours for the blocks"
+        },
+        "effects": {
+          "sinh_ke": -20,
+          "tieng": -5
+        }
+      },
+      "refuse": {
+        "label": {
+          "vi": "Tiền đang vào, dại gì dừng",
+          "en": "The money is good — why stop"
+        },
+        "effects": {}
+      },
+      "historicalBasis": {
+        "vi": "Nghề tay trái nuôi nhà rồi nuốt nhà: khi buôn bán lãi hơn in tranh, giờ ngồi ván cứ ít dần — đúng con đường cả làng sẽ đi sau 1990.",
+        "en": "The side trade feeds the house, then eats it: when commerce out-earns printing, hours at the blocks dwindle — the road the whole village would take after 1990."
+      },
+      "historicity": "simplified",
+      "sources": []
+    },
+    {
+      "id": "nghe-low",
+      "stat": "nghe",
+      "trigger": {
+        "when": "lte",
+        "value": 20
+      },
+      "oncePerLevel": true,
+      "name": {
+        "vi": "Tìm thầy cũ",
+        "en": "Seek the old master"
+      },
+      "rescue": {
+        "label": {
+          "vi": "Khăn gói đi tìm người thạo nghề học lại",
+          "en": "Travel to relearn from a surviving master"
+        },
+        "effects": {
+          "nghe": 20,
+          "sinh_ke": -15
+        }
+      },
+      "refuse": {
+        "label": {
+          "vi": "Tự mò lại sau",
+          "en": "Puzzle it out later"
+        },
+        "effects": {}
+      },
+      "historicalBasis": {
+        "vi": "Nghề không có sách — nó ở trong tay người. Mất tay là phải tìm người mà học lại, và chuyến đi ấy không rẻ.",
+        "en": "The craft has no manual — it lives in hands. Lose the hand and you must find a person, and the journey is not cheap."
+      },
+      "historicity": "simplified",
+      "sources": []
+    },
+    {
+      "id": "nghe-high",
+      "stat": "nghe",
+      "trigger": {
+        "when": "gte",
+        "value": 80
+      },
+      "oncePerLevel": true,
+      "name": {
+        "vi": "Cầu toàn",
+        "en": "Perfection stops the presses"
+      },
+      "rescue": {
+        "label": {
+          "vi": "Cho ra hàng — đẹp vừa đủ, đúng hẹn",
+          "en": "Ship it — good enough, on time"
+        },
+        "effects": {
+          "nghe": -20,
+          "tieng": -5
+        }
+      },
+      "refuse": {
+        "label": {
+          "vi": "Chưa ưng thì chưa ra lò",
+          "en": "Nothing leaves until it is right"
+        },
+        "effects": {}
+      },
+      "historicalBasis": {
+        "vi": "Tranh Tết là hàng của mùa — lỡ phiên chợ là lỡ cả năm. Cái đẹp tuyệt đối không nuôi nổi cái nghề sống bằng tháng Chạp.",
+        "en": "Tết prints are seasonal goods — miss the market days and you miss the year. Absolute beauty cannot feed a craft that lives on the twelfth month."
+      },
+      "historicity": "simplified",
+      "sources": []
+    },
+    {
+      "id": "tieng-low",
+      "stat": "tieng",
+      "trigger": {
+        "when": "lte",
+        "value": 20
+      },
+      "oncePerLevel": true,
+      "name": {
+        "vi": "Gánh tranh chợ xa",
+        "en": "Far markets"
+      },
+      "rescue": {
+        "label": {
+          "vi": "Gánh tranh đi các chợ xa rao lại tên nhà",
+          "en": "Carry the sheets to distant markets and cry the house's name"
+        },
+        "effects": {
+          "tieng": 20,
+          "sinh_ke": -15
+        }
+      },
+      "refuse": {
+        "label": {
+          "vi": "Chờ khách tự tìm đến",
+          "en": "Wait to be found"
+        },
+        "effects": {}
+      },
+      "historicalBasis": {
+        "vi": "Khi phiên chợ làng vắng, người làm tranh phải tự mang tranh đi — tiếng không tự về.",
+        "en": "When the village market empties, the printers must carry the prints out — standing does not return on its own."
+      },
+      "historicity": "simplified",
+      "sources": []
+    },
+    {
+      "id": "tieng-high",
+      "stat": "tieng",
+      "trigger": {
+        "when": "gte",
+        "value": 80
+      },
+      "oncePerLevel": true,
+      "name": {
+        "vi": "Đơn dồn quá tay",
+        "en": "The flood of orders"
+      },
+      "rescue": {
+        "label": {
+          "vi": "Trả bớt đơn, giữ đúng lối in",
+          "en": "Turn orders away, keep the printing honest"
+        },
+        "effects": {
+          "tieng": -20,
+          "sinh_ke": -10
+        }
+      },
+      "refuse": {
+        "label": {
+          "vi": "Nhận hết, in gấp cho kịp",
+          "en": "Take them all and rush"
+        },
+        "effects": {}
+      },
+      "historicalBasis": {
+        "vi": "Đơn nhiều hơn tay là lúc tranh bắt đầu ẩu — và tiếng lớn là lúc hàng nhái đội tên làng xuất hiện.",
+        "en": "More orders than hands is when printing turns sloppy — and a big name is when fakes wearing the village's name appear."
+      },
+      "historicity": "simplified",
+      "sources": []
+    },
+    {
+      "id": "nguoi-low",
+      "stat": "nguoi",
+      "trigger": {
+        "when": "lte",
+        "value": 20
+      },
+      "oncePerLevel": true,
+      "name": {
+        "vi": "Gọi họ hàng về",
+        "en": "Call the kin home"
+      },
+      "rescue": {
+        "label": {
+          "vi": "Nhắn khắp nơi gọi người nhà về đỡ nghề",
+          "en": "Send word everywhere: come home and hold the craft"
+        },
+        "effects": {
+          "nguoi": 20,
+          "sinh_ke": -15
+        }
+      },
+      "refuse": {
+        "label": {
+          "vi": "Ai có phận nấy",
+          "en": "Each to their own path"
+        },
+        "effects": {}
+      },
+      "historicalBasis": {
+        "vi": "Người về là thêm miệng ăn trước khi thêm tay nghề — gọi người về là một khoản chi, không phải một phép màu.",
+        "en": "Returners are mouths before they are hands — calling them home is an expense, not a miracle."
+      },
+      "historicity": "simplified",
+      "sources": []
+    },
+    {
+      "id": "nguoi-high",
+      "stat": "nguoi",
+      "trigger": {
+        "when": "gte",
+        "value": 80
+      },
+      "oncePerLevel": true,
+      "name": {
+        "vi": "Đông miệng ăn",
+        "en": "Too many at the tray"
+      },
+      "rescue": {
+        "label": {
+          "vi": "Chọn người ở lại xưởng, người ra đồng",
+          "en": "Choose who stays at the blocks and who goes to the fields"
+        },
+        "effects": {
+          "nguoi": -20,
+          "tieng": -5
+        }
+      },
+      "refuse": {
+        "label": {
+          "vi": "Cứ để cả nhà quây một xưởng",
+          "en": "Keep everyone at one workshop"
+        },
+        "effects": {}
+      },
+      "historicalBasis": {
+        "vi": "Một xưởng tranh nuôi không nổi một họ. Đông người quanh ván không phải là truyền nghề — là chia nhau một nồi cơm mỏng.",
+        "en": "One print shop cannot feed a clan. A crowd around the blocks is not transmission — it is a thin pot divided many ways."
+      },
+      "historicity": "simplified",
+      "sources": []
+    }
+  ],
+  "ambientPolicy": {
+    "minCardGap": 4,
+    "maxPerLevel": 3,
+    "maxAbsEffect": 8,
+    "totalGainMustStayUnder": 35,
+    "_capRationale": "The required carriers + ticks bill ~55 points across the run (sinh_ke-heavy); the most generous legal set of ambient beats must stay under 35 — well below the bill — or the preparations stop costing anything. PRECEDENCE: maxPerLevel is the hard ceiling; a difficulty ambientCap above it (De: 5) is clamped down to it."
+  },
+  "ambient": [
+    {
+      "id": "duoc-mua-diep",
+      "name": {
+        "vi": "Mẻ điệp óng",
+        "en": "A gleaming điệp batch"
+      },
+      "text": {
+        "vi": "Vỏ điệp năm nay nghiền mịn, quét lên giấy dó ánh như xà cừ. Tờ nào cũng bắt mắt hơn thường.",
+        "en": "This year's shells grind fine; the ground shimmers like nacre on the dó paper. Every sheet catches the eye."
+      },
+      "effects": {
+        "nghe": 5,
+        "tieng": 3
+      },
+      "historicity": "simplified",
+      "sources": []
+    },
+    {
+      "id": "hoa-hoe-tot",
+      "name": {
+        "vi": "Hoa hòe được mùa",
+        "en": "A good sophora year"
+      },
+      "text": {
+        "vi": "Hòe đậu hoa dày, sao lên vàng tươi. Thuốc cái đủ dùng cả vụ, không phải mua đắt.",
+        "en": "The sophora blooms thick; roasted, it yields a bright yellow. Pigment enough for the season, none bought dear."
+      },
+      "effects": {
+        "sinh_ke": 5,
+        "nghe": 3
+      },
+      "historicity": "simplified",
+      "sources": []
+    },
+    {
+      "id": "khach-khen",
+      "name": {
+        "vi": "Tiếng lành đồn xa",
+        "en": "Good word travels"
+      },
+      "text": {
+        "vi": "Một ông khách tỉnh xa khen bộ Vinh hoa – Phú quý của nhà trước cả phường. Người hỏi mua theo lời đồn.",
+        "en": "A buyer from a far province praises the house's Vinh hoa – Phú quý pair before the whole guild. Others come asking on the rumour."
+      },
+      "effects": {
+        "tieng": 5
+      },
+      "historicity": "invented",
+      "sources": []
+    },
+    {
+      "id": "mua-thuan",
+      "name": {
+        "vi": "Trời hanh đúng vụ",
+        "en": "Dry air at printing time"
+      },
+      "text": {
+        "vi": "Hanh heo đúng kỳ phơi tranh. Giấy khô đều, màu đanh mặt, không tờ nào loang.",
+        "en": "Crisp dry days right when the sheets hang. Paper dries even, colours set hard, not one sheet bleeds."
+      },
+      "effects": {
+        "nghe": 5
+      },
+      "historicity": "invented",
+      "sources": []
+    },
+    {
+      "id": "phien-cho-dong",
+      "name": {
+        "vi": "Phiên chợ đông",
+        "en": "A crowded market day"
+      },
+      "text": {
+        "vi": "Phiên mười sáu người chen kín sân đình. Chiếu tranh nhà trải đến đâu vợi đến đấy.",
+        "en": "The sixteenth-day fair packs the đình courtyard. The house's mat empties as fast as it is laid."
+      },
+      "effects": {
+        "sinh_ke": 5,
+        "tieng": 3
+      },
+      "historicity": "simplified",
+      "sources": []
+    },
+    {
+      "id": "em-be-thuoc-mau",
+      "name": {
+        "vi": "Đứa út thuộc màu",
+        "en": "The youngest knows the colours"
+      },
+      "text": {
+        "vi": "Đứa út đọc vanh vách: đen than lá tre, xanh lá chàm, vàng hoa hòe, đỏ sỏi son, trắng vỏ điệp. Cả xưởng cười.",
+        "en": "The youngest rattles it off: black from bamboo-leaf char, blue from indigo, yellow from sophora, red from son stone, white from shell. The whole workshop laughs."
+      },
+      "effects": {
+        "nguoi": 5
+      },
+      "historicity": "simplified",
+      "sources": []
+    },
+    {
+      "id": "tho-cu-ghe-tham",
+      "name": {
+        "vi": "Thợ cũ ghé thăm",
+        "en": "An old hand visits"
+      },
+      "text": {
+        "vi": "Một người thợ cũ của nhà ghé qua, ngồi lại nửa buổi sửa cho đường thét quét điệp.",
+        "en": "A former apprentice stops by and stays half a day, correcting the sweep of the điệp brush."
+      },
+      "effects": {
+        "nghe": 3,
+        "nguoi": 3
+      },
+      "historicity": "invented",
+      "sources": []
+    },
+    {
+      "id": "chieu-moi",
+      "name": {
+        "vi": "Đổi được chiếu mới",
+        "en": "New mats in trade"
+      },
+      "text": {
+        "vi": "Khách Thái Bình đổi chiếu lấy tranh như lệ cũ. Chiếu mới trải sân phơi, đỡ hỏng giấy.",
+        "en": "The Thái Bình buyers trade mats for prints, the old way. Fresh mats line the drying yard and spare the paper."
+      },
+      "effects": {
+        "sinh_ke": 3,
+        "nghe": 3
+      },
+      "historicity": "simplified",
+      "sources": []
+    }
+  ],
+  "weavePolicy": {
+    "slotsPerAct": {
+      "C1": 2,
+      "C2": 1,
+      "C3": 1
+    },
+    "_slotRationale": "Chapter I gets two beats of customs texture (it is the customs chapter); II and III one each — the later chapters are shorter on drawn cards so the dated arc stays loud. 4 weave per run.",
+    "maxAbsEffect": 8,
+    "noRepeatWithinRun": true,
+    "maxWorstCaseSwing": {
+      "nghe": 15,
+      "sinh_ke": 12,
+      "tieng": 15,
+      "nguoi": 15
+    },
+    "_swingRationale": "THE SOLVENCY INVARIANT, unchanged. sinh_ke is the tightest budget at 12 because all three carriers bill it and the trial gates on it at 10 — a hostile draw must never be what pushes a prepared household under the gate. Weave changes how the run feels and what it costs, never whether it can be won."
+  },
+  "weave": [
+    {
+      "id": "khach-dat-tranh-cuoi",
+      "act": "C1",
+      "year": null,
+      "name": {
+        "vi": "Đám cưới đặt tranh",
+        "en": "A wedding order"
+      },
+      "prompt": {
+        "vi": "Nhà trai làng bên sang đặt một bộ tranh mừng đám cưới, đòi có cả Đám cưới chuột 'cho vui cửa vui nhà'. Chú rể tương lai gãi đầu hỏi: tranh chuột cống mèo, treo ngày cưới có phải điềm xui?",
+        "en": "A groom's family from the next village orders wedding prints and wants Đám cưới chuột 'for the fun of it'. The groom-to-be scratches his head: rats bribing a cat — is that bad luck at a wedding?"
+      },
+      "choices": [
+        {
+          "label": {
+            "vi": "Ngồi giảng nghĩa từng lớp tranh",
+            "en": "Sit down and unfold the picture's layers"
+          },
+          "effects": {
+            "tieng": 4,
+            "sinh_ke": -2
+          },
+          "outcome": {
+            "vi": "Mất nửa buổi trà: chuột cống nạp mèo là cười kẻ mạnh sách nhiễu, mà đám rước vẫn rộn ràng — mèo vui, chuột cũng vui. Nhà trai gật gù, đặt thêm hai bộ.",
+            "en": "Half a pot of tea later: the tribute mocks the strong who squeeze the weak, yet the procession stays joyful — the cat content, the rats content too. The family nods along and orders two more sets."
+          }
+        },
+        {
+          "label": {
+            "vi": "Bán nhanh cho xong phiên",
+            "en": "Just sell and move on"
+          },
+          "effects": {
+            "sinh_ke": 3
+          },
+          "outcome": {
+            "vi": "Tiền trao cháo múc. Tranh về nhà người mà nghĩa ở lại xưởng — sau này ai hỏi, họ sẽ kể sai.",
+            "en": "Cash changes hands. The print goes home without its meaning — and when someone asks one day, they will tell it wrong."
+          }
+        }
+      ],
+      "historicalNote": {
+        "vi": "Đám cưới chuột là tranh châm biếm nổi tiếng nhất của Đông Hồ: lớp nghĩa phê phán nạn cống nạp kẻ mạnh, và một lớp nghĩa chúc tụng — sung túc, cộng sinh — mà giới nghiên cứu về sau còn tranh luận.",
+        "en": "Đám cưới chuột is Đông Hồ's most famous satire: a layer mocking tribute to the strong, and a festive layer — abundance, coexistence — that scholars still debate."
+      },
+      "historicity": "simplified",
+      "sources": [
+        {
+          "title": "Trang Thanh Hiền — Giải mã các bức tranh dân gian Đám cưới chuột, Tạp chí Mỹ thuật 1/2020",
+          "url": "https://tapchimythuat.vn/giai-ma-cac-buc-tranh-dan-gian-dam-cuoi-chuot/",
+          "type": "secondary",
+          "accessed": "2026-08-21"
+        }
+      ]
+    },
+    {
+      "id": "con-gai-xin-hoc",
+      "act": "C1",
+      "year": null,
+      "name": {
+        "vi": "Con gái xin học nghề",
+        "en": "A daughter asks for the craft"
+      },
+      "prompt": {
+        "vi": "Đứa con gái mười bốn tuổi xin được đứng ván in thay vì chỉ phụ quét điệp. Có người trong họ lườm: xưa nay ván nét là việc đàn ông.",
+        "en": "The fourteen-year-old daughter asks to stand at the printing block instead of only brushing the điệp ground. An uncle glares: the line block has always been men's work."
+      },
+      "choices": [
+        {
+          "label": {
+            "vi": "Cho con đứng ván",
+            "en": "Let her print"
+          },
+          "effects": {
+            "nguoi": 4,
+            "nghe": 2,
+            "tieng": -2
+          },
+          "outcome": {
+            "vi": "Tay nó dẻo hơn tay anh nó. Họ hàng xì xào một mùa rồi thôi — thêm một đôi tay thạo là thêm một đời nghề.",
+            "en": "Her hand is steadier than her brother's. The clan mutters for a season and stops — one more skilled pair of hands is one more lifetime of the craft."
+          }
+        },
+        {
+          "label": {
+            "vi": "Giữ lệ cũ",
+            "en": "Keep the old rule"
+          },
+          "effects": {
+            "nguoi": -3,
+            "sinh_ke": 2
+          },
+          "outcome": {
+            "vi": "Con bé lặng lẽ quay lại chum điệp. Ít lâu sau nó xin sang làng bên học dệt.",
+            "en": "The girl goes quietly back to the shell vats. Not long after, she asks to learn weaving in the next village."
+          }
+        }
+      ],
+      "historicalNote": {
+        "vi": "Phụ nữ làng Hồ vẫn vào nghề từ nhỏ — nghệ nhân ưu tú Nguyễn Thị Oanh làm tranh từ năm mười bốn tuổi, hơn năm mươi năm sau thành người phụ nữ đầu tiên của các làng nghề Bắc Ninh được phong nghệ nhân ưu tú.",
+        "en": "Women of the village did enter the craft young — NNƯT Nguyễn Thị Oanh began at fourteen and, fifty years on, became the first woman of Bắc Ninh's craft villages to be named an artisan of merit."
+      },
+      "historicity": "simplified",
+      "sources": [
+        {
+          "title": "VNA Báo ảnh — Nghệ nhân Nguyễn Thị Oanh, người giữ gìn dòng tranh Đông Hồ",
+          "url": "https://vietnam.vnanet.vn/vietnamese/tin-tuc/nghe-nhan-nguyen-thi-oanh-%E2%80%93-nguoi-giu-gin-dong-tranh-dong-ho-258714.html",
+          "type": "secondary",
+          "accessed": "2026-08-21"
+        }
+      ]
+    },
+    {
+      "id": "phuong-vay-van",
+      "act": "C1",
+      "year": null,
+      "name": {
+        "vi": "Phường mượn ván",
+        "en": "The guild borrows a block"
+      },
+      "prompt": {
+        "vi": "Nhà bác cả trong phường cháy mất bộ ván Gà đàn, sang xin mượn ván nhà mình in tạm cho kịp đơn. Ván đi đường loạn, lỡ mất là mất.",
+        "en": "The guild elder's house lost their Gà đàn blocks to fire and asks to borrow yours to fill an order. Blocks travel badly in wartime — lost is lost."
+      },
+      "choices": [
+        {
+          "label": {
+            "vi": "Cho mượn",
+            "en": "Lend them"
+          },
+          "effects": {
+            "nguoi": 4,
+            "tieng": 2,
+            "sinh_ke": -3
+          },
+          "outcome": {
+            "vi": "Ván về đủ, kèm hai thúng gạo nếp. Phường không quên nhà nào rộng tay lúc khó.",
+            "en": "The blocks come back whole, with two baskets of sticky rice. The guild does not forget who was open-handed in a hard year."
+          }
+        },
+        {
+          "label": {
+            "vi": "Từ chối khéo",
+            "en": "Decline politely"
+          },
+          "effects": {
+            "sinh_ke": 2,
+            "nguoi": -3
+          },
+          "outcome": {
+            "vi": "Bác cả gật đầu không nói gì. Mùa sau, phiên chợ xếp chỗ, chiếu nhà mình bị đẩy ra mé ngoài.",
+            "en": "The elder nods and says nothing. Next season, when the market mats are laid out, yours is at the outer edge."
+          }
+        }
+      ],
+      "historicalNote": {
+        "vi": "Nghề tranh là nghề của phường: ván, thuốc cái, chỗ chợ đều chạy trên quan hệ làng — một nhà không tự đứng được.",
+        "en": "Printing was a guild craft: blocks, pigments and market places all ran on village relations — no house stood alone."
+      },
+      "historicity": "invented",
+      "sources": []
+    },
+    {
+      "id": "mua-dam-hong-giay",
+      "act": "C1",
+      "year": null,
+      "name": {
+        "vi": "Mưa dầm",
+        "en": "The long rain"
+      },
+      "prompt": {
+        "vi": "Mưa dầm nửa tháng. Chỗ trú chật, giấy dó hút ẩm mềm oặt, mấy thếp đã lấm tấm mốc.",
+        "en": "Two weeks of rain. Shelter is cramped, the dó paper drinks the damp, and mould speckles the first quires."
+      },
+      "choices": [
+        {
+          "label": {
+            "vi": "Đốt củi sấy, thức canh lửa",
+            "en": "Burn wood to dry it, sit up with the fire"
+          },
+          "effects": {
+            "sinh_ke": -3,
+            "nghe": 3
+          },
+          "outcome": {
+            "vi": "Tốn củi tốn người, nhưng giấy cứu được quá nửa — và lũ trẻ học được cách hơ giấy không giòn mặt điệp.",
+            "en": "It costs wood and sleep, but more than half the paper is saved — and the children learn to warm sheets without cracking the shell ground."
+          }
+        },
+        {
+          "label": {
+            "vi": "Bỏ giấy, giữ củi",
+            "en": "Let the paper go, keep the firewood"
+          },
+          "effects": {
+            "sinh_ke": 2,
+            "nghe": -3
+          },
+          "outcome": {
+            "vi": "Thếp giấy mốc đem nhóm bếp. Vụ sau phải mua giấy giá loạn — và tay quét điệp lâu không tập đã cứng đi.",
+            "en": "The mouldy quires kindle the stove. Next season paper costs wartime prices — and hands long off the brush have stiffened."
+          }
+        }
+      ],
+      "historicalNote": {
+        "vi": "Giấy điệp sợ ẩm: dó hút nước, điệp bở mặt. Giữ giấy qua mùa mưa là một phần thầm lặng của nghề.",
+        "en": "Điệp paper hates damp: the dó drinks water and the shell ground crumbles. Keeping paper through the rains is the craft's quiet half."
+      },
+      "historicity": "invented",
+      "sources": []
+    },
+    {
+      "id": "thet-moi-dao-tu",
+      "act": "C1",
+      "year": null,
+      "name": {
+        "vi": "Thét mới làng Đạo Tú",
+        "en": "New brushes from Đạo Tú"
+      },
+      "prompt": {
+        "vi": "Người làng Đạo Tú gánh thét lá thông sang bán. Thét cũ nhà đã tòe, nhưng tiền cuối vụ cũng cạn.",
+        "en": "A Đạo Tú man comes over with pine-needle brushes. The house's old thét is splayed — but so is the end-of-season purse."
+      },
+      "choices": [
+        {
+          "label": {
+            "vi": "Mua đủ bộ thét mới",
+            "en": "Buy the full set"
+          },
+          "effects": {
+            "sinh_ke": -3,
+            "nghe": 3
+          },
+          "outcome": {
+            "vi": "Thét mới quét điệp ăn đều tay, vệt gờ nổi đẹp như sóng lúa. Tiền hết, tay sướng.",
+            "en": "The new brushes lay the ground even and true, the ridged strokes like wind-rows in rice. The purse is empty; the hand is glad."
+          }
+        },
+        {
+          "label": {
+            "vi": "Buộc lại thét cũ dùng tạm",
+            "en": "Rebind the old one"
+          },
+          "effects": {
+            "sinh_ke": 1,
+            "nghe": -2
+          },
+          "outcome": {
+            "vi": "Thét buộc lại quét được, nhưng mặt điệp kém óng. Khách tinh mắt nhận ra ngay.",
+            "en": "The rebound brush works, but the shell ground loses its gleam. The sharp-eyed buyers notice at once."
+          }
+        }
+      ],
+      "historicalNote": {
+        "vi": "Thét — chổi lá thông quét điệp — được làm chủ yếu ở làng Đạo Tú cùng xã; vệt chổi để lại chính là 'ganh điệp' đặc trưng của mặt tranh.",
+        "en": "The thét — the pine-needle brush for the shell ground — was made mainly in Đạo Tú in the same commune; its strokes leave the sheet's signature ridged shimmer."
+      },
+      "historicity": "simplified",
+      "sources": [
+        {
+          "title": "Nho Thuận — Giá trị độc đáo, đặc sắc và tinh tế của truyền thống tranh dân gian Đông Hồ, Tạp chí VHNT số 438",
+          "url": "https://vanhoanghethuat.vn/gia-tri-doc-dao-dac-sac-va-tinh-te-cua-truyen-thong-tranh-dan-gian-dong-ho-77750175.html",
+          "type": "secondary",
+          "accessed": "2026-08-21"
+        }
+      ]
+    },
+    {
+      "id": "thuong-lai-ep-gia",
+      "act": "C1",
+      "year": null,
+      "name": {
+        "vi": "Thương lái ép giá",
+        "en": "The trader squeezes"
+      },
+      "prompt": {
+        "vi": "Một thương lái quen đường loạn gom tranh cả vùng, trả giá bằng nửa năm ngoái: 'Thời này, bán được là may.'",
+        "en": "A trader who knows the wartime roads is buying up prints across the region at half last year's price: 'These days, selling at all is luck.'"
+      },
+      "choices": [
+        {
+          "label": {
+            "vi": "Bán — nửa giá còn hơn không",
+            "en": "Sell — half is better than nothing"
+          },
+          "effects": {
+            "sinh_ke": 3,
+            "tieng": -3
+          },
+          "outcome": {
+            "vi": "Gạo về nhà. Nhưng tiếng cũng theo lái đi: vùng dưới đồn tranh Đông Hồ giờ rẻ như bèo.",
+            "en": "Rice reaches the house. But the word travels with the trader: downriver they now say Đông Hồ prints go cheap as duckweed."
+          }
+        },
+        {
+          "label": {
+            "vi": "Không bán rẻ tên làng",
+            "en": "The village's name is not for half price"
+          },
+          "effects": {
+            "sinh_ke": -3,
+            "tieng": 3
+          },
+          "outcome": {
+            "vi": "Lái nhún vai đi. Tháng ấy đói hơn — nhưng ai hỏi giá tranh nhà này, giá vẫn là giá.",
+            "en": "The trader shrugs and moves on. That month is hungrier — but whoever asks this house's price, the price stands."
+          }
+        }
+      ],
+      "historicalNote": {
+        "vi": "Chợ tranh xưa mua đứt bán đoạn cả bằng hàng đổi hàng; thương lái đường dài là mạch bán quan trọng khi phiên chợ làng suy.",
+        "en": "The old print trade ran on cash and barter alike; long-road traders became the vital channel as the village fair declined."
+      },
+      "historicity": "invented",
+      "sources": []
+    },
+    {
+      "id": "hang-xom-xin-mau",
+      "act": "C1",
+      "year": null,
+      "name": {
+        "vi": "Hàng xóm xin bài màu",
+        "en": "A neighbour asks for the colour recipe"
+      },
+      "prompt": {
+        "vi": "Nhà hàng xóm — họ khác, xưa chỉ làm giấy — muốn học cách chế màu đỏ sỏi son để cùng vực nghề khi về làng. Bài màu là của hồi môn của họ nhà mình.",
+        "en": "The neighbours — a different lineage, papermakers before — ask to learn the son-stone red so both houses can rebuild the craft after the return. The recipe is your lineage's dowry."
+      },
+      "choices": [
+        {
+          "label": {
+            "vi": "Truyền bài màu",
+            "en": "Share the recipe"
+          },
+          "effects": {
+            "nguoi": 4,
+            "nghe": -2
+          },
+          "outcome": {
+            "vi": "Thêm một bếp thuốc cái đỏ lửa trong làng. Bí quyết loãng đi một chút — nghề dày lên một chút.",
+            "en": "One more pigment fire burns in the village. The secret thins a little — the craft thickens a little."
+          }
+        },
+        {
+          "label": {
+            "vi": "Giữ làm của riêng",
+            "en": "Keep it in the house"
+          },
+          "effects": {
+            "nghe": 2,
+            "nguoi": -3
+          },
+          "outcome": {
+            "vi": "Bài màu nguyên vẹn trong họ. Nhà bên lẳng lặng quay về nghề giấy — làng bớt một nhà theo tranh.",
+            "en": "The recipe stays whole within the lineage. The neighbours quietly return to papermaking — one fewer house at the craft."
+          }
+        }
+      ],
+      "historicalNote": {
+        "vi": "Thuốc cái là tri thức truyền trong nhà, trong phường — chia hay giữ luôn là cân nhắc thật của làng nghề.",
+        "en": "The pigment lore passed inside households and guilds — to share or to hold was always the craft village's real dilemma."
+      },
+      "historicity": "invented",
+      "sources": []
+    },
+    {
+      "id": "tre-nghich-xuong",
+      "act": "C1",
+      "year": null,
+      "name": {
+        "vi": "Trẻ nghịch sân phơi",
+        "en": "Children in the drying yard"
+      },
+      "prompt": {
+        "vi": "Lũ trẻ chơi đuổi nhau xô đổ một sào tranh đang phơi. Ba tờ Lợn đàn lấm đất, mặt điệp xước.",
+        "en": "A chase through the yard knocks down a drying pole. Three Lợn đàn sheets hit the dirt; the shell ground scuffs."
+      },
+      "choices": [
+        {
+          "label": {
+            "vi": "Gọi cả lũ vào xưởng dạy in lại",
+            "en": "March them inside and teach the reprint"
+          },
+          "effects": {
+            "nguoi": 3,
+            "sinh_ke": -2
+          },
+          "outcome": {
+            "vi": "Buổi chiều mất toi thành buổi học đầu tiên của ba đứa nhỏ. Có đứa in lệch cữ, có đứa in được.",
+            "en": "The lost afternoon becomes three children's first lesson. One misses the register marks, one does not."
+          }
+        },
+        {
+          "label": {
+            "vi": "Mắng cho chừa rồi in bù",
+            "en": "Scold them and reprint alone"
+          },
+          "effects": {
+            "sinh_ke": -1,
+            "nguoi": -2
+          },
+          "outcome": {
+            "vi": "Tranh in bù kịp phiên. Lũ trẻ từ đấy né cái sân phơi — và né luôn cái xưởng.",
+            "en": "The reprints make the fair. The children keep clear of the yard after that — and of the workshop too."
+          }
+        }
+      ],
+      "historicalNote": {
+        "vi": "Nghề làng truyền qua việc vặt: trẻ con lớn lên giữa sân phơi, chum điệp, mùi hồ nếp — trước khi được đứng ván.",
+        "en": "Village crafts pass through chores: children grow up among drying poles, shell vats and rice-paste smell — long before they stand at a block."
+      },
+      "historicity": "invented",
+      "sources": []
+    },
+    {
+      "id": "nguoi-la-hoi-nghe",
+      "act": "C1",
+      "year": null,
+      "name": {
+        "vi": "Người lạ hỏi nghề",
+        "en": "A stranger asks about the craft"
+      },
+      "prompt": {
+        "vi": "Một người lạ ăn vận tươm tất hỏi han cặn kẽ: ván khắc gỗ gì, màu chế ra sao, nhà nào còn giữ ván cổ. Thời buổi này, tò mò cũng đáng ngờ.",
+        "en": "A well-dressed stranger asks careful questions: what wood for the blocks, how the colours are made, which houses still hold old blocks. In times like these, curiosity itself is suspect."
+      },
+      "choices": [
+        {
+          "label": {
+            "vi": "Tiếp chuyện, kể về nghề",
+            "en": "Talk — tell the craft's story"
+          },
+          "effects": {
+            "tieng": 4,
+            "nguoi": -2
+          },
+          "outcome": {
+            "vi": "Hoá ra là người viết báo trên tỉnh. Bài báo nhỏ, nhưng lần đầu tên làng Mái nằm trên mặt chữ quốc ngữ.",
+            "en": "He turns out to write for a provincial paper. A small piece — but the first time làng Mái's name sits in quốc ngữ print."
+          }
+        },
+        {
+          "label": {
+            "vi": "Giữ miệng cho lành",
+            "en": "Say little, stay safe"
+          },
+          "effects": {
+            "nguoi": 2,
+            "tieng": -2
+          },
+          "outcome": {
+            "vi": "Người lạ đi. Làng khen nhà mình kín tiếng — nhưng câu chuyện của nghề lại chậm ra khỏi lũy tre một nhịp.",
+            "en": "The stranger moves on. The village praises your discretion — and the craft's story stays behind the bamboo hedge one beat longer."
+          }
+        }
+      ],
+      "historicalNote": {
+        "vi": "Tranh Đông Hồ đi vào thơ ca nửa đầu thế kỷ XX — chính những vần thơ ấy giữ tên làng khi chợ tranh đã tàn.",
+        "en": "Đông Hồ prints entered early-20th-century poetry — and those verses held the village's name after the fair itself had died."
+      },
+      "historicity": "invented",
+      "sources": []
+    },
+    {
+      "id": "gio-to-nghe",
+      "act": "C1",
+      "year": null,
+      "name": {
+        "vi": "Ngày giỗ tổ nghề",
+        "en": "The craft ancestor's day"
+      },
+      "prompt": {
+        "vi": "Đến ngày cúng tổ nghề mà cả họ đang mỗi người một nơi. Làm mâm cúng giữa nơi tản cư, hay để năm nay trôi qua?",
+        "en": "The craft ancestor's day arrives with the lineage scattered. Set the offering tray here in the evacuation, or let this year pass?"
+      },
+      "choices": [
+        {
+          "label": {
+            "vi": "Bày mâm cúng, gọi người về quanh hương án",
+            "en": "Set the tray, gather whoever can come"
+          },
+          "effects": {
+            "nguoi": 4,
+            "sinh_ke": -3
+          },
+          "outcome": {
+            "vi": "Một nén hương giữa lán tạm. Người về không đủ mặt, nhưng ai có mặt đều nhớ mình là người làng tranh.",
+            "en": "One incense stick in a makeshift hut. Not every face is there — but every face there remembers it belongs to the printing village."
+          }
+        },
+        {
+          "label": {
+            "vi": "Năm nay xin khất tổ",
+            "en": "Beg the ancestor's patience this year"
+          },
+          "effects": {
+            "sinh_ke": 2,
+            "nguoi": -3
+          },
+          "outcome": {
+            "vi": "Gạo để dành được một bữa. Nhưng cái nếp 'đến ngày là quây lại' đứt mất một năm — và nếp đứt thì dễ đứt tiếp.",
+            "en": "A meal's worth of rice is saved. But the habit of gathering breaks for a year — and a broken habit breaks easier the next time."
+          }
+        }
+      ],
+      "historicalNote": {
+        "vi": "Lệ cúng tổ nghề là nét chung của các làng nghề Việt — ngày ấy cả phường nhớ mình chung một nghiệp.",
+        "en": "Craft-ancestor rites are common to Vietnamese craft villages — a day the whole guild remembers it shares one calling.",
+        "_verifyNote": "Đông Hồ-specific tổ nghề figure and date UNVERIFIED (pass 1a searched and could not settle it; only the general hội làng 14–16/3 âm lịch surfaced). Keep the note generic until the team finds a source."
+      },
+      "historicity": "invented",
+      "sources": []
+    },
+    {
+      "id": "doan-van-cong",
+      "act": "C2",
+      "year": null,
+      "name": {
+        "vi": "Đoàn văn công ghé làng",
+        "en": "A performance troupe passes"
+      },
+      "prompt": {
+        "vi": "Một đoàn văn công qua vùng, xin mấy tờ tranh làm phông trang trí và ngỏ ý nhờ vẽ thêm hình mới 'cho hợp thời'.",
+        "en": "A travelling troupe asks for prints to dress their stage — and would you draw some new images 'to suit the times'?"
+      },
+      "choices": [
+        {
+          "label": {
+            "vi": "Nhận lời, thử nét mới",
+            "en": "Take the job, try new lines"
+          },
+          "effects": {
+            "sinh_ke": 3,
+            "tieng": 3,
+            "nghe": -2
+          },
+          "outcome": {
+            "vi": "Hình mới vẽ tay không ván, lạ tay mà vui mắt. Tranh nhà theo đoàn đi khắp vùng — kèm một câu hỏi nhỏ: thế còn là tranh Đông Hồ không?",
+            "en": "New images, hand-drawn, no blocks — strange to the hand, bright to the eye. The house's work travels with the troupe — trailing one small question: is it still Đông Hồ?"
+          }
+        },
+        {
+          "label": {
+            "vi": "Chỉ đưa tranh cổ",
+            "en": "Offer only the classic sheets"
+          },
+          "effects": {
+            "tieng": 2,
+            "sinh_ke": -1
+          },
+          "outcome": {
+            "vi": "Gà, lợn, Hứng dừa lên phông sân khấu, nguyên nét nguyên màu. Đoàn nhận, tuy hơi tiếc cái 'mới'.",
+            "en": "Roosters, pigs and Hứng dừa dress the stage, line and colour untouched. The troupe accepts — a little wistful about the 'new'."
+          }
+        }
+      ],
+      "historicalNote": {
+        "vi": "Câu hỏi 'đổi mới đến đâu thì còn là tranh Đông Hồ' theo nghề suốt thế kỷ XX và vẫn được tranh luận công khai đến hôm nay.",
+        "en": "How far renewal can go before it stops being Đông Hồ has trailed the craft across the twentieth century — and is still openly debated today."
+      },
+      "historicity": "invented",
+      "sources": []
+    },
+    {
+      "id": "kheo-tay-kiem-song",
+      "act": "C1",
+      "year": null,
+      "name": {
+        "vi": "Khéo tay kiếm sống",
+        "en": "Skilled hands, other work"
+      },
+      "prompt": {
+        "vi": "Nơi tản cư người ta cần đan lát, chạm sửa — việc nào bàn tay thợ tranh cũng làm được, và trả công ngay.",
+        "en": "The evacuation needs weaving, carving, mending — all work a printer's hands can do, and it pays now."
+      },
+      "choices": [
+        {
+          "label": {
+            "vi": "Nhận việc nuôi nhà",
+            "en": "Take the work"
+          },
+          "effects": {
+            "nghe": -3,
+            "sinh_ke": 6
+          },
+          "outcome": {
+            "vi": "Gạo về đều. Tay quen dần việc khác — đường thét lơi đi một chút.",
+            "en": "Rice comes steady. The hands learn other habits — the brush stroke slackens a little."
+          }
+        },
+        {
+          "label": {
+            "vi": "Chỉ giữ việc tranh",
+            "en": "Only the craft"
+          },
+          "effects": {
+            "nghe": 3,
+            "sinh_ke": -3
+          },
+          "outcome": {
+            "vi": "Đói hơn một chút, nhưng tay không rời nghề.",
+            "en": "A little hungrier, but the hand never leaves the craft."
+          }
+        }
+      ],
+      "historicalNote": {
+        "vi": "Bàn tay nghệ nhân nuôi nhà bằng nhiều nghề qua thời loạn — và mỗi nghề tạm là một quãng xa nghề gốc.",
+        "en": "Artisan hands fed their families through many trades in wartime — and every stopgap trade is a step away from the craft."
+      },
+      "historicity": "invented",
+      "sources": []
+    },
+    {
+      "id": "ban-dat-hay-giu",
+      "act": "C1",
+      "year": null,
+      "name": {
+        "vi": "Bán đất hay giữ",
+        "en": "Sell the land or hold"
+      },
+      "prompt": {
+        "vi": "Có người trả giá được cho phần đất hương hỏa ở làng — tiền tươi, giữa thời chẳng biết ngày về.",
+        "en": "Someone offers real money for the family plot in the village — cash now, in a time with no promised return."
+      },
+      "choices": [
+        {
+          "label": {
+            "vi": "Bán lấy vốn",
+            "en": "Sell for capital"
+          },
+          "effects": {
+            "sinh_ke": 6,
+            "tieng": -3,
+            "nguoi": -3
+          },
+          "outcome": {
+            "vi": "Tiền cầm chắc tay. Làng biết, và nhớ, nhà nào đã bán chỗ đứng của mình.",
+            "en": "The money is real. The village knows, and remembers, who sold their standing place."
+          }
+        },
+        {
+          "label": {
+            "vi": "Giữ đất giữ gốc",
+            "en": "Hold the ground"
+          },
+          "effects": {
+            "sinh_ke": -3,
+            "nguoi": 3
+          },
+          "outcome": {
+            "vi": "Nghèo thêm một mùa. Nhưng ở làng vẫn còn một chỗ gọi là nhà mình.",
+            "en": "Poorer by a season. But in the village there is still a place called home."
+          }
+        }
+      ],
+      "historicalNote": {
+        "vi": "Đất hương hỏa là chỗ đứng của một dòng họ trong làng nghề — bán đi là bán một phần đường về.",
+        "en": "The ancestral plot is a lineage's standing in a craft village — selling it sells part of the road home."
+      },
+      "historicity": "invented",
+      "sources": []
+    },
+    {
+      "id": "tem-phieu-thang-kho",
+      "act": "C2",
+      "year": null,
+      "name": {
+        "vi": "Tháng kho tem phiếu",
+        "en": "A thin ration month"
+      },
+      "prompt": {
+        "vi": "Tháng này tem phiếu về chậm. Nhà còn ít giấy dó tốt — bán chợ đen được giá, hay để dành cho vụ in?",
+        "en": "Rations are late this month. The house holds a little good dó paper — black-market price is high; or keep it for the printing season?"
+      },
+      "choices": [
+        {
+          "label": {
+            "vi": "Bán bớt giấy",
+            "en": "Sell some paper"
+          },
+          "effects": {
+            "sinh_ke": 6,
+            "nghe": -3
+          },
+          "outcome": {
+            "vi": "Bữa cơm đủ lại. Vụ in tới thiếu giấy tốt, tranh mỏng đi một lớp điệp.",
+            "en": "The meals recover. Come printing season the good paper is short; the sheets lose a layer of shimmer."
+          }
+        },
+        {
+          "label": {
+            "vi": "Để dành cho vụ in",
+            "en": "Keep it for the season"
+          },
+          "effects": {
+            "sinh_ke": -3,
+            "nghe": 3
+          },
+          "outcome": {
+            "vi": "Cả nhà ăn độn thêm ít lâu. Tờ tranh vụ ấy dày dặn, ai cầm cũng biết.",
+            "en": "The house eats thin a while longer. That season's sheets are full-bodied — anyone who holds one knows."
+          }
+        }
+      ],
+      "historicalNote": {
+        "vi": "Thời bao cấp, vật tư của nghề cũng là của để dành của nhà — mỗi vụ in là một lần cân đối với nồi cơm.",
+        "en": "In the subsidy era the craft's materials doubled as household savings — every printing season was weighed against the rice pot."
+      },
+      "historicity": "invented",
+      "sources": []
+    },
+    {
+      "id": "can-bo-hoi-mau-moi",
+      "act": "C2",
+      "year": null,
+      "name": {
+        "vi": "Cán bộ hỏi mẫu mới",
+        "en": "A cadre asks for new designs"
+      },
+      "prompt": {
+        "vi": "Cán bộ văn hóa gợi ý xưởng góp vài mẫu 'đời sống mới'. Vẽ mẫu mới, hay xin cứ in mẫu cũ?",
+        "en": "A culture cadre suggests the workshop contribute a few 'new life' designs. Draw them, or ask to keep printing the old ones?"
+      },
+      "choices": [
+        {
+          "label": {
+            "vi": "Vẽ mẫu đời sống mới",
+            "en": "Draw the new designs"
+          },
+          "effects": {
+            "sinh_ke": 3,
+            "tieng": 3,
+            "nghe": -3
+          },
+          "outcome": {
+            "vi": "Mẫu mới được duyệt, được khen. Ván cổ nằm im thêm một vụ.",
+            "en": "The new designs pass and are praised. The old blocks lie idle another season."
+          }
+        },
+        {
+          "label": {
+            "vi": "Xin giữ mẫu cũ",
+            "en": "Ask to keep the classics"
+          },
+          "effects": {
+            "nghe": 3,
+            "tieng": -3
+          },
+          "outcome": {
+            "vi": "Trên gật gù cho qua, nhưng tên xưởng rơi khỏi vài danh sách. Nét cổ thì không rơi đâu mất.",
+            "en": "The office lets it pass, but the workshop drops off a few lists. The old line loses nothing."
+          }
+        }
+      ],
+      "historicalNote": {
+        "vi": "Tranh 'cải tiến' thời hợp tác xã là chuyện có thật; giữ được nét cổ qua thời ấy là một lựa chọn lặp lại nhiều lần, không phải một lần.",
+        "en": "The cooperative era's 'improved' prints were real; keeping the classic line through it was a choice made many times, not once."
+      },
+      "historicity": "invented",
+      "sources": []
+    },
+    {
+      "id": "phong-vien-ve-lang",
+      "act": "C3",
+      "year": null,
+      "name": {
+        "vi": "Phóng viên về làng",
+        "en": "A reporter comes to the village"
+      },
+      "prompt": {
+        "vi": "Một phóng viên muốn quay phóng sự về xưởng — cả ngày theo chân, hỏi đủ chuyện, in thử vài tờ.",
+        "en": "A reporter wants a day in the workshop — following, asking everything, printing a few sheets."
+      },
+      "choices": [
+        {
+          "label": {
+            "vi": "Tiếp cả ngày",
+            "en": "Give the day"
+          },
+          "effects": {
+            "sinh_ke": -3,
+            "tieng": 6
+          },
+          "outcome": {
+            "vi": "Mất trọn một ngày công. Phóng sự phát, điện thoại đổ chuông cả tuần.",
+            "en": "A full day's work lost. The piece airs; the phone rings all week."
+          }
+        },
+        {
+          "label": {
+            "vi": "Hẹn dịp khác",
+            "en": "Another time"
+          },
+          "effects": {
+            "sinh_ke": 3,
+            "tieng": -3
+          },
+          "outcome": {
+            "vi": "Đơn hàng kịp hẹn. Phóng sự phát về một làng nghề khác.",
+            "en": "The orders ship on time. The piece airs about a different craft village."
+          }
+        }
+      ],
+      "historicalNote": {
+        "vi": "Truyền thông là mạch sống mới của nghề sau 2000 — mỗi phóng sự là một mùa khách.",
+        "en": "Media became the craft's new bloodstream after 2000 — every feature is a season of visitors."
+      },
+      "historicity": "invented",
+      "sources": []
+    },
+    {
+      "id": "khach-mua-do-gia",
+      "act": "C3",
+      "year": null,
+      "name": {
+        "vi": "Tờ tranh giả",
+        "en": "The fake sheet"
+      },
+      "prompt": {
+        "vi": "Một khách mang tờ tranh in phẩm màu mua ngoài phố, hỏi: 'Của nhà mình đây phải không?' Nét sai, màu hóa học.",
+        "en": "A visitor holds out a chemical-dye print bought in town: 'This is yours, isn't it?' The line is wrong, the colors synthetic."
+      },
+      "choices": [
+        {
+          "label": {
+            "vi": "Chỉ tận nơi từng chỗ sai",
+            "en": "Show them every flaw"
+          },
+          "effects": {
+            "sinh_ke": -3,
+            "tieng": 3,
+            "nghe": 3
+          },
+          "outcome": {
+            "vi": "Mất một buổi trà. Người khách ấy từ đó chỉ mua tận xưởng — và dắt thêm bạn.",
+            "en": "A pot of tea's worth of time. That visitor buys only at the workshop from then on — and brings friends."
+          }
+        },
+        {
+          "label": {
+            "vi": "Cười cho qua",
+            "en": "Smile it away"
+          },
+          "effects": {
+            "sinh_ke": 3,
+            "tieng": -3
+          },
+          "outcome": {
+            "vi": "Đỡ mất công. Tờ giả vẫn nằm trên tường nhà người ta, mang tên làng mình.",
+            "en": "Less bother. The fake stays on their wall, wearing the village's name."
+          }
+        }
+      ],
+      "historicalNote": {
+        "vi": "Chống hàng giả nằm trong chính Đề án 2026–2035 — tiếng càng lớn, tranh nhái càng nhiều.",
+        "en": "Anti-counterfeiting is written into the 2026–2035 program itself — the bigger the name, the more the fakes."
+      },
+      "historicity": "simplified",
+      "sources": [
+        {
+          "title": "Bộ VHTTDL — Đề án 2026–2035 (5/8/2026)",
+          "url": "https://bvhttdl.gov.vn/bac-ninh-phe-duyet-de-an-quan-ly-bao-ve-va-phat-huy-gia-tri-di-san-van-hoa-phi-vat-the-nghe-lam-tranh-dan-gian-dong-ho-giai-doan-2026-2035.htm",
+          "type": "secondary",
+          "accessed": "2026-08-21"
+        }
+      ]
+    }
+  ],
+  "interstitials": [
+    {
+      "type": "chapter",
+      "before": "htx-thanh-lap",
+      "title": {
+        "vi": "Chương II · Giữ nếp — 1967",
+        "en": "Chapter II · Keep the Way — 1967"
+      },
+      "bridge": {
+        "vi": "Mười ba năm dựng lại. Rồi người ta về làng tìm năm mươi bàn tay còn thạo nghề.",
+        "en": "Thirteen years of rebuilding. Then they came looking for fifty hands that still knew the craft."
+      }
+    },
+    {
+      "type": "chapter",
+      "before": "nhat-ve-tung-tam",
+      "title": {
+        "vi": "Chương III · Hồi sinh — 1992",
+        "en": "Chapter III · Revival — 1992"
+      },
+      "bridge": {
+        "vi": "Hợp tác xã không còn. Chín phần mười làng đã sang hàng mã. Còn lại là từng nhà — và từng tấm ván lưu lạc.",
+        "en": "The cooperative is gone. Nine in ten households have gone to votive goods. What remains is each house — and each wandering block."
+      }
+    },
+    {
+      "type": "advisor",
+      "before": "lang-chay",
+      "speaker": {
+        "vi": "Ông trùm phường nghề",
+        "en": "The guild head"
+      }
+    },
+    {
+      "type": "advisor",
+      "before": "tan-cu-day-nghe",
+      "speaker": {
+        "vi": "Cụ đồ làng",
+        "en": "The village teacher"
+      }
+    },
+    {
+      "type": "advisor",
+      "before": "nhat-ve-tung-tam",
+      "speaker": {
+        "vi": "Bà cả",
+        "en": "The grandmother"
+      }
+    },
+    {
+      "type": "advisor",
+      "before": "chau-noi-nghe",
+      "speaker": {
+        "vi": "Người cha — đứa trẻ của năm 1972",
+        "en": "The father — the child of 1972"
+      }
+    },
+    {
+      "type": "advisor",
+      "before": "ho-so-khoi-dong",
+      "speaker": {
+        "vi": "Cán bộ văn hóa tỉnh",
+        "en": "The provincial culture officer"
+      }
+    },
+    {
+      "type": "omen",
+      "before": "toan-quoc-khang-chien",
+      "lookahead": 1
+    },
+    {
+      "type": "omen",
+      "before": "lich-offset-tran-ve",
+      "lookahead": 1
+    },
+    {
+      "type": "omen",
+      "before": "han-chot-31-3",
+      "lookahead": 1
+    },
+    {
+      "type": "echo",
+      "after": "doi-at-dau",
+      "delay": 3,
+      "condition": "chose:share"
+    },
+    {
+      "type": "echo",
+      "after": "viec-tot-thanh-pho",
+      "delay": 3,
+      "condition": "chose:send"
+    },
+    {
+      "type": "echo",
+      "after": "lai-buon-do-co",
+      "delay": 3,
+      "condition": "chose:sell"
+    },
+    {
+      "type": "echo",
+      "after": "htx-giai-the",
+      "delay": 3,
+      "condition": "chose:ma"
+    }
+  ],
+  "finalTrial": {
+    "name": {
+      "vi": "9/12/2025 — New Delhi đọc sổ gia truyền",
+      "en": "9 Dec 2025 — New Delhi Reads the Ledger"
+    },
+    "year": 2025,
+    "requireAll": [
+      "giu_bi_quyet",
+      "truyen_nhan",
+      "ho_so"
+    ],
+    "requireAny": [
+      "giu_van",
+      "phuc_hoi_van"
+    ],
+    "requireCounter": {
+      "truyen_thua": 2
+    },
+    "statGate": {
+      "nghe": 15,
+      "sinh_ke": 10,
+      "tieng": 10,
+      "nguoi": 15
+    },
+    "_statGateRationale": "One trial, three questions, three mechanisms — the three shapes fused: recognise (requireAll + the requireAny pair for the blocks), sustain (the counter across three eras, and the 1990 trap can take a tick back), reverse (ho_so expires after the 31/3/2020 window). The statGate stays a low floor (sinh_ke lowest at 10) and sinh_ke is insufficientAlone: the Committee did not count money. Machine-checked: tools/trace_run.py proves canonical all-flag lines on Thuong (one accepted crisis) and Kho (none).",
+    "insufficientAlone": [
+      "sinh_ke"
+    ],
+    "victoryText": {
+      "vi": "14 giờ 38 phút, Red Fort, New Delhi. Búa gõ. 'Nghề làm tranh dân gian Đông Hồ' được ghi danh Danh sách cần bảo vệ khẩn cấp — vì còn những nhà như nhà này: ván còn, bí quyết còn, người nối còn, và câu chuyện được kể kịp lúc. Ủy ban không đếm tiền trong két. Họ đếm thứ đã được truyền tay.",
+      "en": "2:38 pm, Red Fort, New Delhi. The gavel falls. The craft of Đông Hồ woodblock printing is inscribed for urgent safeguarding — because houses like this one remain: blocks kept, recipe held, an heir standing, the story told in time. The Committee did not count the strongbox. It counted what had changed hands."
+    },
+    "defeatByStatsText": {
+      "vi": "Nhà về đích 2025 với của ăn của để — xưởng mã chạy đều, sổ sách đẹp. Nhưng hồ sơ cần ván, cần bí quyết, cần một người trẻ đứng bên bàn in, và những thứ ấy đã bán, đã quên, đã đi làm xa. Ở New Delhi người ta ghi danh một nghề đang sống. Tiền không phải là nghề.",
+      "en": "The household reaches 2025 comfortable — the votive workshop hums, the books are clean. But a dossier needs blocks, a recipe, a young person at the printing table, and those were sold, forgotten, moved away. In New Delhi they inscribe a living craft. Money is not a craft."
+    },
+    "defeatByExhaustionText": {
+      "vi": "Ván đã giữ. Nghề đã truyền. Hồ sơ đã nộp. Và đến mùa đông 2025 thì không còn gì nữa — không gạo nhóm bếp, không sức mở xưởng, không một phiên chợ nhớ tên. Bên kia trái đất, cái tên được xướng lên. Ở làng, cái nhà đã giữ lấy nó không còn thắp nổi một nén hương. Đây là số phận của phần lớn mười bảy dòng họ — điều mà tấm bằng không ghi.",
+      "en": "The blocks were kept. The craft was passed. The dossier was filed. And by the winter of 2025 nothing is left — no rice for the stove, no strength to open the workshop, no market that remembers the name. Across the world, the name is read aloud. In the village, the house that kept it cannot light one stick of incense. This was the fate of most of the seventeen lineages — the part the certificate does not record."
+    },
+    "sources": [
+      {
+        "title": "UNESCO ICH — Decision 20.COM 7.A.1",
+        "url": "https://ich.unesco.org/en/decisions/20.COM/7.A.1",
+        "type": "primary",
+        "accessed": "2026-08-21"
+      }
+    ]
+  },
+  "lesson": {
+    "vi": "Một dòng tranh sống được 87 năm không nhờ nhà nào giàu nhất, mà nhờ những bàn tay giữ ván qua lửa, giữ bí quyết qua tản cư, giữ nếp qua thời bao cấp, và kịp kể câu chuyện của mình cho thế giới trước khi quá muộn. Di sản sống bằng thứ được truyền tay — đó là điều UNESCO ghi danh năm 2025.",
+    "en": "One line of prints lived 87 years not through the richest house, but through hands that carried blocks through fire, recipes through evacuation, habits through the subsidy years — and told their story to the world in time. Living heritage lives by what changes hands. That is what UNESCO inscribed in 2025."
+  }
+}

@@ -1,5 +1,10 @@
 # Win-condition model
 
+> ⚠️ **Canon note (22 Aug 2026):** the mechanism below is current; the worked *examples* (Trần /
+> Lam Sơn / Lý, § Three shapes, the ordering problem) are the retired war concept's. The shapes
+> now map onto the Đông Hồ eras **in calendar order** — see `dongho-game-design.md` § 3 — which
+> retires the ordering problem. D13-vi is closed by construction.
+
 The mechanism that separates this game from a reskinned Reigns. Read this before writing any card.
 
 ---
@@ -24,11 +29,16 @@ That is the whole design. Everything below is bookkeeping for it.
 | Kind | Example | Decides victory? | Fails the run? |
 | --- | --- | --- | --- |
 | **Stat** — continuous, two-sided | `binh`, `dan`, `kho`, `than` | ❌ never on its own | ✅ at `<= 0` **and** at `>= 100` |
-| **Preparation flag** — boolean, sticky | `tieu_tho`, `coc_bach_dang` | ✅ this is the win check | ❌ |
+| **Preparation flag** — boolean, sticky¹ | `tieu_tho`, `coc_bach_dang` | ✅ this is the win check | ❌ |
 | **Counter** — tiered, for graded conditions | `chinh_danh: 0..3` | ✅ via threshold | ❌ |
 
 Stats create pressure. Flags decide the ending. Keeping these separate is what stops the game
 collapsing back into "make the numbers big".
+
+¹ *Sticky* means no ordinary card takes a granted flag away. The one exception is a **trap** choice
+that explicitly `revokes` it (schema `choice.revokes`) — first used by the Đông Hồ run's card 11
+(`lai-buon-do-co`), where selling the rescued blocks visibly un-fills the ledger slot. A revoke outside a trap is a design
+error.
 
 ### Two-sided stat failure
 

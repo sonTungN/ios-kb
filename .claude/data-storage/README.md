@@ -1,7 +1,13 @@
 # data-storage
 
-Authoring workspace for the game's historical content. **Not** part of the Xcode project — this is
+Authoring workspace for the game's cultural content. **Not** part of the Xcode project — this is
 where the data is researched, written and checked before it is exported into the app bundle.
+
+> 🔄 **21 Aug 2026 — subject pivot.** The game keeps its engine and now teaches **nghề làm tranh dân
+> gian Đông Hồ** (tutor-endorsed; see `DEC-01` D1b). The active content set is
+> `research/04-dong-ho-tranh-dan-gian.md` + `design/dongho-game-design.md` + `content/dongho/`.
+> The Trần/war set (`research/01–03`, `content/tran/`) is **archive**: it remains the pipeline's
+> worked example and validator fixture, but it is no longer game content — do not extend it.
 
 ```
 data-storage/
@@ -13,14 +19,20 @@ data-storage/
   content/    ← you create this; the actual data lives here
 ```
 
-Suggested `content/` layout:
+`content/` layout:
 
 ```
 content/
-  tran/            dynasty.json  +  cards/*.json
-  lam-son/         dynasty.json  +  cards/*.json
-  ly/              dynasty.json  +  cards/*.json
+  dongho/          THE game: one continuous run 1938–2025 (36 spine cards, 3 chapters).
+                   dynasty.json + level-map.md (+ cards/*.json — the team writes these)
+  tran/            ARCHIVE — the war-concept worked example; kept for pipeline reference
 ```
+
+Reachability is machine-checked: `tools/trace_run.py` mirrors the 36-card table and beam-searches
+the choice space — change a number in the map, change it there, re-run.
+
+(`dynasty.json`/`dynastyId` are naming debt from the war era — the contract is subject-neutral;
+rename to `level.json`/`levelId` only as a single sweep, or not at all. See the design doc.)
 
 ---
 
@@ -55,21 +67,29 @@ changes `outcome` (which may be counterfactual) — never the record.
 
 ## Scope
 
-Three dynasties, ~25–30 cards each. Do not add a fourth.
+**One craft, one continuous run, 36 spine cards** (team decision 22 Aug 2026): three eras as
+chapters inside a single progress. Do not add cards past 36 — trim, don't thicken — and the
+"Coming soon" arts (gốm, quan họ) get menu tiles only, **zero content**.
 
 Every string ships in **Vietnamese and English** (`BRIEF-04` requires multi-language support). One
 card is roughly six text blocks — prompt, two labels, two outcomes, historical note — so:
 
 | | Cards | Text blocks | ×2 languages |
 | --- | --- | --- | --- |
-| 3 dynasties × 28 | 84 | ~500 | **~1,000** |
-| 4 dynasties × 28 | 112 | ~670 | ~1,340 |
+| 36 spine | 36 | ~216 | **~432** |
+| weave pool (17, chapter-tagged; 11 drafted) | 6 new | ~36 | ~72 |
+| system prose (banners, trial, crises reuse) | | ~50 | ~100 |
+| **Đông Hồ total** | | | **≈ 620–700** |
+
+One-third less than the 3-màn plan it replaces, and 40% less than the 3-dynasty plan before that —
+one subject, one JSON, one trial, one map; the paintings catalog is shared by the codex and the
+match minigame. Per-card text canon: prompt ≤ 2 câu · outcome ≤ 2 câu · historicalNote ≤ 2 câu.
 
 That is written alongside five required views, auth, Firebase sync, CRUD, leaderboard with charts,
 an interactive tutorial, a 30-page report and a 10-minute video — in four weeks, by five people. The
 fourth dynasty is where the schedule breaks.
 
-**Split by dynasty, not by task.** One owner per level researches, writes and verifies it end to end;
+**Split by chapter, not by task.** One owner per chapter (12 + 10 + 14 cards) researches, writes and verifies it end to end;
 otherwise nobody holds the whole timeline and the chronology drifts. This also produces the per-member
 contribution evidence the Project Responsibilities table needs.
 

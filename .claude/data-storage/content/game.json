@@ -39,8 +39,8 @@
       "id": "de",
       "name": { "vi": "Dễ", "en": "Forgiving" },
       "blurb": {
-        "vi": "Sử chỉ đường. Sổ chuẩn bị mở sẵn từ đầu, và triều đình báo động sớm.",
-        "en": "History points the way. The ledger is open from the first card, and the court warns you early."
+        "vi": "Nghề chỉ đường. Sổ gia truyền mở sẵn từ đầu, và người nhà báo động sớm.",
+        "en": "The craft points the way. The ledger is open from the first card, and the household warns you early."
       },
       "crisisBands": { "low": 30, "high": 70 },
       "ledgerDisclosure": "from-start",
@@ -51,8 +51,8 @@
       "id": "thuong",
       "name": { "vi": "Thường", "en": "Standard" },
       "blurb": {
-        "vi": "Sử chỉ lúc, không chỉ đường. Sổ chuẩn bị mở ra khi m giành được điều đầu tiên.",
-        "en": "History tells you when, not what. The ledger opens once you have secured your first preparation."
+        "vi": "Nghề chỉ lúc, không chỉ đường. Sổ gia truyền mở ra khi giữ chắc được điều đầu tiên.",
+        "en": "The craft tells you when, not what. The ledger opens once you have secured your first preparation."
       },
       "crisisBands": { "low": 20, "high": 80 },
       "ledgerDisclosure": "after-first-flag",
@@ -63,8 +63,8 @@
       "id": "kho",
       "name": { "vi": "Khó", "en": "Without hindsight" },
       "blurb": {
-        "vi": "Không cố vấn, không sổ chuẩn bị, không đường lui. Triều đình năm ấy cũng không có.",
-        "en": "No advisors, no ledger, no way back from the edge. The court of that year had none either."
+        "vi": "Không ai mách nước, không sổ gia truyền, không đường lui. Người làng năm ấy cũng không có.",
+        "en": "No advisors, no ledger, no way back from the edge. The households of those years had none either."
       },
       "crisisBands": null,
       "ledgerDisclosure": "at-final-trial",

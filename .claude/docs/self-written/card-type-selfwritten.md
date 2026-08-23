@@ -1,3 +1,7 @@
+> ⚠️ **Canon note (22 Aug 2026):** the taxonomy below is current; its *examples* are Trần-era
+> (war concept, retired). Current subject canon: `.claude/data-storage/design/dongho-game-design.md`
+> — stats are NGHỀ · SINH KẾ · TIẾNG · NGƯỜI, floors/gates per the Đông Hồ files.
+
 ### Card Type
 #### 1. Decision Cards
 There are 3 types. Every one presents a **choice**, and every choice has **a value and a tradeoff**.
