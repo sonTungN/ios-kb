@@ -4,7 +4,7 @@ The addressable map of this project's knowledge base. **`CLAUDE.md` carries the 
 
 - **Load by address, not by glob.** Every file has a stable ID (`BRIEF-04`). Cite addresses in answers.
 - **Read the whole file once you route to it.** Files are sized so that loading one is cheap; partial reads cause wrong answers.
-- **Never load `.claude/context/_source/`** — raw originals, fully migrated. See `_source/README.md`.
+- **Never load `.claude/context/_source/`** — raw originals, fully migrated. Its `README.md` is the one readable file there: the migration map.
 
 ---
 
@@ -25,19 +25,19 @@ _What the assignment demands. Non-negotiable. Overrules everything else on any c
 | **BRIEF-09** | `brief/09-rubric-and-marks.md` | The 7-criterion 40-point rubric with full band descriptors, and where marks concentrate |
 
 ### `decision/` — the decision record · authority **decision**
-_D1a (game category) is closed; D1b (concept) is a proposal; everything else is open._
+_The concept is settled (card game · tranh Đông Hồ · one continuous run); roles, names, stack, features and logistics are open._
 
 | ID | File | Scope |
 | --- | --- | --- |
-| **DEC-01** | `decision/01-open-decisions.md` | D1a game category CLOSED (card game); D1b concept PROPOSED; every other decision the team must make (roles, names, stack, languages, features, logistics), each with its constraints — status as of **15 Aug 2026** |
+| **DEC-01** | `decision/01-open-decisions.md` | Settled: card game · subject tranh Đông Hồ · household POV · one continuous 36-card run · win by preparation · two minigames · vi+en. Open: roles, names, persistence stack, industry requirements, advanced features, workload, logistics |
 
 ### `build/` — execution · authority **reality**
 
 | ID | File | Scope |
 | --- | --- | --- |
-| **BUILD-01** | `build/01-current-status.md` | **What exists today** (this KB + `data-storage/`), urgent time-sensitive actions (guest lecture, invites), standing obligations (commit hygiene) |
+| **BUILD-01** | `build/01-current-status.md` | **What exists today** (this KB + `.claude/data-storage/`), urgent time-sensitive actions (guest lecture, invites), standing obligations (commit hygiene) |
 | **BUILD-02** | `build/02-timeline-and-runway.md` | Verified due date (Fri 11 Sep 2026 17:00 ICT) and its derivation, the week map (weeks 7–11), runway, and a **proposed, not decided** milestone shape |
-| **BUILD-03** | `build/03-first-meeting-agenda.md` | The ready-to-run first-meeting agenda + per-member preparation, mapped to `DEC-01` items |
+| **BUILD-03** | `build/03-first-meeting-agenda.md` | The meeting agenda — one item per Open row in `DEC-01`, plus per-member preparation. Settled items are deliberately absent |
 
 ### `reference/` · authority **reference**
 
@@ -48,7 +48,7 @@ _D1a (game category) is closed; D1b (concept) is a proposal; everything else is 
 
 ### Reserved domains (do not exist yet)
 
-`design/` (`DES-xx`) and `data/` (`DATA-xx`) will be created **after** the team's concept decision (D1b) closes. Working material for the pending proposal lives in `data-storage/`, which is not addressable KB. Until then, no design or data questions have recorded answers — say so rather than inventing.
+`design/` (`DES-xx`) and `data/` (`DATA-xx`) are created when the SwiftUI build begins. Until then the design and content answers live in `.claude/data-storage/`, which is working material rather than addressable KB — cite it by path, and say so.
 
 ---
 
@@ -78,7 +78,7 @@ _D1a (game category) is closed; D1b (concept) is a proposal; everything else is 
 | What has been decided / is X decided yet | `DEC-01` |
 | What exists / current progress / what to do next | `BUILD-01` |
 | The due date derivation / weeks / runway / schedule | `BUILD-02` |
-| The first meeting / agenda / what to prepare | `BUILD-03` |
+| The team meeting / agenda / what to prepare | `BUILD-03` |
 | A link or a Canvas file | `REF-01` |
 | An unfamiliar term | `REF-02` |
 
@@ -88,7 +88,8 @@ _D1a (game category) is closed; D1b (concept) is a proposal; everything else is 
 
 | Task | Load in this order |
 | --- | --- |
-| **Prepare/run the first team meeting** | `BUILD-03` → `DEC-01` → `BRIEF-02` → `BUILD-02` |
+| **Prepare/run a team meeting** | `BUILD-03` → `DEC-01` → `BUILD-02` |
+| **Understand the game itself** | `.claude/data-storage/README.md` → `design/win-condition-model.md` → `design/dongho-game-design.md` → `content/dongho/level-map.md` |
 | **Evaluate a game concept candidate** | `BRIEF-02` → `BRIEF-09` §1 → `BRIEF-03`/`BRIEF-04` (can it carry the plumbing?) → `BUILD-02` (fits runway?) |
 | **Set up the repo / first commits** | `BRIEF-07` → `BRIEF-01` (header) → `BUILD-01` |
 | **Plan any feature work** (post-decision) | `BRIEF-04` + `BRIEF-03` + `BRIEF-05` → then the future `DES-xx` |
@@ -104,14 +105,18 @@ _D1a (game category) is closed; D1b (concept) is a proposal; everything else is 
 | `.claude/docs/GroupProjectCanvas.html` | The saved Canvas assignment page — ultimate source | `_source/README.md`, routed via `brief/` |
 | Canvas assignment 1251174 (live) | Source of truth for updates/announcements | `REF-01` |
 | `.claude/skills/` | Installed skills (context-engineering, deep-research) | — |
-| `data-storage/` | Content-authoring workspace for the D1b proposal: win-condition model, JSON schema, sourced research scaffolds, templates, linter. **Not** part of the Xcode project | its own `README.md` |
+| `.claude/docs/self-written/` | The team's own notes — currently `card-type-selfwritten.md`, the card taxonomy in the team's wording. Working notes, not KB truth: where it disagrees with `.claude/data-storage/`, the data wins | — |
+| `.claude/data-storage/` | Content-authoring workspace: win-condition model, subject design, user journey, JSON schema, sourced research, templates, linter and reachability sim. **Not** part of the Xcode project | its own `README.md` |
 | `../MigratoryYear/` | A1 sibling project — KB architecture reference only; **its rules do not apply here** | `REF-01` |
 
 ---
 
 ## 5 · Non-routable
 
-`.claude/context/_source/` — the raw Canvas extraction. **Never load.** Fully migrated into `brief/01–09`; see `_source/README.md` for the section-by-section map.
+`.claude/context/_source/` — the raw Canvas extraction. **Never load the extracts.** Fully migrated
+into `brief/01–09`. The **single exception** is `_source/README.md`, which is the section-by-section
+migration map rather than source text — read it if you need to trace a `brief/` claim back to its
+Canvas section.
 
 ---
 

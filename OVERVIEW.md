@@ -19,7 +19,7 @@ Attention is finite and unevenly distributed: material in the middle of a long c
 | Tier | What | Cost | Contents |
 | --- | --- | --- | --- |
 | **Tier 0 — always loaded** | `CLAUDE.md` | ~1 file, every turn | Identity · the invariants that must never be wrong · the router · the answering protocol |
-| **Tier 1 — loaded on demand** | 15 addressed files | 1–4 files per question | Everything else |
+| **Tier 1 — loaded on demand** | 14 addressed files | 1–4 files per question | Everything else |
 
 Tier 0 is deliberately small: it holds only what is dangerous to get wrong, plus the map to everything else. This is progressive disclosure — the same **Write / Select / Compress / Isolate** strategy described in `.claude/skills/context-engineering/`, applied to the KB itself. The architecture is deliberately identical to the sibling `../MigratoryYear/` (Assignment 1) KB, so anyone familiar with one can drive the other.
 
@@ -31,14 +31,16 @@ Domains chosen so that a question lands in exactly one:
 
 ```
 brief/     BRIEF-01…07,09 What the assignment demands.        External. Non-negotiable.
-decision/  DEC-01        What the team has (not) decided.    Today: an all-OPEN register.
+decision/  DEC-01        What is settled, and what is still open.
 build/     BUILD-01…03   Status, timeline, meeting agenda.   Changes constantly.
 reference/ REF-01…02     Links and glossary.
-_source/                 The raw Canvas extraction.          Never loaded.
-design/ + data/          RESERVED — created once the concept decision (D1) closes.
+_source/                 The raw Canvas extraction.          Never loaded (README.md excepted).
+design/ + data/          RESERVED — created when the SwiftUI build starts. Until then the design
+                         and content answers live in `.claude/data-storage/`.
 ```
 
-The split is by **question type**, not by source document. The Canvas page is one long scroll covering logistics, theme, tech specs, report rules, GitHub rules and the rubric — seven unrelated question types; a question about the deadline should not drag in the rubric. It is now eight `brief/` files. The complete section-by-section migration map is in `_source/README.md`.
+The split is by **question type**, not by source document. The Canvas page is one long scroll covering logistics, theme, tech specs, report rules, GitHub rules and the rubric — seven unrelated question types; a question about the deadline should not drag in the rubric. It is now eight `brief/` files. The complete section-by-section migration map is in `_source/README.md` — the one file in that
+directory that is meant to be read; everything beside it is raw extract and stays unloaded.
 
 ### Addresses
 
@@ -57,9 +59,9 @@ brief  >  reality  >  decision  >  blueprint  >  reference
 ```
 
 - **brief** — what the assignment demands. If anything contradicts it, the other thing is wrong.
-- **reality** — `BUILD-01…03`: what exists *right now*. Today that is "a KB and nothing else."
-- **decision** — `DEC-01`: settled choices. Today it records the *absence* of choices, which is itself the fact that prevents the worst failure mode of this phase: an agent (or a teammate) confidently describing a "chosen" concept that was never chosen.
-- **blueprint** — will exist once design starts (`DES-xx`, `DATA-xx`).
+- **reality** — `BUILD-01…03`: what exists *right now* — a KB, a researched and machine-checked content design, and a UI mock-up; no code yet.
+- **decision** — `DEC-01`: settled choices, stated as facts, next to the ones still open. Keeping the two visibly apart prevents the worst failure mode of this phase in both directions: an agent (or a teammate) describing as "chosen" something nobody chose, or re-arguing something the team already settled.
+- **blueprint** — appears when the SwiftUI build starts (`DES-xx`, `DATA-xx`); the working design lives in `.claude/data-storage/` until then.
 - **reference** — supporting material; never overrides anything.
 
 A second ladder matters here that Assignment 1 did not have: **this KB must not inherit Assignment 1's rules.** Several are inverted — A1 forbade view models and remote APIs; A2 **mandates MVVM** and **requires cloud sync**. The kernel and `context-map.mdc` both carry this warning explicitly.
@@ -72,7 +74,7 @@ A second ladder matters here that Assignment 1 did not have: **this KB must not 
 
 **A week map with an urgent flag (`BUILD-02`, `BUILD-01`).** Week 7 — the **guest-lecture week whose content supplies two mandatory requirements** — is the week of 10–14 Aug, i.e. *now*. Surfaced as the top urgent action.
 
-**The open-decision register (`DEC-01`).** Twelve decisions the team must make, each with its constraints and cross-references, all marked OPEN. The register turns "what do we need to talk about?" into a checklist.
+**The decision register (`DEC-01`).** Two halves: settled items stated as facts about the project (concept, subject, POV, structure, win rule, languages), and open items with their constraints and cross-references. The register turns "what do we need to talk about?" into a checklist, and "is this actually decided?" into a lookup.
 
 **A first-meeting agenda (`BUILD-03`).** The register, sequenced into a runnable agenda with per-member preparation.
 
@@ -119,7 +121,7 @@ The invariants appear in both `CLAUDE.md` and `context-map.mdc` on purpose: they
 
 ## 7 · Housekeeping
 
-1. **This folder is not yet a git repository.** The assessed history will live in the **assigned team repo** (`BRIEF-07`) once the teaching team creates it. When that happens, move/copy this KB into that repo (commit history is graded from day one — `BRIEF-07`) — or `git init` here in the interim so nothing is lost.
+1. **This folder is a git repository; the assigned org repo is not cloned yet.** The assessed history will live in the **assigned team repo** (`BRIEF-07`) once the teaching team creates it. When that happens, move/copy this KB into that repo (commit history is graded from day one — `BRIEF-07`) — or `git init` here in the interim so nothing is lost.
 2. **`.claude/context/_source/`** holds the raw extraction; the original HTML stays in `.claude/docs/`. Once the migration is spot-checked and the KB lives in version control, `_source/` can be deleted; the HTML should stay.
 3. **The live Canvas page outranks the saved copy** — if an announcement or edit changes the assignment, re-extract and update the affected `brief/` file(s), noting the date.
 
@@ -127,4 +129,4 @@ The invariants appear in both `CLAUDE.md` and `context-map.mdc` on purpose: they
 
 ## 8 · The shape, in one line
 
-> **A small always-on kernel that knows what must never be wrong and where everything else lives — and 15 addressed files that are read only when a question actually touches them.**
+> **A small always-on kernel that knows what must never be wrong and where everything else lives — and 14 addressed files that are read only when a question actually touches them.**

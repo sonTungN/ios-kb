@@ -33,8 +33,8 @@ grounds.
 The craft's practices, knowledge and transmission generate the game's mechanics; the historical
 setting is the pressure around them, never the subject.
 
-Research base: `data-storage/research/04-dong-ho-tranh-dan-gian.md` (sourced, statuses per claim).
-Design: `data-storage/design/dongho-game-design.md`.
+Research base: `.claude/data-storage/research/01-dong-ho-tranh-dan-gian.md` (sourced, statuses per claim).
+Design: `.claude/data-storage/design/dongho-game-design.md`.
 
 ### D1b-POV · Who the player is
 
@@ -47,13 +47,13 @@ game never puts counterfactual words in a living person's mouth.
 
 **One continuous run, 1938 → 9 Dec 2025**, 36 dated spine cards. The three eras are **chapters**
 inside that single progress — *Giữ lửa* (1–12) · *Giữ nếp* (13–22) · *Hồi sinh* (23–36) — marked by
-banner interstitials, not separate levels. One player, one sitting, the whole educational arc
+banner interstitials inside one progress. One player, one sitting, the whole educational arc
 including the living-heritage present. `BRIEF-05` §3 is met on its own wording ("levels **or
 stages** of increasing difficulty"), with Gốm and Quan họ as "sắp ra mắt" menu tiles carrying **zero
 content**.
 
-Map: `data-storage/content/dongho/level-map.md` · data: `content/dongho/dynasty.json` ·
-reachability machine-checked by `data-storage/tools/trace_run.py`.
+Map: `.claude/data-storage/content/dongho/level-map.md` · data: `content/dongho/level.json` ·
+reachability machine-checked by `.claude/data-storage/tools/trace_run.py`.
 
 ### D1b-WIN · How the game is won
 
@@ -61,7 +61,7 @@ reachability machine-checked by `data-storage/tools/trace_run.py`.
 9 Dec 2025 — reads `requireAll` (bí quyết · truyền nhân · hồ sơ) + `requireAny` (giữ ván **or**
 chuộc ván) + `requireCounter` (truyền thừa ≥ 2) over a low `statGate` floor, with `sinh_ke`
 declared `insufficientAlone`. Every preparation costs stats to acquire and may declare a `statFloor`
-— the means to act, never a threshold to farm. Model: `data-storage/design/win-condition-model.md`.
+— the means to act, never a threshold to farm. Model: `.claude/data-storage/design/win-condition-model.md`.
 
 ### D1b-MG · Minigames
 
@@ -78,7 +78,7 @@ cards must carry `year: null`, may never carry a required flag, and may never be
 `documented`. `historicalNote` is identical after either choice — the player's counterfactual never
 overwrites the record. A **solvency invariant** guarantees no legal draw changes whether the run can
 be won, only how it feels and what it costs. All of it is enforced by
-`data-storage/tools/validate_data.py`.
+`.claude/data-storage/tools/validate_data.py`.
 
 **Two axes, different jobs.** *Across chapters* = progression: it comes from the shape of the
 problem (recognise → sustain → reverse) and the danger profile (floors → the trap era → ceilings),
@@ -86,7 +86,7 @@ never from harsher numbers. *Inside the run* = accommodation: the Dễ/Thường
 **how much the game tells you and how much slack it leaves** (crisis bands, ledger disclosure,
 advisors, ambient count). It never touches a starting stat, a cost, a flag or the victory rule — so
 a Khó win and a Dễ win mean the same thing and the leaderboard stays comparable. Declared in
-`data-storage/content/game.json` and machine-enforced.
+`.claude/data-storage/content/game.json` and machine-enforced.
 
 ### D2 · Heritage context
 
@@ -118,5 +118,5 @@ The card schema requires both on every field and the whole content budget is bui
 
 **Still true: there is no code.** What exists is a knowledge base, a researched and machine-checked
 content design, and a UI mock-up. The addressable `DES-xx` / `DATA-xx` domains are created when the
-SwiftUI build begins; until then design questions are answered from `data-storage/`, which is
+SwiftUI build begins; until then design questions are answered from `.claude/data-storage/`, which is
 working material rather than KB truth.

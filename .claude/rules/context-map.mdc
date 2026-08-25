@@ -25,7 +25,7 @@ This project's knowledge lives in an **addressable knowledge base**, not in this
 ### Load rules
 
 - **Load by address. Never glob or grep the KB as a first move.**
-- **Never read `.claude/context/_source/`** — raw originals, fully migrated into `brief/01–09`.
+- **Never read `.claude/context/_source/`** — raw originals, fully migrated into `brief/01–09`. The one exception is its `README.md`, the migration map.
 - **Do not load the whole KB "for background."** Progressive disclosure is the entire design.
 - **Two to four files is a normal answer.**
 
@@ -45,8 +45,8 @@ brief  >  reality  >  decision  >  blueprint  >  reference
 | --- | --- | --- |
 | **brief** | `BRIEF-01`…`BRIEF-07`, `BRIEF-09` | What the assignment demands. External, non-negotiable. If anything contradicts it, the other thing is wrong. |
 | **reality** | `BUILD-01`, `BUILD-02`, `BUILD-03` | What actually exists/holds right now. |
-| **decision** | `DEC-01` | The decision register. Today it records that **everything is open**. |
-| **blueprint** | *(none yet)* | `DES-xx`/`DATA-xx` will appear after the concept decision. |
+| **decision** | `DEC-01` | The decision register: the settled concept stated as fact, and the items still open. |
+| **blueprint** | *(none yet)* | `DES-xx`/`DATA-xx` appear when the SwiftUI build starts; until then design and content answers come from `.claude/data-storage/`. |
 | **reference** | `REF-01`, `REF-02` | Supporting material. Never overrides anything. |
 
 **When you spot a conflict:** answer from the higher tier, then say the lower-tier file is stale and name it. Do not silently reconcile.
@@ -71,7 +71,8 @@ Restated from `CLAUDE.md` because they must survive being read in isolation.
 - Commit history is assessment evidence — regular commits from **every** member across the whole window.
 
 **Phase**
-- **No team decision has been made yet** (`DEC-01`). Do not present any concept, name, role, or stack as chosen; route "what did we decide?" to `DEC-01`.
+- **The concept is settled** (`DEC-01`): a swipe-decision card game about **nghề làm tranh dân gian Đông Hồ**, played as one craft household across a single 36-card run, won by preparation rather than by stats. Do not re-argue it.
+- **Names, roles, persistence stack, industry requirements and workload split are open.** Do not present those as chosen; route "what did we decide?" to `DEC-01`.
 
 ---
 

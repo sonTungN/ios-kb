@@ -19,11 +19,6 @@ source: _source/canvas-extract-raw.md — all hyperlinks and file references
 | Saved copy (the KB's source) | `.claude/docs/GroupProjectCanvas.html` | Saved Canvas page, extracted into this KB on 13 Aug 2026. |
 | Marking rubric | Canvas rubric `680963` on course 172067 (attached to the assignment page) | Transcribed in full in `BRIEF-09`. |
 
-## Canvas-hosted files referenced by the brief (login required)
-
-| File | Canvas path | What it is |
-| --- | --- | --- |
-
 ## Other external links in the brief
 
 | Link | Context |
