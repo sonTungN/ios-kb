@@ -50,6 +50,10 @@ xcuserdata/
 DerivedData/
 build/
 Build/
+# ...but the KB's reality tier lives at .claude/context/build/, and core.ignorecase
+# on macOS makes the Xcode pattern above swallow it. Keep it tracked:
+!.claude/context/build/
+!.claude/context/build/**
 
 *.hmap
 *.ipa
@@ -206,3 +210,7 @@ vendor/bundle/
 *~
 .vscode/
 .idea/
+
+# Python bytecode from data-storage tooling
+__pycache__/
+*.pyc
