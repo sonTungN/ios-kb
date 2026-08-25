@@ -1,49 +1,60 @@
 {
-  "_comment": "Copy this file per card. Every TODO must be replaced by team-written text from a source. Delete keys you do not use; the validator rejects unknown keys.",
-
+  "_comment": "Copy this file per card. Every TODO must be replaced by team-written text from a source. Delete keys you do not use; the validator runs this against card.schema.json and rejects unknown keys (keys beginning with '_' are authoring annotations and are always allowed).",
   "id": "TODO-kebab-case-id",
-  "dynastyId": "TODO",
+  "levelId": "TODO",
   "order": 0,
   "year": null,
   "historicity": "documented",
-
   "sources": [
     {
       "title": "TODO source title",
       "url": "TODO",
       "type": "primary",
       "locator": "TODO page/chapter",
-      "accessed": "2026-08-15",
+      "accessed": "TODO-YYYY-MM-DD",
       "verifiedBy": "TODO team member name"
     }
   ],
-
   "tags": [],
-
   "appearsIf": {
     "noneOf": []
   },
-
-  "speaker": { "vi": "TODO", "en": "TODO" },
-  "prompt": { "vi": "TODO", "en": "TODO" },
-
+  "speaker": {
+    "vi": "TODO",
+    "en": "TODO"
+  },
+  "prompt": {
+    "vi": "TODO",
+    "en": "TODO"
+  },
   "choices": [
     {
-      "label": { "vi": "TODO swipe-left label", "en": "TODO" },
-      "effects": { "binh": 0, "dan": 0, "kho": 0, "than": 0 },
+      "label": {
+        "vi": "TODO swipe-left label",
+        "en": "TODO"
+      },
+      "effects": { "nghe": 0, "sinh_ke": 0, "tieng": 0, "nguoi": 0 },
       "grants": [],
       "counters": {},
-      "outcome": { "vi": "TODO consequence of THIS choice", "en": "TODO" }
+      "outcome": {
+        "vi": "TODO consequence of THIS choice",
+        "en": "TODO"
+      }
     },
     {
-      "label": { "vi": "TODO swipe-right label", "en": "TODO" },
-      "effects": { "binh": 0, "dan": 0, "kho": 0, "than": 0 },
+      "label": {
+        "vi": "TODO swipe-right label",
+        "en": "TODO"
+      },
+      "effects": { "nghe": 0, "sinh_ke": 0, "tieng": 0, "nguoi": 0 },
       "grants": [],
       "counters": {},
-      "outcome": { "vi": "TODO consequence of THIS choice", "en": "TODO" }
+      "outcome": {
+        "vi": "TODO consequence of THIS choice",
+        "en": "TODO"
+      }
     }
   ],
-
   "historicalNote": {
     "vi": "TODO what actually happened - identical after either choice, never bent to match the player's decision",
     "en": "TODO"

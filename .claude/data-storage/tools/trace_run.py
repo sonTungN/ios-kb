@@ -7,7 +7,7 @@ and Khó (no crises), which bands they touch, and a canonical best line.
 
 The card table below MUST mirror content/dongho/level-map.md — when the map's
 numbers change, change them here and re-run. This script is the reachability
-pass the level maps have owed since the Trần card-16 finding.
+pass every level map owes before its numbers are trusted.
 
 Usage: python3 tools/trace_run.py
 """
@@ -17,7 +17,7 @@ STATS = ["nghe", "sinh_ke", "tieng", "nguoi"]
 BAND_LO, BAND_HI = 20, 80          # Thường crisis bands
 GATE = {"nghe": 15, "sinh_ke": 10, "tieng": 10, "nguoi": 15}
 
-# rescue effects per stat-side (mirrors dynasty.json crises)
+# rescue effects per stat-side (mirrors level.json crises)
 CRISES = {
     ("sinh_ke", "lo"): {"sinh_ke": 25, "tieng": -10},
     ("sinh_ke", "hi"): {"sinh_ke": -20, "tieng": -5},
@@ -197,10 +197,29 @@ def show(tag, winners, depth):
     print("   winning end-states with ZERO crises: %d" % len(zero_cx))
 
 
+def run_line(choices, kho):
+    """Replay one fixed line of choices; accept a crisis offer only when it helps."""
+    st = dict(START)
+    st.update({"flags": set(), "used": set(), "tick": 0, "line": []})
+    log = []
+    for i, c in enumerate(choices):
+        outs = step(st, i, c, kho)
+        if not outs:
+            return None, log + ["DEAD at card %d%s (%s)" % (i + 1, c, CARDS[i][0])]
+        outs.sort(key=lambda s2: -min(s2[k] - GATE[k] for k in STATS))
+        st = outs[0]
+        log.append("%2d%s  %-22s %3d %3d %3d %3d  t%d%s" % (
+            i + 1, c, CARDS[i][0], st["nghe"], st["sinh_ke"], st["tieng"], st["nguoi"],
+            st["tick"], "  " + "+".join(sorted(x["grantsA"] for x in [CARDS[i][4]] if "grantsA" in x)) if c == "A" and "grantsA" in CARDS[i][4] else ""))
+    return st, log
+
+
 CANONICAL_THUONG = "A A B B A B A A A B B A A B A A A A A A B B A A A B A B A A A A B B A B".split()
 CANONICAL_KHO = "B B A B B B A A A B B A A B A A A A A A A B A A A B A B B A A B B A B A".split()
 
-# canonical skeleton: every carrier taken, every trap refused, minigames shown
+# Canonical skeleton: the required carriers and both traps pinned. Card 23 (phuc_hoi_van) is
+# deliberately left free — canonical_search() filters for the optional pair afterwards, so the
+# search can find lines that reach it by either road.
 FORCED = {6: "A", 8: "A", 9: "B", 10: "B", 11: "A", 14: "A", 17: "A", 19: "A",
           21: "B", 26: "A", 29: "A", 30: "A", 32: "B"}
 

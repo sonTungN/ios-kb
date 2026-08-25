@@ -1,9 +1,12 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "dynasty.schema.json",
-  "title": "Dynasty (level)",
-  "description": "One playable level: its stats, its preparation flags, and the historical victory condition.",
+  "$id": "level.schema.json",
+  "title": "Level",
+  "description": "One playable level: its stats, its preparation flags and counters, and the historical victory condition.",
   "type": "object",
+  "patternProperties": {
+    "^_": {}
+  },
   "additionalProperties": false,
   "required": [
     "id",
@@ -24,6 +27,9 @@
     },
     "period": {
       "type": "object",
+      "patternProperties": {
+        "^_": {}
+      },
       "additionalProperties": false,
       "required": [
         "from",
@@ -40,7 +46,7 @@
     },
     "playPattern": {
       "$ref": "#/$defs/i18n",
-      "description": "One line: how this level FEELS different to play. If two dynasties share a play pattern, one of them is redundant."
+      "description": "One line: how this level FEELS to play — the kind of thinking it demands."
     },
     "stats": {
       "type": "array",
@@ -78,11 +84,11 @@
       "items": {
         "type": "object"
       },
-      "description": "Stat-band rescue cards: id, stat, trigger{when: lte|gte, value}, oncePerLevel, name, rescue{label, effects}, refuse, historicalBasis, historicity, sources. Every rescue priced from another stat; one per stat per side."
+      "description": "Stat-band rescue cards: id, stat, trigger{when: lte|gte, value}, oncePerRun, name, rescue{label, effects}, refuse, historicalBasis, historicity, sources. Every rescue priced from another stat; one per stat per side."
     },
     "ambientPolicy": {
       "type": "object",
-      "description": "minCardGap, maxPerLevel (the HARD ceiling — a difficulty ambientCap above it is clamped), maxAbsEffect, totalGainMustStayUnder (below the combined carrier bill)."
+      "description": "minCardGap, maxPerRun (the HARD ceiling — a difficulty ambientCap above it is clamped), maxAbsEffect, totalGainMustStayUnder (below the combined carrier bill)."
     },
     "ambient": {
       "type": "array",
@@ -93,7 +99,7 @@
     },
     "weavePolicy": {
       "type": "object",
-      "description": "slotsPerAct, maxAbsEffect, noRepeatWithinRun, maxWorstCaseSwing per stat — the solvency invariant the linter proves."
+      "description": "slotsPerChapter, maxAbsEffect, noRepeatWithinRun, maxWorstCaseSwing per stat — the solvency invariant the linter proves."
     },
     "weave": {
       "type": "array",
@@ -113,6 +119,9 @@
   "$defs": {
     "i18n": {
       "type": "object",
+      "patternProperties": {
+        "^_": {}
+      },
       "additionalProperties": false,
       "required": [
         "vi",
@@ -131,6 +140,9 @@
     },
     "stat": {
       "type": "object",
+      "patternProperties": {
+        "^_": {}
+      },
       "additionalProperties": false,
       "required": [
         "id",
@@ -164,16 +176,19 @@
         },
         "failLowText": {
           "$ref": "#/$defs/i18n",
-          "description": "Historical failure mode when depleted."
+          "description": "Documented failure mode when depleted."
         },
         "failHighText": {
           "$ref": "#/$defs/i18n",
-          "description": "Historical failure mode when maxed. Required: an unbounded stat removes all tension."
+          "description": "Documented failure mode when maxed. Required: an unbounded stat removes all tension."
         }
       }
     },
     "flag": {
       "type": "object",
+      "patternProperties": {
+        "^_": {}
+      },
       "additionalProperties": false,
       "required": [
         "id",
@@ -197,6 +212,9 @@
         },
         "minigame": {
           "type": "object",
+          "patternProperties": {
+            "^_": {}
+          },
           "additionalProperties": false,
           "required": [
             "type"
@@ -240,12 +258,22 @@
         },
         "irrevocable": {
           "type": "boolean",
-          "description": "True when granting the flag also removes choices (e.g. having asked the nation, peace can no longer be sued)."
+          "description": "True when granting the flag also closes off choices later in the run."
+        },
+        "alternateCarrierCardIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Later spine cards that can also grant this flag — a last chance at a higher price. The linter checks these exist and cost more than the primary carrier. Use only where the record actually offered a second door; a flag with an easy second door is not a preparation."
         }
       }
     },
     "counter": {
       "type": "object",
+      "patternProperties": {
+        "^_": {}
+      },
       "additionalProperties": false,
       "required": [
         "id",
@@ -270,10 +298,14 @@
           "type": "integer",
           "default": 0
         }
-      }
+      },
+      "description": "A tiered, accumulating quantity (e.g. transmission across generations) read by finalTrial.requireCounter."
     },
     "finalTrial": {
       "type": "object",
+      "patternProperties": {
+        "^_": {}
+      },
       "additionalProperties": false,
       "required": [
         "name",
@@ -297,7 +329,7 @@
           "items": {
             "type": "string"
           },
-          "description": "Preparation flags that must all be held. Fewer than 2 makes the level a single gate. Under review (D1b-M2): a single requireAll flag may be permitted when requireCounter is non-empty — decide schema + linter in one commit before Màn 2 is numbered."
+          "description": "Preparation flags that must all be held. A trial whose victory rests on a single flag is a single gate; pair it with requireAny or requireCounter so more than one kind of preparation is being judged."
         },
         "requireAny": {
           "type": "array",
@@ -331,13 +363,17 @@
         },
         "defeatByStatsText": {
           "$ref": "#/$defs/i18n",
-          "description": "Shown when the player arrives strong but unprepared. Must explain the historical reason. This is where the learning lands."
+          "description": "Shown when the player arrives strong but unprepared. Must explain the documented reason. This is where the learning lands."
         },
         "sources": {
           "type": "array",
           "items": {
             "type": "object"
           }
+        },
+        "defeatByExhaustionText": {
+          "$ref": "#/$defs/i18n",
+          "description": "Shown when the player holds every preparation but a stat sits below its statGate floor. Mandatory whenever statGate is set: losing WITH the preparations in hand is a different ending from losing without them."
         }
       }
     }

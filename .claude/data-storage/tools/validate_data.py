@@ -2,7 +2,8 @@
 """
 Content linter for data-storage/.
 
-Checks the rules that keep the dataset historically honest and mechanically tense.
+Validates the data against schema/*.json, then checks the design rules that keep the
+dataset historically honest and mechanically tense.
 This is authoring tooling only — it is not part of the iOS app and nothing here
 ships inside the Xcode project.
 
@@ -38,6 +39,36 @@ def check_i18n(where, field, value):
             err(where, "%s.%s still contains TODO" % (field, lang))
 
 
+SCHEMA_DIR = pathlib.Path(__file__).resolve().parent.parent / "schema"
+
+
+def check_schema(kind, doc, path):
+    """Enforce the JSON Schema contract itself.
+
+    The rules further down check the *design*; this checks the *shape*. Without it
+    the schema is documentation nobody runs, and a Swift decoder written against it
+    is the first thing to discover the data never matched. Keys beginning with '_'
+    are authoring annotations and are allowed everywhere by the schemas.
+    """
+    try:
+        import jsonschema
+    except ImportError:
+        warn(str(path), "jsonschema is not installed, so schema/%s.schema.json was NOT enforced "
+                        "(pip3 install jsonschema)" % kind)
+        return
+    sf = SCHEMA_DIR / ("%s.schema.json" % kind)
+    if not sf.exists():
+        return err(str(path), "schema/%s.schema.json is missing" % kind)
+    try:
+        schema = json.loads(sf.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as e:
+        return err(str(sf), "invalid JSON — %s" % e)
+    for e in sorted(jsonschema.Draft7Validator(schema).iter_errors(doc),
+                    key=lambda x: list(x.path)):
+        err("%s at %s" % (path, "/".join(map(str, e.path)) or "<root>"),
+            "schema — %s" % e.message)
+
+
 def load(path):
     try:
         return json.loads(path.read_text(encoding="utf-8"))
@@ -51,13 +82,13 @@ def check_game(root):
 
     The player-facing Dễ/Thường/Khó control may change how much the game tells you and
     how much room it leaves. It may not change a starting stat, a choice cost, a flag or
-    the victory rule: if it did, a Khó win and a Dễ win would mean different things and
+    the victory rule: if it lid, a Khó win and a Dễ win would mean different things and
     the level's argument would be a different argument at every setting.
     """
     path = root / "game.json"
     if not path.exists():
         warn(str(root), "no game.json — difficulty, and anything else that is game-wide "
-                        "rather than per-dynasty, has nowhere to be declared")
+                        "rather than per-level, has nowhere to be declared")
         return
     game = load(path)
     if not game:
@@ -124,43 +155,45 @@ def main(root):
         print("No content directory yet at %s — nothing to validate." % root)
         return 0
 
-    dynasties = {}
-    for p in sorted(root.glob("**/dynasty.json")) + sorted(root.glob("**/*.dynasty.json")):
+    levels = {}
+    for p in sorted(root.glob("**/level.json")) + sorted(root.glob("**/*.level.json")):
         d = load(p)
         if d:
-            dynasties[d.get("id")] = (d, p)
+            check_schema("level", d, p)
+            levels[d.get("id")] = (d, p)
 
     cards = defaultdict(list)
     for p in sorted(root.glob("**/cards/*.json")):
         c = load(p)
         if c:
-            cards[c.get("dynastyId")].append((c, p))
+            check_schema("card", c, p)
+            cards[c.get("levelId")].append((c, p))
 
     check_game(root)
 
-    if not dynasties:
-        print("No dynasty files found under %s." % root)
+    if not levels:
+        print("No level files found under %s." % root)
         return 0
 
-    for did, (dyn, dpath) in dynasties.items():
+    for lid, (lvl, dpath) in levels.items():
         where = str(dpath)
-        deck = cards.get(did, [])
+        deck = cards.get(lid, [])
         by_id = {c.get("id"): (c, p) for c, p in deck}
-        stat_ids = {s.get("id") for s in dyn.get("stats", [])}
-        flag_ids = {f.get("id") for f in dyn.get("flags", [])}
-        counter_ids = {c.get("id") for c in dyn.get("counters", [])}
+        stat_ids = {s.get("id") for s in lvl.get("stats", [])}
+        flag_ids = {f.get("id") for f in lvl.get("flags", [])}
+        counter_ids = {c.get("id") for c in lvl.get("counters", [])}
 
-        check_i18n(where, "lesson", dyn.get("lesson", {}))
+        check_i18n(where, "lesson", lvl.get("lesson", {}))
 
         # --- two-sided stat failure ---
-        for s in dyn.get("stats", []):
+        for s in lvl.get("stats", []):
             sw = "%s stat=%s" % (where, s.get("id"))
             if s.get("failHigh") is None:
                 err(sw, "no failHigh — an unbounded stat removes all tension")
             if not s.get("failHighText"):
                 err(sw, "no failHighText — the max-out failure must have a historical explanation")
 
-        trial = dyn.get("finalTrial", {})
+        trial = lvl.get("finalTrial", {})
         req_all = trial.get("requireAll", [])
 
         # --- victory must not be decided by stats ---
@@ -172,14 +205,14 @@ def main(root):
             err(where, "finalTrial.insufficientAlone is empty — the level teaches nothing on defeat")
         check_i18n(where, "finalTrial.defeatByStatsText", trial.get("defeatByStatsText", {}))
 
-        # --- the final trial's gate: enough left to fight, never enough to win ---
+        # --- the final trial's gate: enough left to act, never enough to win ---
         #
-        # requireAll decides the battle. statGate only asks whether the court can still
+        # requireAll decides the outcome. statGate only asks whether the household can still
         # act at all — holding all three preparations with every stat under 10 is a
-        # dynasty that prepared correctly and then collapsed before it could use any of it.
+        # household that prepared correctly and then collapsed before it could use any of it.
         gate = trial.get("statGate") or {}
         crisis_low = {c.get("stat"): (c.get("trigger") or {}).get("value")
-                      for c in dyn.get("crises", [])
+                      for c in lvl.get("crises", [])
                       if (c.get("trigger") or {}).get("when") == "lte"}
 
         if gate and not trial.get("defeatByExhaustionText"):
@@ -191,7 +224,7 @@ def main(root):
                        trial.get("defeatByExhaustionText", {}))
 
         for st, v in gate.items():
-            s_def = next((s for s in dyn.get("stats", []) if s.get("id") == st), None)
+            s_def = next((s for s in lvl.get("stats", []) if s.get("id") == st), None)
             if s_def is None:
                 err(where, "finalTrial.statGate references undeclared stat '%s'" % st)
                 continue
@@ -199,7 +232,7 @@ def main(root):
             if v >= hi * 0.5:
                 warn(where, "finalTrial.statGate floors %s at %d, half or more of its %d range — "
                             "that is the trial being decided by stats after all, which is the one "
-                            "thing this design exists to avoid. The gate asks whether the court can "
+                            "thing this design exists to avoid. The gate asks whether the household can "
                             "still act, not whether it is strong" % (st, v, hi))
             trigger = crisis_low.get(st)
             if trigger is not None and v >= trigger:
@@ -210,11 +243,11 @@ def main(root):
                      % (st, v, trigger))
             if st in trial.get("insufficientAlone", []):
                 warn(where, "stat '%s' is both a gate and declared insufficient — coherent "
-                            "(necessary to fight, not sufficient to win) but confirm intended" % st)
+                            "(necessary to act, not sufficient to win) but confirm intended" % st)
 
         for st in sorted(stat_ids - set(gate)):
             warn(where, "stat '%s' has no finalTrial.statGate — it can sit at 1 on the day of the "
-                        "battle and the trial will not notice" % st)
+                        "trial and the trial will not notice" % st)
 
         for f in req_all + trial.get("requireAny", []):
             if f not in flag_ids:
@@ -223,11 +256,11 @@ def main(root):
             if c not in counter_ids:
                 err(where, "finalTrial references undeclared counter '%s'" % c)
 
-        advisors_before = {it.get("before") for it in dyn.get("interstitials", [])
+        advisors_before = {it.get("before") for it in lvl.get("interstitials", [])
                            if it.get("type") == "advisor" and it.get("before")}
 
         # --- every victory flag has a carrier, and that carrier costs something ---
-        for flag in dyn.get("flags", []):
+        for flag in lvl.get("flags", []):
             fid, carrier_id = flag.get("id"), flag.get("carrierCardId")
 
             # a flag with a floor: you need the means to execute the preparation, not the
@@ -249,7 +282,7 @@ def main(root):
                         % (fid, carrier_id))
 
             for st, v in floor.items():
-                s_def = next((s for s in dyn.get("stats", []) if s.get("id") == st), None)
+                s_def = next((s for s in lvl.get("stats", []) if s.get("id") == st), None)
                 if s_def is None:
                     err(where, "flag '%s' floors undeclared stat '%s'" % (fid, st))
                     continue
@@ -263,7 +296,7 @@ def main(root):
                                "unreachable without the run ending first" % (fid, st, v, hi))
                 elif v > hi * 0.5:
                     warn(where, "flag '%s' floors %s at %d, over half of its %d range — that is a "
-                                "THRESHOLD, not a floor. A floor says the court needs the means to "
+                                "THRESHOLD, not a floor. A floor says the household needs the means to "
                                 "act; a threshold says it needs to be strong, which is the claim "
                                 "finalTrial.insufficientAlone exists to refute. Confirm this is "
                                 "meant, and check it does not make a pressure card correct play"
@@ -278,6 +311,38 @@ def main(root):
                                 "player must raise it before the carrier, which is a real design "
                                 "choice and not a mistake, but it must be reachable"
                          % (fid, st, v, s_def["start"]))
+
+            # a flag may offer a second, dearer door later in the spine
+            for alt_id in flag.get("alternateCarrierCardIds") or []:
+                if alt_id not in by_id:
+                    err(where, "flag '%s' names alternate carrier '%s' which does not exist"
+                        % (fid, alt_id))
+                    continue
+                alt_card, alt_path = by_id[alt_id]
+                alt_grant = [ch for ch in alt_card.get("choices", [])
+                             if fid in (ch.get("grants") or [])]
+                if not alt_grant:
+                    err(str(alt_path), "alternate carrier for flag '%s' has no choice granting it"
+                        % fid)
+                if (alt_card.get("order") is not None and by_id.get(carrier_id)
+                        and by_id[carrier_id][0].get("order") is not None
+                        and alt_card["order"] <= by_id[carrier_id][0]["order"]):
+                    err(where, "flag '%s' lists '%s' as an alternate carrier, but it is not later "
+                               "than the primary carrier '%s' — a last chance has to come last"
+                        % (fid, alt_id, carrier_id))
+                for ch in alt_grant:
+                    prim = by_id.get(carrier_id)
+                    if not prim:
+                        continue
+                    p_cost = min((sum(v for v in (c.get("effects") or {}).values() if v < 0)
+                                  for c in prim[0].get("choices", [])
+                                  if fid in (c.get("grants") or [])), default=0)
+                    a_cost = sum(v for v in (ch.get("effects") or {}).values() if v < 0)
+                    if a_cost >= p_cost:
+                        err(str(alt_path),
+                            "the second chance at flag '%s' costs %d, no more than the first (%d) — "
+                            "a cheap last chance deletes the deadline it is supposed to enforce"
+                            % (fid, a_cost, p_cost))
 
             # everything below needs the carrier card itself to exist
             if carrier_id not in by_id:
@@ -310,9 +375,9 @@ def main(root):
                             % (fid, carrier_id, o_carrier, deadline, o_deadline))
 
         # --- crises: the safety net must be paid for, and must not be infinite ---
-        stat_ids = {s["id"] for s in dyn.get("stats", [])}
+        stat_ids = {s["id"] for s in lvl.get("stats", [])}
         seen_crisis = set()
-        for cr in dyn.get("crises", []):
+        for cr in lvl.get("crises", []):
             crid, stat = cr.get("id"), cr.get("stat")
             cw = "%s crisis '%s'" % (where, crid)
             if stat not in stat_ids:
@@ -325,8 +390,8 @@ def main(root):
                 err(cw, "duplicate crisis for stat '%s' on the same side" % stat)
             seen_crisis.add(key)
 
-            if not cr.get("oncePerLevel"):
-                err(cw, "oncePerLevel is not set — a repeatable rescue makes the stat unkillable "
+            if not cr.get("oncePerRun"):
+                err(cw, "oncePerRun is not set — a repeatable rescue makes the stat unkillable "
                         "and the two-sided failure model stops meaning anything")
 
             eff = (cr.get("rescue") or {}).get("effects") or {}
@@ -351,12 +416,12 @@ def main(root):
                     warn(where, "stat '%s' has no '%s' crisis — that edge kills with no way back" % (st, side))
 
         # --- ambient: relief that must stay small, positive, and capped ---
-        pol = dyn.get("ambientPolicy") or {}
+        pol = lvl.get("ambientPolicy") or {}
         cap_abs = pol.get("maxAbsEffect", 8)
-        cap_n = pol.get("maxPerLevel", 5)
+        cap_n = pol.get("maxPerRun", 5)
         cap_total = pol.get("totalGainMustStayUnder")
         nets, seen_amb = [], set()
-        for am in dyn.get("ambient", []):
+        for am in lvl.get("ambient", []):
             aid = am.get("id")
             aw = "%s ambient '%s'" % (where, aid)
             if aid in seen_amb:
@@ -392,25 +457,25 @@ def main(root):
                            "ambientPolicy.totalGainMustStayUnder (%d) — relief on that scale cancels "
                            "the carriers' cost and the sacrifice stops being a sacrifice"
                     % (cap_n, worst, cap_total))
-        if dyn.get("ambient") and not pol:
+        if lvl.get("ambient") and not pol:
             err(where, "ambient beats declared with no ambientPolicy — nothing caps how often they "
                        "fire or how much they give back")
 
-        # --- weave: undated court business, drawn per run ---
+        # --- weave: undated ordinary business, drawn per run ---
         #
         # The spine (cards/) is dated history and never moves. The weave is period texture
         # with no date, drawn fresh each run. Three things must hold or randomising it
         # stops being safe: it must not claim a date, it must not carry the level's
         # argument, and no draw may change whether the level can be won.
-        wpol = dyn.get("weavePolicy") or {}
-        slots = wpol.get("slotsPerAct") or {}
+        wpol = lvl.get("weavePolicy") or {}
+        slots = wpol.get("slotsPerChapter") or {}
         w_cap = wpol.get("maxAbsEffect", 10)
         swing_budget = wpol.get("maxWorstCaseSwing") or {}
-        by_act = defaultdict(list)
+        by_chapter = defaultdict(list)
         seen_weave = set()
 
-        for wv in dyn.get("weave", []):
-            wid, act = wv.get("id"), wv.get("act")
+        for wv in lvl.get("weave", []):
+            wid, chap = wv.get("id"), wv.get("chapter")
             ww = "%s weave '%s'" % (where, wid)
             if wid in seen_weave:
                 err(ww, "duplicate weave id")
@@ -419,16 +484,16 @@ def main(root):
                 err(ww, "id collides with a spine card in cards/ — a card is either dated "
                         "history or undated texture, never both")
 
-            if act not in slots:
-                err(ww, "act '%s' is not in weavePolicy.slotsPerAct" % act)
-            elif slots.get(act, 0) < 1:
-                err(ww, "act '%s' has 0 slots — this card can never be drawn" % act)
+            if chap not in slots:
+                err(ww, "chapter '%s' is not in weavePolicy.slotsPerChapter" % chap)
+            elif slots.get(chap, 0) < 1:
+                err(ww, "chapter '%s' has 0 slots — this card can never be drawn" % chap)
             else:
-                by_act[act].append(wv)
+                by_chapter[chap].append(wv)
 
             # the whole licence to shuffle rests on this field being null
             if wv.get("year") is not None:
-                err(ww, "has year %s — a weave card is shuffled into an act, so a date on it "
+                err(ww, "has year %s — a weave card is shuffled into a chapter, so a date on it "
                         "would be a claim the game then contradicts by moving it. Give it a "
                         "date and it belongs in cards/ as spine." % wv.get("year"))
 
@@ -470,7 +535,7 @@ def main(root):
         # For each stat: assume the player takes the kindest branch of every card drawn,
         # then hand them the cruellest draw the slot counts allow. That floor must stay
         # inside the budget. Same again on the high side, where overshoot kills instead.
-        if by_act and swing_budget:
+        if by_chapter and swing_budget:
             for st in sorted(stat_ids):
                 budget = swing_budget.get(st)
                 if budget is None:
@@ -478,8 +543,8 @@ def main(root):
                                 "stat's exposure to the draw is unchecked" % st)
                     continue
                 floor = ceil = 0
-                for act, pool in by_act.items():
-                    n = slots.get(act, 0)
+                for chap, pool in by_chapter.items():
+                    n = slots.get(chap, 0)
                     best = sorted(max((ch.get("effects") or {}).get(st, 0)
                                       for ch in wv.get("choices", []) or [{}]) for wv in pool)
                     worst = sorted(min((ch.get("effects") or {}).get(st, 0)
@@ -496,16 +561,16 @@ def main(root):
                                "maxWorstCaseSwing (%d) — overshoot is a failure state too, and the "
                                "draw must not be able to cause it" % (st, ceil, budget))
 
-        for act, n in sorted(slots.items()):
-            pool = len(by_act.get(act, []))
+        for chap, n in sorted(slots.items()):
+            pool = len(by_chapter.get(chap, []))
             if n and pool < n:
-                err(where, "act %s draws %d weave cards from a pool of %d" % (act, n, pool))
+                err(where, "chapter %s draws %d weave cards from a pool of %d" % (chap, n, pool))
             elif n and pool == n:
-                warn(where, "act %s draws %d from a pool of %d — every run sees the same set, "
-                            "so the slot costs content and buys no variety" % (act, n, pool))
+                warn(where, "chapter %s draws %d from a pool of %d — every run sees the same set, "
+                            "so the slot costs content and buys no variety" % (chap, n, pool))
 
         # --- interstitials: pacing beats carry no stat effects ---
-        for it in dyn.get("interstitials", []):
+        for it in lvl.get("interstitials", []):
             iw = "%s interstitial %s" % (where, it.get("type"))
             if it.get("type") not in ("advisor", "omen", "echo", "chapter"):
                 err(iw, "unknown interstitial type '%s'" % it.get("type"))
@@ -519,7 +584,7 @@ def main(root):
                 err(iw, "anchors to card '%s' which does not exist" % anchor)
 
         # --- the ledger must track exactly the required flags ---
-        ledger = dyn.get("ledger")
+        ledger = lvl.get("ledger")
         if ledger is not None:
             slots = ledger.get("slots", [])
             if sorted(slots) != sorted(req_all):
@@ -545,7 +610,7 @@ def main(root):
             if card.get("year") is None:
                 err(cw, "no year — everything in cards/ is spine: it holds a fixed position "
                         "because a date holds it there. Undated content belongs in the weave "
-                        "pool in dynasty.json, where it can be drawn and shuffled safely.")
+                        "pool in level.json, where it can be drawn and shuffled safely.")
 
             check_i18n(cw, "prompt", card.get("prompt", {}))
             check_i18n(cw, "historicalNote", card.get("historicalNote", {}))
