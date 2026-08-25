@@ -6,9 +6,10 @@ workshop earns. The correct player arrives poor — which is, verbatim, why UNES
 in 2025: *"the number of skilled and committed individuals pursuing Đông Hồ printing as a livelihood
 has become too small to sustain transmission."*
 
-> ⚠️ This file is a **research scaffold**, not content. Researched 21 Aug 2026 by three parallel
-> passes (timeline & heritage status · craft process & customs · paintings & revival), ~60 unique
-> sources, Vietnamese primary. Every claim carries a status: ✅ = 2+ independent sources ·
+> ⚠️ This file is a **research scaffold**, not content. Built in three passes (timeline & heritage
+> status · craft process & customs · paintings & revival), Vietnamese sources primary. It cites
+> **17 URLs across 15 domains** below, and names **28 distinct outlets** in the per-claim source
+> columns. Every claim carries a status: ✅ = 2+ independent sources ·
 > ⚠️ `VERIFY` = single source · ❌ = sources contradict (both readings recorded — pick the safe
 > wording, never silently resolve). Card text is written by the team, from sources, in vi + en.
 > Method note: part of the pass ran on WebSearch/WebFetch during a Firecrawl outage; source list at
@@ -165,18 +166,26 @@ game abstraction; it is the decision text.
 1. **Origin century** ❌ 15th–17th across sources → game says "khoảng 500 năm / thời Lê".
 2. **Chợ tranh phiên count** ❌ 5 (written majority: 6·11·16·21·26 tháng Chạp) vs 6 (+mồng 1, per
    nghệ nhân Chế, first-person). Use 5 in-card, note 6 in codex.
-3. **Village burned "1947"** — event ✅, year unfound. Say "trong kháng chiến chống Pháp".
+3. **Village burned "1947"** — event ✅, year unfound. **The game uses:** "trong kháng chiến chống
+   Pháp" in every player-facing string. Card 7 carries 1947 as an ordering year only, marked `ᵇ` in
+   the level map, and the year is never printed on a card, a chip or the ledger.
 4. **Nguyễn Hữu Sam death** ❌ 2016 vs 2017 ("2018" unsupported). Avoid printing a year.
 5. **Nguyễn Đăng Chế return** ❌ 1985 vs 1992. Say "từ giữa thập niên 1980, toàn tâm từ 1992" or avoid.
 6. **Đỏ pigment** ❌ sỏi son + gỗ vang (VHNT/wiki) vs hoa hiên (dsvh). Record both traditions.
 7. **State center cost** ❌ 45.2 tỷ vs "gần 100 tỷ". Avoid the number or date it.
-8. **Đám cưới chuột meaning** — satire (mainstream) vs Tết-wish layer (Tạp chí Mỹ thuật). Minigame
-   canonical = satire; codex carries both. "Chí chí… mưu mưu" inscription = Hàng Trống version.
+8. **Đám cưới chuột meaning** — satire (mainstream) vs Tết-wish layer (Tạp chí Mỹ thuật). **The
+   game uses:** the print is **excluded from `mg_match` grading entirely** — a contested reading
+   must not become a right answer — and the codex carries both layers side by side. "Chí chí… mưu
+   mưu" inscription = Hàng Trống version.
 9. **Số mẫu tranh còn lại** — no total exists; never print a count.
 10. **Households remaining** — 2 dòng họ / 3 gia đình / "vài hộ" (UNESCO) — magnitude consistent;
     date any figure used.
 11. **Nguyễn Thị Oanh NNND elevation** — unconfirmed (a different Oanh matches); she is NNƯT 2020 ✅.
-12. Firecrawl outage forced part of the pass onto WebSearch/WebFetch; bacninh.gov.vn and
+12. **Tổ nghề Đông Hồ** — no Đông Hồ-specific craft-ancestor figure or feast date could be sourced;
+    only the general hội làng 14–16/3 âm lịch surfaced. The card's `historicalNote` therefore speaks
+    of craft-ancestor rites as a Vietnamese craft-village custom (`historicity: invented`) — keep it
+    generic until a source settles it.
+13. Firecrawl outage forced part of the pass onto WebSearch/WebFetch; bacninh.gov.vn and
     svhttdl.bacninh.gov.vn could not be deep-read (served navigation only).
 
 ---
@@ -209,5 +218,5 @@ game abstraction; it is the decision text.
 - Giáo dục & Thời đại — Gà trống: `https://giaoducthoidai.vn/ga-trong-tranh-dan-gian-dong-ho-post227921.html`
 - SGK Ngữ văn 10 tập 1 (Chân trời sáng tạo), Bài 4, Văn bản 1 — the defensible textbook citation.
 
-*(Full per-claim URL lists live in the three research-pass reports; ~60 unique sources consulted 21
+*(Every claim's sources are named in its own row above; the list below is the deep-read set. Consulted 21
 Aug 2026.)*

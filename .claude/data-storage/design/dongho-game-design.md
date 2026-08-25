@@ -1,11 +1,10 @@
-# Đông Hồ game design — the engine re-grounded in a living craft
+# Đông Hồ game design — the subject layer
 
-Written 21 Aug 2026, after the tutor endorsed the engine and ruled the war subject out (`DEC-01`
-D1b). This document does for tranh Đông Hồ what `win-condition-model.md` + the Trần research did for
-the war concept: POV, stats, flags, level structure, minigames, endings. **The engine itself is
-unchanged** — spine/weave, two-sided stats, preparation flags, carriers with floors and costs, the
-two-question final trial, difficulty as information/slack. Facts cited here are sourced in
-`../research/04-dong-ho-tranh-dan-gian.md`; nothing below invents a date.
+The subject layer of the game: POV, stats, flags, chapters, minigames, endings. The engine it sits
+on — spine/weave, two-sided stats, preparation flags, carriers with floors and costs, the
+preparation-vs-capacity trial, difficulty as information and slack — is specified in
+`win-condition-model.md`. Facts cited here are sourced in
+`../research/01-dong-ho-tranh-dan-gian.md`; nothing below invents a date.
 
 ---
 
@@ -40,9 +39,8 @@ someone brings to you, like everything else in Reigns.
 
 ## 2 · The four stats — NGHỀ · SINH KẾ · TIẾNG · NGƯỜI
 
-Same contract as before: fail at `≤ 0` **and** `≥ 100`; every overflow is a **documented failure mode
-of the craft**, not an arbitrary game-over. (Old canon `BINH LỰC · LÒNG DÂN · QUỐC KHỐ · TRIỀU THẦN`
-is retired; sweep the screens.)
+The contract: fail at `≤ 0` **and** `≥ 100`; every overflow is a **documented failure mode
+of the craft**, not an arbitrary game-over.
 
 | Stat | It measures | `≤ 0` — documented | `≥ 100` — documented |
 | --- | --- | --- | --- |
@@ -53,8 +51,7 @@ is retired; sweep the screens.)
 
 Two of the eight edges (`nghe` high, `nguoi` high) are patterns argued from documented tensions
 rather than single dated events — they are tagged `simplified` and their `failHighText` must say so.
-The other six are directly documented. This is the same standard the Trần stats held (kiêu binh /
-quyền thần were patterns too).
+The other six are directly documented.
 
 **The double death is the syllabus.** Heritage dies of neglect *and* of commodification; a player
 who discovers that farming TIẾNG to 100 kills the craft as surely as letting it hit 0 has learned
@@ -62,14 +59,15 @@ the central problem of heritage preservation — that is the two-sided stat mode
 
 ---
 
-## 3 · Structure — one game, one unbroken run, three chapters (team decision 22 Aug 2026)
+## 3 · Structure — one game, one unbroken run, three chapters
 
-**One continuous run, 1938 → 9 Dec 2025.** The eras are **chapters inside a single progress** —
-banner interstitials at the era turns — not separate levels. Decided by the team for three reasons,
-all of which held up under review: a marker or Experience Day visitor experiences the *whole*
-educational arc — including the living-heritage present — in one sitting; a craft's record honestly
-supports ~36 milestone events, not 54 (the hygiene factor: every anchor is a public, checkable
-milestone); and an educational game should not bury its point under three levels of reading.
+**One continuous run, 1938 → 9 Dec 2025.** The eras are **chapters inside a single progress**,
+turned by banner interstitials. Three things follow from that, and each is a design requirement:
+a marker or an Experience Day visitor experiences the *whole* educational arc — including the
+living-heritage present — in one sitting; every dated anchor is a public, checkable milestone, and
+the craft's record supports about thirty-six of them, which is the hygiene factor that keeps a
+player from asking where all this information came from; and an educational game earns its point in
+one arc rather than burying it under repeated reading.
 
 | | Chương I · **Giữ lửa** (1938–54) | Chương II · **Giữ nếp** (1967–90) | Chương III · **Hồi sinh** (1992–2025) |
 | --- | --- | --- | --- |
@@ -82,13 +80,13 @@ milestone); and an educational game should not bury its point under three levels
 chapters are the stages, each adding mechanics and content; the **Chọn di sản** screen's "Gốm ·
 Quan họ — sắp ra mắt" tiles keep the *levels* dimension visible for future arts. Stats flow
 continuously across chapters (one household, one century); there are no per-era resets, which is
-what lets 1947 decide 2025.
+what lets the fire of the kháng chiến years decide 2025.
 
-**Why the merge also de-risks delivery:** there is no longer a "màn 3 that might not ship" — the
-present day is *inside the one deck* and cannot be cut without cutting the game. The schedule lever
-is now pool size (weave/ambient) and prose polish, never structure. Budget: 36 spine + 17 weave +
-system ≈ **620–700 bilingual strings — one-third less than the 3-màn plan** — one JSON, one trial,
-one map (`../content/dongho/level-map.md`, machine-checked by `../tools/trace_run.py`).
+**The structure is also the delivery safeguard:** the present day sits *inside the one deck* and
+cannot be cut without cutting the game. The schedule lever is pool size (weave/ambient) and prose
+polish, never structure. Budget: 36 spine + 17 weave + system ≈ **620–700 bilingual strings** — one
+JSON, one trial, one map (`../content/dongho/level-map.md`, machine-checked by
+`../tools/trace_run.py`).
 
 ---
 
@@ -98,7 +96,7 @@ one map (`../content/dongho/level-map.md`, machine-checked by `../tools/trace_ru
 
 | Card | Id | What it is | Cost lands as | Floor |
 | --- | --- | --- | --- | --- |
-| 7 | `giu_van` | The blocks carried through the fire (1947ᵃ) | `sinh_ke −10 · tieng −10` | `nguoi ≥ 20` |
+| 7 | `giu_van` | The blocks carried through the fire (kháng chiến chống Pháp) | `sinh_ke −10 · tieng −10` | `nguoi ≥ 20` |
 | 9 | `giu_bi_quyet` | The recipe taught in evacuation (1949ᵃ) — **mg_match** | `sinh_ke −5` | `nghe ≥ 25` |
 | 12 · 15 · 20 | `truyen_thua` **counter +1 each** | Về làng 1954 · dạy con 1972ᵃ · con ở lại 1987ᵃ | each tick bills `sinh_ke` | — |
 | 11 | *(trap)* | The dealer buys the rescued blocks — **revokes `giu_van`** | +25 `sinh_ke`, the ledger slot un-fills | — |
@@ -107,7 +105,7 @@ one map (`../content/dongho/level-map.md`, machine-checked by `../tools/trace_ru
 | 23 | `phuc_hoi_van` | The buy-backs (1992ᵃ→) — the blocks' second road | `sinh_ke −15` | `sinh_ke ≥ 20` |
 | 27 | `mo_cua` *(optional)* | Experience classes (2008) — **mg_match reprise** | `nghe −5 · sinh_ke −5` | `tieng ≥ 20` |
 | 30 | `truyen_nhan` | The grandchild takes the craft (2015ᵃ) — **mg_assemble** | `sinh_ke −10` | `nguoi ≥ 20` |
-| 31 / 33 | `ho_so` | The dossier, 2017 → the 31/3/2020 deadline — **expires**; card 33 is the dear last chance (conditional pair in one spine slot) | `sinh_ke −10 · nghe −5` (double at 33) | `tieng ≥ 25` |
+| 31 / 33 | `ho_so` | The dossier, 2017 → the 31/3/2020 deadline — **expires**; card 33 is the dear last chance (conditional pair in one spine slot) | 31: `nghe −5 · sinh_ke −10` · 33: `nghe −10 · sinh_ke −15 · nguoi −5` | `tieng ≥ 25` |
 
 Every carrier obeys the standing rules (cost rule · floor rule + `blockedText` · advisor before
 every floored required carrier, suppressed on Khó). **Chapter III floor note:** `phuc_hoi_van`
@@ -124,8 +122,7 @@ statGate:        nghe 15 · sinh_ke 10 · tieng 10 · nguoi 15   — floor only
 insufficientAlone: [sinh_ke]                            — the Committee did not count money
 ```
 
-The three "shapes" of the old model are **fused into one judgment** — recognise, sustain, reverse —
-and the `requireAny` pair is the design's mercy and its history in one mechanism: losing the blocks
+One judgment asks three kinds of question — recognise, sustain, reverse — and the `requireAny` pair is the design's mercy and its history in one mechanism: losing the blocks
 in 1951 is not a 25-card death march; it opens the costlier documented road of 1992. All four
 endings survive with their Đông Hồ names (Ghi danh · Giàu mà mất nghề · Kiệt sức · Nghề tàn), and
 every one of them is a real fate some family had.
@@ -151,35 +148,30 @@ never completion. Content comes from the researched catalog, never invented:
 Difficulty scaling for `mg_match`: Dễ labels shown · Thường labels shown once · Khó icons only, the
 meanings must have been read in the codex. SwiftUI cost: `LazyVGrid` + drag / tap-rotate state
 machines — inside `BRIEF-02` scope, and each shipped minigame counts toward the ≥3 distinct Game
-View animations. Schema: the `minigame` object lives on the flag (`dynasty.schema.json`); the
+View animations. Schema: the `minigame` object lives on the flag (`level.schema.json`); the
 validator's minigame check (type known, contentRef resolves) is a logged follow-up.
 
-## 5 · What ports unchanged — and the three renames
+## 5 · The named surfaces
 
-**Unchanged in principle and in code:** the swipe loop and mid-drag preview canon (exact deltas, 50%
-dim); spine/weave split and the weave's three laws (`year: null`, never a required flag, never
-`documented`); the solvency invariant and `weavePolicy.maxWorstCaseSwing`; crisis bands and the
-one-rescue rule; interstitials (advisor · omen · echo · ambient); ledger disclosure policy
-(`when-not-what`); the difficulty table in `content/game.json` — all three difficulty blurbs need
-re-wording for the craft ("Sử chỉ đường" → "Nghề chỉ đường"), nothing else changes; the four-ending
-structure; the preparation-vs-capacity trial; save-and-resume (a 36-card run makes it earn its keep); run review.
+The engine layer the build implements once and never varies by subject: the swipe loop and its
+mid-drag preview canon (exact deltas, affected bars dimmed to 50%); the spine/weave split and the
+weave's three laws (`year: null`, never a required flag, never `documented`); the solvency invariant
+(`weavePolicy.maxWorstCaseSwing`); crisis bands and the one-rescue rule; the interstitial set; the
+ledger's `when-not-what` disclosure policy; the difficulty table in `content/game.json`; the four
+endings; the preparation-vs-capacity trial; save-and-resume (a 36-card run makes it earn its keep);
+the run review.
 
-**Renamed surfaces** (sweep Stitch + the SwiftUI build):
+The surfaces this subject names:
 
-| Was | Becomes | Note |
+| Surface | Name | Note |
 | --- | --- | --- |
-| Dynasty Select | **Chọn di sản** — Tranh Đông Hồ · Gốm *(sắp ra mắt)* · Quan họ *(sắp ra mắt)* | teaser tiles only — zero content behind them |
-| Level Briefing | **Chapter banner / opening briefing** — era title, one line of bridge, ledger snapshot (the sub-progress moment) | new `chapter` interstitial type, validator-supported |
-| Preparation Ledger "Sổ chuẩn bị" | **Sổ gia truyền** | same three slots + floors + when-not-what |
-| Historical Codex "Sử liệu" | **Bộ sưu tập tranh** | the codex becomes a collectible painting gallery: each unlocked entry = one real mẫu with its documented meaning + sources. It is simultaneously the CRUD/search-filter surface (`BRIEF-03`/`BRIEF-05`), the Report §2 evidence, and `mg_match`'s content source — one screen, four requirements |
-| Omen "Điềm báo" | keeps the name — "tin từ tỉnh": chiến sự lan về Kinh Bắc; lịch offset đã tới Hà Nội; đoàn khảo sát hồ sơ sắp về làng | omens stay on at every difficulty: each of these was genuinely knowable |
-| Stat HUD names | `NGHỀ · SINH KẾ · TIẾNG · NGƯỜI` | no synonyms, ever (house canon rule holds) |
+| Art select | **Chọn di sản** — Tranh Đông Hồ · Gốm *(sắp ra mắt)* · Quan họ *(sắp ra mắt)* | teaser tiles only — zero content behind them |
+| Era turn | **Chapter banner** — era title, one line of bridge text, ledger snapshot | the `chapter` interstitial type, validator-supported |
+| Preparation ledger | **Sổ gia truyền** | slots + floors + `when-not-what`; the woodblock pair is one slot, the counter a three-notch meter |
+| Codex | **Bộ sưu tập tranh** | a collectible painting gallery: each unlocked entry is one real mẫu with its documented meaning and sources. Simultaneously the CRUD/search-filter surface (`BRIEF-03`/`BRIEF-05`), the Report §2 evidence, and `mg_match`'s content source — one screen, four requirements |
+| Omen | **Điềm báo** — "tin từ tỉnh": chiến sự lan về vùng; lịch offset đã tới Hà Nội; đoàn khảo sát hồ sơ sắp về làng | on at every difficulty: each of these was genuinely knowable |
+| Stat HUD | `NGHỀ · SINH KẾ · TIẾNG · NGƯỜI` | no synonyms, ever |
 
-**Naming debt, recorded once:** the schema keys are still `dynasty.json` / `dynastyId`. The contract
-is subject-neutral in shape, so the Đông Hồ content uses them as-is (`id: "dongho"`);
-renaming key + filename to `level.json`/`levelId` is a mechanical sweep across schema, validator,
-templates and content that should happen **in the Xcode repo era, in one commit, or not at all**.
-Do not half-rename.
 
 ---
 
@@ -197,14 +189,15 @@ is carried by four locks, each welded to a researched fact:
 4. **The minigames teach the craft's own logic** — the meanings on the sheets, the order of the
    ván — content that only exists because the subject is this craft.
 
-All four locks now live in **the one run every player finishes** — the single-progress decision
-(§3) removed the old risk that the locks shipped in a level a marker never reached. The schedule can
-thin the weave pool or the prose; it can no longer cut the present day out of the game.
+All four locks live in **the one run every player finishes** (§3), so no marker can reach the end
+without meeting them. The schedule can thin the weave pool or the prose; it cannot cut the present
+day out of the game.
 
-**Presentation obligation:** chapter I's spine is famine/war/displacement pressure —
-every player verb is a craft verb (carry, teach, share, return), but a viewer primed by the rejected
-war concept could misread a chapter-I-only demo. The video and report open on the customs cards +
-the codex + a minigame, then jump to chapter III, and say the design choice out loud: *the war is weather, not the subject.*
+**Presentation obligation:** chapter I's spine runs through famine, war and displacement, because
+the craft's own timeline does. Every player verb is still a craft verb — carry, teach, share, return
+— but a demo that walks chapter I front to back would show the hardship without the craft. The video
+and report open on the customs cards + the codex + a minigame, then jump to chapter III, and say the
+design choice out loud: *the war is weather, not the subject.*
 
 And the quietest lock: **the player's reward for winning is the thing the player was playing about**
 — the codex fills with the real paintings. Culture as the reward loop, not the wallpaper.

@@ -1,16 +1,15 @@
 # Hành trình một mạch — Tranh Đông Hồ 1938–2025 · full card map (36 dated cards + 4 drawn)
 
-**Team decision, 22 Aug 2026: one game, one continuous run.** The three eras are **chapters inside a
-single progress** (banner interstitials at the era turns), not separate levels — so a marker or an
-Experience Day visitor experiences the whole educational arc, including the living-heritage present,
-in one sitting. `BRIEF-05` §3 is satisfied on its own wording — *"levels **or stages** of increasing
+**One game, one continuous run.** The three eras are **chapters inside a single progress** (banner
+interstitials at the era turns), so a marker or an Experience Day visitor experiences the whole
+educational arc, including the living-heritage present, in one sitting. `BRIEF-05` §3 is satisfied on its own wording — *"levels **or stages** of increasing
 difficulty"* — each chapter introduces new mechanics and new educational elements; the Chọn di sản
 screen's "Gốm · Quan họ — sắp ra mắt" tiles keep the *levels* dimension visible.
 
-Facts and statuses: `../../research/04-dong-ho-tranh-dan-gian.md`. Design rationale:
+Facts and statuses: `../../research/01-dong-ho-tranh-dan-gian.md`. Design rationale:
 `../../design/dongho-game-design.md`. **Reachability is machine-checked**: the card table below is
 mirrored in `../../tools/trace_run.py`, which beam-searches the full choice space — change a number
-here, change it there, re-run. This closes the reachability gap open since the Trần card-16 finding.
+here, change it there, re-run. No number in this file is trusted until the sim re-proves it.
 
 **Starting stats** — `nghe 60 · sinh_ke 50 · tieng 55 · nguoi 50`. Every stat fails at `≤ 0` and
 `≥ 100`. POV: one fictional composite household among the 17 dòng họ; real people appear in anchors
@@ -36,6 +35,8 @@ snapshot of the Sổ gia truyền — the "sub-progress" moment made visible.
 Legend — Role: `setup` · `pressure` · `carrier` (grants) · `relief` · `trap`. Effects
 `nghe / sinh_ke / tieng / nguoi`. His: ✅ documented · `S` simplified (year/framing approximated —
 declared in JSON) · `D` design/invented. ᵃ = year approximated within its documented span.
+ᵇ = **ordering year only** — the sources do not give one, so the year exists to place the card in
+sequence and **must never appear in a player-facing string**; the card speaks of the era instead.
 
 | # | Year | Card id | Anchor | Role | Choice A → | Choice B → | Mechanics |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -45,7 +46,7 @@ declared in JSON) · `D` design/invented. ᵃ = year approximated within its doc
 | 4 | 1944ᵃ | `phien-cho-vang` | The chợ dies mid-40s `S` | setup | vẫn dọn đủ phiên `0/−5/+10/0` | nghỉ chợ chạy hàng xén `0/+10/−10/0` | |
 | 5 | 1945 | `doi-at-dau` | Ất Dậu famine ✅ | pressure | chia gạo `0/−10/0/+5` | đóng cửa `0/+5/−10/−10` | echo (chose:share) |
 | 6 | 1946 | `toan-quoc-khang-chien` | War begins ✅ | setup | tản cư sớm `0/−10/0/0` | nán lại giữ xưởng `+5/+5/0/−10` | omen before |
-| **7** | **1947ᵃ** | **`lang-chay`** | Village burns, blocks scatter `S` | **carrier** | **ôm ván `0/−10/−10/0` → `giu_van`** | gánh hàng `−15/+10/0/0` | floor `nguoi ≥ 20` · advisor |
+| **7** | **1947ᵇ** | **`lang-chay`** | Village burns, blocks scatter `S` | **carrier** | **ôm ván `0/−10/−10/0` → `giu_van`** | gánh hàng `−15/+10/0/0` | floor `nguoi ≥ 20` · advisor |
 | 8 | 1948 | `ben-kia-song-duong` | Hoàng Cầm's poem ✅ | relief | chép thơ `0/0/+10/0` | thơ không đổi gạo `0/+5/0/−5` | |
 | **9** | **1949ᵃ** | **`tan-cu-day-nghe`** | The recipe passes in evacuation `S` | **carrier** | **mở lớp `+5/−5/0/+5` → `giu_bi_quyet`** | ai lo phận nấy `−10/+5/0/−5` | floor `nghe ≥ 25` · advisor · **mg_match** |
 | 10 | 1950 | `viec-tot-thanh-pho` | Wartime city work `S` | pressure | cho con ra phố `0/+20/0/−15` | ở cùng nhau `0/−5/0/0` | echo (chose:send) |
@@ -112,12 +113,17 @@ appears, so the spine is never skipped.
 
 `python3 tools/trace_run.py` (beam 6000, crisis accept/refuse branching) proves:
 
-- **Canonical line exists on Thường** taking *all seven flags*, all 3 ticks, refusing both traps,
-  showing both minigames, with exactly **one accepted crisis** (`vay_phuong` as the ch-I squeeze
+These are the tool's `SEARCH` results — the *cheapest* all-preparation line it can find. They are
+not the same run as the **demo line** in `../design/user-journey.md`, which is the tool's `REPLAY`
+of a fixed choice string with both offered crises accepted; both are winning lines, and both are
+reproduced by `trace_run.py`.
+
+- **Search line on Thường** takes *all seven flags*, all 3 ticks, refuses both traps, shows both
+  minigames, and accepts exactly **one crisis** (`sinh-ke-low` — "Vay phường" — as the ch-I squeeze
   bites): `1A 2A 3B 4B 5A 6B 7A 8A 9A 10B 11B 12A(+cx) 13A 14B 15A 16A 17A 18A 19A 20A 21B 22B 23A
   24A 25A 26B 27A 28B 29A 30A 31A 32A 33B 34B 35A 36B` → end `nghe 70 · sinh_ke 65 · tieng 65 ·
   nguoi 70`.
-- **Canonical line exists on Khó** (no crises at all), same completeness → end `60/55/60/60`.
+- **Search line on Khó** (no crises at all), same completeness → end `60/55/60/60`.
 - Thousands of distinct winning end-states exist on both difficulties (hundreds crisis-free on
   Thường), and lines that lose `giu_van` at card 11 can still win through `phuc_hoi_van` — the
   requireAny recovery works as designed.
@@ -125,7 +131,7 @@ appears, so the spine is never skipped.
 **The chapter-I squeeze is intact**: on historical lines `sinh_ke` bottoms at 5–20 through cards
 9–12 (the intended crisis window). The *optimized* end-states are comfortable — see balance note 1.
 
-### Balance register (v1 — the honest list)
+### Balance register — the honest list
 
 1. **Optimized play ends richer than the historical flavour line** (~65 sinh_ke). Accepted and
    reframed: *the historical path is squeezed; a knowing replayer can arrive comfortable.* The trial
@@ -138,8 +144,8 @@ appears, so the spine is never skipped.
 4. **Forced-death and blocked-floor corners** at deep-poverty entries to cards 23/26/33 exist on
    Khó by premise — and on Thường, a player who spent the `sinh_ke` rescue in the chapter-I squeeze
    approaches the card-23 floor (`sinh_ke ≥ 20`) without a net. Run-review copy must name them.
-5. **First-run discovery**: ledger opens at the first flag (card 7 of 36 — 29 cards of runway,
-   better than Trần's 15). Demo account still ships on Dễ per README notes.
+5. **First-run discovery**: the ledger opens at the first preparation (card 7 of 36 — 29 cards of
+   runway to act on what it reveals). The demo account still ships on Dễ.
 6. **Sim accounting**: refused crisis offers are silent in the printed line; the tool's "crises
    fired" counts accepts only.
 
@@ -153,19 +159,19 @@ appears, so the spine is never skipped.
 | `advisor` | before 7, 9, 23, 30, 31 | off on Khó |
 | `omen` | before 6, 21, 33 | the war; the offset flood; **the closing window** — all genuinely knowable |
 | `echo` | after 5, 10, 11, 22 | conditions `chose:share/send/sell/ma` |
-| `ambient` | ≤3 per run, ≥4 apart | pool 8 (unchanged) |
-| `crisis` | band entry, once per stat-side per run | the same 8; `oncePerLevel` now spans the whole run |
+| `ambient` | ≤3 per run, ≥4 apart | pool of 8 |
+| `crisis` | band entry, once per stat-side per run | 8 crises; `oncePerRun` spans the whole run |
 | `weave` | 4 per run | pool 17, chapter-tagged — below |
 
 ### Weave (pool 17, slots C1: 2 · C2: 1 · C3: 1)
 
-C1 (12): the existing pool (`khach-dat-tranh-cuoi`, `con-gai-xin-hoc`, `phuong-vay-van`,
-`mua-dam-hong-giay`, `thet-moi-dao-tu`, `thuong-lai-ep-gia`, `hang-xom-xin-mau`,
-`tre-nghich-xuong`, `nguoi-la-hoi-nghe`, `gio-to-nghe`) + `kheo-tay-kiem-song` and
-`ban-dat-hay-giu` **demoted from the old spine** (undated, no flags — legal weave).
-C2 (3): `doan-van-cong` (retagged), `tem-phieu-thang-kho`, `can-bo-hoi-mau-moi`.
+C1 (12): `khach-dat-tranh-cuoi`, `con-gai-xin-hoc`, `phuong-vay-van`, `mua-dam-hong-giay`,
+`thet-moi-dao-tu`, `thuong-lai-ep-gia`, `hang-xom-xin-mau`, `tre-nghich-xuong`,
+`nguoi-la-hoi-nghe`, `gio-to-nghe`, `kheo-tay-kiem-song`, `ban-dat-hay-giu` — all undated and
+flag-free, as the weave laws require.
+C2 (3): `doan-van-cong`, `tem-phieu-thang-kho`, `can-bo-hoi-mau-moi`.
 C3 (2): `phong-vien-ve-lang`, `khach-mua-do-gia`.
-Laws unchanged: `year: null`, never a required flag, `simplified`/`invented` only, effects ≤ ±8,
+The weave laws: `year: null`, never a required flag, `simplified`/`invented` only, effects ≤ ±8,
 solvency budget `sinh_ke ±12`, others ±15 (player-chosen worst case; forced weave loss ≤ 1 under
 protective play).
 
@@ -179,12 +185,16 @@ câu · outcome ≤ 2 câu · historicalNote ≤ 2 câu — the player did not c
 
 ## What the team still writes
 
-- **Spine prose**: 36 × 6 × 2 ≈ **432 strings** (each card cites `research/04`).
-- **Weave prose**: 6 new/adapted cards ≈ 72 strings (11 already drafted).
+- **Spine prose**: 36 cards × 6 blocks × 2 languages = **432 strings** (each card cites `research/01`).
+- **Weave prose**: 17 cards × 6 × 2 = **204 strings**. 11 exist at draft quality and must be
+  rewritten before they ship, so treat all 17 as work — 6 of them from nothing.
 - **System prose**: chapter banners/bridges, trial texts (drafted in JSON), crisis/ambient reuse
-  ≈ 60 strings.
-- **≈ 620–700 strings total — one-third less than the 3-màn plan**, one JSON, one trial, one map.
-- **Validator follow-ups**: minigame check; conditional-pair (card 33) support; the sim covers
-  reachability.
+  ≈ **60 strings**.
+- **432 + 204 + 60 = ≈ 700 strings.** The floor of **620** assumes the 11 weave drafts survive
+  light editing rather than a rewrite. One JSON, one trial, one map.
+- **Validator follow-ups**: a `minigame` content check (that every `contentRef` names a real
+  painting in the codex). The card-33 conditional pair is now modelled — `ho_so` declares
+  `alternateCarrierCardIds` and the linter checks the second door exists, comes later, and costs
+  more. Reachability is covered by the sim.
 - **Codex obligation**: the "đỏ" pigment entry carries both traditions (sỏi son/gỗ vang **and**
   hoa hiên).

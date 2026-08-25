@@ -1,5 +1,5 @@
 {
-  "_note": "SINGLE-RUN level (team decision 22 Aug 2026): one continuous game 1938-2025, three chapters as sub-progress (banner interstitials), 36 spine cards mapped in level-map.md and mirrored in ../../tools/trace_run.py (machine-checked reachability: canonical all-flag lines exist on Thuong and Kho). Weave prose is DRAFT quality — the team rewrites from ../../research/04-dong-ho-tranh-dan-gian.md. Spine cards (cards/*.json) are NOT yet written: EXPECTED validator errors = 7 missing carriers + 1 expiresBefore target. Schema naming debt (dynasty.json/dynastyId) unchanged.",
+  "_note": "The playable level: one continuous run 1938-2025, three chapters as sub-progress (banner interstitials), 36 spine cards mapped in level-map.md and mirrored in ../../tools/trace_run.py (machine-checked reachability: canonical all-flag lines exist on Thuong and Kho). Weave prose is DRAFT quality - the team rewrites it from ../../research/01-dong-ho-tranh-dan-gian.md. Spine cards (cards/*.json) are NOT yet written: EXPECTED validator errors = 8 missing carriers (7 preparation flags + ho_so's card-33 alternate).",
   "id": "dongho",
   "name": {
     "vi": "Tranh Đông Hồ — Giữ lấy một dòng tranh (1938–2025)",
@@ -215,6 +215,9 @@
         "en": "The dossier"
       },
       "carrierCardId": "ho-so-khoi-dong",
+      "alternateCarrierCardIds": [
+        "han-chot-31-3"
+      ],
       "expiresBefore": "trung-tam-nha-nuoc",
       "historicalBasis": {
         "vi": "Hồ sơ quốc gia khởi động từ 2017, nộp UNESCO trước hạn 31/3/2020 — và được ghi danh Danh sách cần bảo vệ khẩn cấp ngày 9/12/2025 tại New Delhi (Quyết định 20.COM 7.A.1). Cửa sổ có thật, hạn chót có thật.",
@@ -227,7 +230,7 @@
         "vi": "Đoàn khảo sát về làng, hỏi ai còn giữ nghề. Không ai quanh vùng nhắc tên nhà mình. Hồ sơ cần một cái nghề mà người ta còn nhìn thấy.",
         "en": "The survey team asks who still keeps the craft. Nobody in the district names this house. A dossier needs a craft the world can still see."
       },
-      "_lastChanceNote": "Card 33 (han-chot-31-3) is a conditional pair in one spine slot: for non-holders it offers ho_so once more at roughly double cost; after it, the GRANT WINDOW closes (expiresBefore semantics — a held ho_so is never removed). The card-33 grant is documented in level-map.md; carrierCardId points at the 2017 card."
+      "_lastChanceNote": "Card 33 (han-chot-31-3) is a conditional pair in one spine slot: for non-holders it offers ho_so once more at roughly double cost; after it, the GRANT WINDOW closes (expiresBefore semantics — a held ho_so is never removed). The card-33 grant is documented in level-map.md; carrierCardId points at the 2017 card and alternateCarrierCardIds at card 33."
     },
     {
       "id": "mo_cua",
@@ -288,7 +291,7 @@
     "hintPolicy": "when-not-what",
     "showsFloors": true,
     "_precedenceNote": "game.json ledgerDisclosure per difficulty WINS over revealOn — revealOn states the Thường default (= after-first-flag); Dễ opens from the start, Khó not until the trial.",
-    "_floorDisclosureNote": "Same policy as the Trần ledger: a revealed slot shows its statFloor ('Người ≥ 20') but never names the card or the choice. On Khó the ledger stays shut until the trial; the advisors are the only warning, and Khó suppresses them — that is the setting's premise.",
+    "_floorDisclosureNote": "A revealed slot shows its statFloor ('Người ≥ 20') but never names the card or the choice. That stays inside when-not-what: a floor is a fact about the household's capacity, not a hint about which way to swipe. On Khó the ledger stays shut until the trial; the advisors are the only warning, and Khó suppresses them — that is the setting's premise.",
     "hintText": {
       "vi": "Cơ hội còn ở phía trước. Nghề sẽ chỉ lúc, không chỉ đường.",
       "en": "The chance is still ahead. The craft tells you when, not what to choose."
@@ -303,7 +306,7 @@
         "when": "lte",
         "value": 20
       },
-      "oncePerLevel": true,
+      "oncePerRun": true,
       "name": {
         "vi": "Vay phường",
         "en": "The guild lends"
@@ -339,7 +342,7 @@
         "when": "gte",
         "value": 80
       },
-      "oncePerLevel": true,
+      "oncePerRun": true,
       "name": {
         "vi": "Của nả đổi nghiệp",
         "en": "Money asks for the workshop"
@@ -375,7 +378,7 @@
         "when": "lte",
         "value": 20
       },
-      "oncePerLevel": true,
+      "oncePerRun": true,
       "name": {
         "vi": "Tìm thầy cũ",
         "en": "Seek the old master"
@@ -411,7 +414,7 @@
         "when": "gte",
         "value": 80
       },
-      "oncePerLevel": true,
+      "oncePerRun": true,
       "name": {
         "vi": "Cầu toàn",
         "en": "Perfection stops the presses"
@@ -447,7 +450,7 @@
         "when": "lte",
         "value": 20
       },
-      "oncePerLevel": true,
+      "oncePerRun": true,
       "name": {
         "vi": "Gánh tranh chợ xa",
         "en": "Far markets"
@@ -483,7 +486,7 @@
         "when": "gte",
         "value": 80
       },
-      "oncePerLevel": true,
+      "oncePerRun": true,
       "name": {
         "vi": "Đơn dồn quá tay",
         "en": "The flood of orders"
@@ -519,7 +522,7 @@
         "when": "lte",
         "value": 20
       },
-      "oncePerLevel": true,
+      "oncePerRun": true,
       "name": {
         "vi": "Gọi họ hàng về",
         "en": "Call the kin home"
@@ -555,7 +558,7 @@
         "when": "gte",
         "value": 80
       },
-      "oncePerLevel": true,
+      "oncePerRun": true,
       "name": {
         "vi": "Đông miệng ăn",
         "en": "Too many at the tray"
@@ -587,10 +590,10 @@
   ],
   "ambientPolicy": {
     "minCardGap": 4,
-    "maxPerLevel": 3,
+    "maxPerRun": 3,
     "maxAbsEffect": 8,
     "totalGainMustStayUnder": 35,
-    "_capRationale": "The required carriers + ticks bill ~55 points across the run (sinh_ke-heavy); the most generous legal set of ambient beats must stay under 35 — well below the bill — or the preparations stop costing anything. PRECEDENCE: maxPerLevel is the hard ceiling; a difficulty ambientCap above it (De: 5) is clamped down to it."
+    "_capRationale": "The required carriers + ticks bill ~55 points across the run (sinh_ke-heavy); the most generous legal set of ambient beats must stay under 35 — well below the bill — or the preparations stop costing anything. PRECEDENCE: maxPerRun is the hard ceiling; any difficulty ambientCap above it is clamped down to it."
   },
   "ambient": [
     {
@@ -728,7 +731,7 @@
     }
   ],
   "weavePolicy": {
-    "slotsPerAct": {
+    "slotsPerChapter": {
       "C1": 2,
       "C2": 1,
       "C3": 1
@@ -742,12 +745,12 @@
       "tieng": 15,
       "nguoi": 15
     },
-    "_swingRationale": "THE SOLVENCY INVARIANT, unchanged. sinh_ke is the tightest budget at 12 because all three carriers bill it and the trial gates on it at 10 — a hostile draw must never be what pushes a prepared household under the gate. Weave changes how the run feels and what it costs, never whether it can be won."
+    "_swingRationale": "THE SOLVENCY INVARIANT. sinh_ke is the tightest budget at 12 because all three carriers bill it and the trial gates on it at 10 — a hostile draw must never be what pushes a prepared household under the gate. Weave changes how the run feels and what it costs, never whether it can be won."
   },
   "weave": [
     {
       "id": "khach-dat-tranh-cuoi",
-      "act": "C1",
+      "chapter": "C1",
       "year": null,
       "name": {
         "vi": "Đám cưới đặt tranh",
@@ -802,7 +805,7 @@
     },
     {
       "id": "con-gai-xin-hoc",
-      "act": "C1",
+      "chapter": "C1",
       "year": null,
       "name": {
         "vi": "Con gái xin học nghề",
@@ -859,7 +862,7 @@
     },
     {
       "id": "phuong-vay-van",
-      "act": "C1",
+      "chapter": "C1",
       "year": null,
       "name": {
         "vi": "Phường mượn ván",
@@ -909,7 +912,7 @@
     },
     {
       "id": "mua-dam-hong-giay",
-      "act": "C1",
+      "chapter": "C1",
       "year": null,
       "name": {
         "vi": "Mưa dầm",
@@ -958,7 +961,7 @@
     },
     {
       "id": "thet-moi-dao-tu",
-      "act": "C1",
+      "chapter": "C1",
       "year": null,
       "name": {
         "vi": "Thét mới làng Đạo Tú",
@@ -1014,7 +1017,7 @@
     },
     {
       "id": "thuong-lai-ep-gia",
-      "act": "C1",
+      "chapter": "C1",
       "year": null,
       "name": {
         "vi": "Thương lái ép giá",
@@ -1063,7 +1066,7 @@
     },
     {
       "id": "hang-xom-xin-mau",
-      "act": "C1",
+      "chapter": "C1",
       "year": null,
       "name": {
         "vi": "Hàng xóm xin bài màu",
@@ -1112,7 +1115,7 @@
     },
     {
       "id": "tre-nghich-xuong",
-      "act": "C1",
+      "chapter": "C1",
       "year": null,
       "name": {
         "vi": "Trẻ nghịch sân phơi",
@@ -1161,7 +1164,7 @@
     },
     {
       "id": "nguoi-la-hoi-nghe",
-      "act": "C1",
+      "chapter": "C1",
       "year": null,
       "name": {
         "vi": "Người lạ hỏi nghề",
@@ -1210,7 +1213,7 @@
     },
     {
       "id": "gio-to-nghe",
-      "act": "C1",
+      "chapter": "C1",
       "year": null,
       "name": {
         "vi": "Ngày giỗ tổ nghề",
@@ -1252,15 +1255,14 @@
       ],
       "historicalNote": {
         "vi": "Lệ cúng tổ nghề là nét chung của các làng nghề Việt — ngày ấy cả phường nhớ mình chung một nghiệp.",
-        "en": "Craft-ancestor rites are common to Vietnamese craft villages — a day the whole guild remembers it shares one calling.",
-        "_verifyNote": "Đông Hồ-specific tổ nghề figure and date UNVERIFIED (pass 1a searched and could not settle it; only the general hội làng 14–16/3 âm lịch surfaced). Keep the note generic until the team finds a source."
+        "en": "Craft-ancestor rites are common to Vietnamese craft villages — a day the whole guild remembers it shares one calling."
       },
       "historicity": "invented",
       "sources": []
     },
     {
       "id": "doan-van-cong",
-      "act": "C2",
+      "chapter": "C2",
       "year": null,
       "name": {
         "vi": "Đoàn văn công ghé làng",
@@ -1310,7 +1312,7 @@
     },
     {
       "id": "kheo-tay-kiem-song",
-      "act": "C1",
+      "chapter": "C1",
       "year": null,
       "name": {
         "vi": "Khéo tay kiếm sống",
@@ -1359,7 +1361,7 @@
     },
     {
       "id": "ban-dat-hay-giu",
-      "act": "C1",
+      "chapter": "C1",
       "year": null,
       "name": {
         "vi": "Bán đất hay giữ",
@@ -1409,7 +1411,7 @@
     },
     {
       "id": "tem-phieu-thang-kho",
-      "act": "C2",
+      "chapter": "C2",
       "year": null,
       "name": {
         "vi": "Tháng kho tem phiếu",
@@ -1458,7 +1460,7 @@
     },
     {
       "id": "can-bo-hoi-mau-moi",
-      "act": "C2",
+      "chapter": "C2",
       "year": null,
       "name": {
         "vi": "Cán bộ hỏi mẫu mới",
@@ -1508,7 +1510,7 @@
     },
     {
       "id": "phong-vien-ve-lang",
-      "act": "C3",
+      "chapter": "C3",
       "year": null,
       "name": {
         "vi": "Phóng viên về làng",
@@ -1557,7 +1559,7 @@
     },
     {
       "id": "khach-mua-do-gia",
-      "act": "C3",
+      "chapter": "C3",
       "year": null,
       "name": {
         "vi": "Tờ tranh giả",
