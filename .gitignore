@@ -1,0 +1,220 @@
+# =============================================================================
+# Swift / SwiftUI / Xcode .gitignore
+# For iOS, iPadOS, macOS, watchOS, tvOS, and visionOS projects
+# =============================================================================
+GoogleService-Info.plist
+**/GoogleService-Info.plist
+
+# -----------------------------------------------------------------------------
+# macOS
+# -----------------------------------------------------------------------------
+
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+
+# -----------------------------------------------------------------------------
+# Xcode - user-specific settings and local state
+# -----------------------------------------------------------------------------
+
+xcuserdata/
+*.xcuserstate
+*.xcscmblueprint
+*.xccheckout
+
+
+# -----------------------------------------------------------------------------
+# Xcode - legacy per-user project settings
+# -----------------------------------------------------------------------------
+
+*.pbxuser
+!default.pbxuser
+
+*.mode1v3
+!default.mode1v3
+
+*.mode2v3
+!default.mode2v3
+
+*.perspectivev3
+!default.perspectivev3
+
+
+# -----------------------------------------------------------------------------
+# Xcode - build products, intermediates, archives, symbols
+# -----------------------------------------------------------------------------
+
+DerivedData/
+build/
+Build/
+
+*.hmap
+*.ipa
+*.dSYM
+*.dSYM.zip
+*.bcsymbolmap
+
+
+# -----------------------------------------------------------------------------
+# Xcode - test results, coverage, logs
+# -----------------------------------------------------------------------------
+
+*.xcresult
+TestResults/
+coverage/
+*.profdata
+*.profraw
+
+
+# -----------------------------------------------------------------------------
+# Playgrounds
+# -----------------------------------------------------------------------------
+
+timeline.xctimeline
+playground.xcworkspace
+
+
+# -----------------------------------------------------------------------------
+# Swift Package Manager
+# -----------------------------------------------------------------------------
+
+.build/
+
+# Xcode creates this when opening Swift packages.
+# Do not ignore the whole .swiftpm directory if your project uses shared
+# SwiftPM registry configuration.
+.swiftpm/xcode/
+
+# User/local SwiftPM security and registry state.
+# Keep project-level registry config only if your team intentionally shares it.
+.swiftpm/security/
+# .swiftpm/configuration/registries.json
+
+
+# IMPORTANT:
+# For app projects, commit Package.resolved for reproducible dependency versions,
+# especially for CI and Xcode Cloud.
+#
+# For reusable public libraries, teams sometimes choose not to commit it.
+# Uncomment only if that is your deliberate policy:
+#
+# Package.resolved
+# Packages/
+
+
+# -----------------------------------------------------------------------------
+# CocoaPods
+# -----------------------------------------------------------------------------
+
+# Keep Podfile and Podfile.lock under version control.
+#
+# CocoaPods officially says whether to commit Pods/ is a team/workflow choice,
+# though it recommends keeping Pods/ under source control.
+#
+# Common app-team choice:
+# Pods/
+#
+# Only ignore workspaces if your project does NOT rely on a generated workspace.
+# CocoaPods projects usually should commit the .xcworkspace.
+#
+# *.xcworkspace
+
+
+# -----------------------------------------------------------------------------
+# Carthage
+# -----------------------------------------------------------------------------
+
+Carthage/Build/
+
+# Uncomment if you do not vendor Carthage checkouts.
+# Carthage/Checkouts/
+
+
+# -----------------------------------------------------------------------------
+# fastlane
+# -----------------------------------------------------------------------------
+
+# Keep fastlane configuration files such as Fastfile, Appfile, Matchfile, and
+# Deliverfile in source control. Ignore generated reports, screenshots, and output.
+
+**/fastlane/report.xml
+**/fastlane/Preview.html
+**/fastlane/screenshots/
+**/fastlane/test_output/
+
+
+# -----------------------------------------------------------------------------
+# Ruby / Bundler
+# Used by CocoaPods and fastlane
+# -----------------------------------------------------------------------------
+
+.bundle/
+vendor/bundle/
+
+# Keep Gemfile and Gemfile.lock tracked for reproducible Ruby tooling.
+
+
+# -----------------------------------------------------------------------------
+# SwiftLint / SwiftFormat / tooling caches
+# -----------------------------------------------------------------------------
+
+.swiftlint_cache/
+.swiftformat.cache
+
+
+# -----------------------------------------------------------------------------
+# Generated documentation
+# -----------------------------------------------------------------------------
+
+.docc-build/
+
+
+# -----------------------------------------------------------------------------
+# Local configuration and secrets
+# -----------------------------------------------------------------------------
+
+.env
+.env.*
+!.env.example
+
+*.local
+*.local.*
+*.xcconfig.local
+*.local.xcconfig
+
+# Code signing secrets and provisioning artifacts.
+# Prefer secure storage such as CI secrets or a signing system, not Git.
+
+*.mobileprovision
+*.provisionprofile
+*.cer
+*.p12
+*.key
+*.pem
+*.certSigningRequest
+
+
+# -----------------------------------------------------------------------------
+# Misc editor state
+# -----------------------------------------------------------------------------
+
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Firebase
+**/GoogleService-Info.plist
+
+.claude/
+CLAUDE.md
+GEMINI.md
+AGENTS.md
+.agents/
+OVERVIEW.md
+docs/
