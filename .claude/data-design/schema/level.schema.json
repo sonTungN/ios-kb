@@ -1,0 +1,381 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "level.schema.json",
+  "title": "Level",
+  "description": "One playable level: its stats, its preparation flags and counters, and the historical victory condition.",
+  "type": "object",
+  "patternProperties": {
+    "^_": {}
+  },
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "name",
+    "period",
+    "stats",
+    "flags",
+    "finalTrial",
+    "lesson"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "name": {
+      "$ref": "#/$defs/i18n"
+    },
+    "period": {
+      "type": "object",
+      "patternProperties": {
+        "^_": {}
+      },
+      "additionalProperties": false,
+      "required": [
+        "from",
+        "to"
+      ],
+      "properties": {
+        "from": {
+          "type": "integer"
+        },
+        "to": {
+          "type": "integer"
+        }
+      }
+    },
+    "playPattern": {
+      "$ref": "#/$defs/i18n",
+      "description": "One line: how this level FEELS to play — the kind of thinking it demands."
+    },
+    "stats": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 5,
+      "items": {
+        "$ref": "#/$defs/stat"
+      }
+    },
+    "flags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/flag"
+      }
+    },
+    "counters": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/counter"
+      }
+    },
+    "finalTrial": {
+      "$ref": "#/$defs/finalTrial"
+    },
+    "lesson": {
+      "$ref": "#/$defs/i18n",
+      "description": "The single thing the player should understand after finishing. Feeds Report section 1 (Cultural Element -> Gameplay Mechanic -> Player Learning) directly."
+    },
+    "ledger": {
+      "type": "object",
+      "description": "Preparation-ledger disclosure config: revealOn, slots (must equal finalTrial.requireAll — linter-enforced), showsOptional, hintPolicy 'when-not-what', showsFloors, hintText."
+    },
+    "crises": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "description": "Stat-band rescue cards: id, stat, trigger{when: lte|gte, value}, oncePerRun, name, rescue{label, effects}, refuse, historicalBasis, historicity, sources. Every rescue priced from another stat; one per stat per side. Rescue effects carry effectReasons chips like any choice."
+    },
+    "ambientPolicy": {
+      "type": "object",
+      "description": "minCardGap, maxPerRun (the HARD ceiling — a difficulty ambientCap above it is clamped), maxAbsEffect, totalGainMustStayUnder (below the combined carrier bill)."
+    },
+    "ambient": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "description": "Small net-positive beats: id, name, text, effects, historicity, sources. Never grant flags. An ambient beat may declare `chapter` (C1/C2/C3) restricting where it can be scheduled; a beat that moves nguoi MUST be restricted to C1 — after chapter I the draw never moves NGƯỜI."
+    },
+    "weavePolicy": {
+      "type": "object",
+      "description": "slotsPerChapter, maxAbsEffect, noRepeatWithinRun, maxWorstCaseSwing per stat — the solvency invariant the linter proves."
+    },
+    "weave": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "description": "Undated drawn decisions: id, chapter, year (MUST be null), name, prompt, choices (each choice's nonzero effects carry effectReasons chips), historicalNote, historicity (simplified/invented only), optional conditions ({allOf/anyOf/noneOf} over flag ids or chose:<tag> tokens — Reigns-style eligibility: a card that no longer fits the run's state is filtered from the bag, never dealt). Never carry a required flag."
+    },
+    "interstitials": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "description": "advisor{before, speaker} (required before every floored required carrier), omen{before, lookahead}, echo{after, delay, condition}. A fourth type, chapter{before, title, bridge}, is the era-turn banner before cards 13 and 23."
+    }
+  },
+  "$defs": {
+    "i18n": {
+      "type": "object",
+      "patternProperties": {
+        "^_": {}
+      },
+      "additionalProperties": false,
+      "required": [
+        "vi",
+        "en"
+      ],
+      "properties": {
+        "vi": {
+          "type": "string",
+          "minLength": 1
+        },
+        "en": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "stat": {
+      "type": "object",
+      "patternProperties": {
+        "^_": {}
+      },
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "start",
+        "failLow",
+        "failHigh"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "$ref": "#/$defs/i18n"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "start": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "failLow": {
+          "type": "integer",
+          "default": 0
+        },
+        "failHigh": {
+          "type": "integer",
+          "default": 100
+        },
+        "failLowText": {
+          "$ref": "#/$defs/i18n",
+          "description": "Documented failure mode when depleted."
+        },
+        "failHighText": {
+          "$ref": "#/$defs/i18n",
+          "description": "Documented failure mode when maxed. Required: an unbounded stat removes all tension."
+        }
+      }
+    },
+    "flag": {
+      "type": "object",
+      "patternProperties": {
+        "^_": {}
+      },
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "carrierCardId"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "$ref": "#/$defs/i18n"
+        },
+        "carrierCardId": {
+          "type": "string",
+          "description": "The card whose choice grants this flag. Must exist, and that choice must have a negative stat effect (the cost rule)."
+        },
+        "historicalBasis": {
+          "$ref": "#/$defs/i18n",
+          "description": "What real preparation this represents."
+        },
+        "minigame": {
+          "type": "object",
+          "patternProperties": {
+            "^_": {}
+          },
+          "additionalProperties": false,
+          "required": [
+            "type"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "match",
+                "assemble",
+                "sequence"
+              ],
+              "description": "Carrier minigame: match = painting-to-meaning pairs; assemble = 3x3 rotate puzzle; sequence = order the printing steps. A minigame is the flag's RITUAL, never a gate: the statFloor still gates the attempt, the cost is still paid, and the minigame is retryable until completed at EVERY difficulty (difficulty may strip hints, never completion). Content comes from the codex (contentRef), never invented."
+            },
+            "contentRef": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Codex entry ids the minigame draws its educational content from."
+            }
+          }
+        },
+        "statFloor": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "description": "Minimum a stat must hold ENTERING the carrier, or the cost is paid and the flag is not granted. A floor states the means to act, never a threshold to farm — the linter warns above half-range or above the start value."
+        },
+        "blockedText": {
+          "$ref": "#/$defs/i18n",
+          "description": "Shown when the floor is unmet: the cost was paid, the preparation did not land. Mandatory whenever statFloor is set."
+        },
+        "expiresBefore": {
+          "type": "string",
+          "description": "Card id after which the carrier choice stops granting this flag (the closing window). The carrier must precede it; the linter checks both."
+        },
+        "optional": {
+          "type": "boolean",
+          "description": "True for flags that never gate victory — shown as a bonus ledger slot."
+        },
+        "irrevocable": {
+          "type": "boolean",
+          "description": "True when granting the flag also closes off choices later in the run."
+        },
+        "alternateCarrierCardIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Later spine cards that can also grant this flag — a last chance at a higher price. The linter checks these exist and cost more than the primary carrier. Use only where the record actually offered a second door; a flag with an easy second door is not a preparation."
+        }
+      }
+    },
+    "counter": {
+      "type": "object",
+      "patternProperties": {
+        "^_": {}
+      },
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "min",
+        "max"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "$ref": "#/$defs/i18n"
+        },
+        "min": {
+          "type": "integer"
+        },
+        "max": {
+          "type": "integer"
+        },
+        "start": {
+          "type": "integer",
+          "default": 0
+        }
+      },
+      "description": "A tiered, accumulating quantity (e.g. transmission across generations) read by finalTrial.requireCounter."
+    },
+    "finalTrial": {
+      "type": "object",
+      "patternProperties": {
+        "^_": {}
+      },
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "requireAll",
+        "insufficientAlone",
+        "defeatByStatsText"
+      ],
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/i18n"
+        },
+        "year": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "requireAll": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "string"
+          },
+          "description": "Preparation flags that must all be held. A trial whose victory rests on a single flag is a single gate; pair it with requireAny or requireCounter so more than one kind of preparation is being judged."
+        },
+        "requireAny": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requireCounter": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer"
+          }
+        },
+        "statGate": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "description": "Survival floor only. Never sufficient for victory on its own."
+        },
+        "insufficientAlone": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          },
+          "description": "Stats explicitly documented as NOT winning this trial however high. The pedagogical core of the level."
+        },
+        "victoryText": {
+          "$ref": "#/$defs/i18n"
+        },
+        "defeatByStatsText": {
+          "$ref": "#/$defs/i18n",
+          "description": "Shown when the player arrives strong but unprepared. Must explain the documented reason. This is where the learning lands."
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "defeatByExhaustionText": {
+          "$ref": "#/$defs/i18n",
+          "description": "Shown when the player holds every preparation but a stat sits below its statGate floor. Mandatory whenever statGate is set: losing WITH the preparations in hand is a different ending from losing without them."
+        }
+      }
+    }
+  }
+}

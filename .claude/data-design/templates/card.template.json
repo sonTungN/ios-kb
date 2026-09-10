@@ -1,0 +1,85 @@
+{
+  "_comment": "Copy this file per card. Every TODO must be replaced by team-written text from a source. Delete keys you do not use; the validator runs this against card.schema.json and rejects unknown keys (keys beginning with '_' are authoring annotations and are always allowed).",
+  "id": "TODO-kebab-case-id",
+  "levelId": "TODO",
+  "order": 0,
+  "year": null,
+  "historicity": "documented",
+  "sources": [
+    {
+      "title": "TODO source title",
+      "url": "TODO",
+      "type": "primary",
+      "locator": "TODO page/chapter",
+      "accessed": "TODO-YYYY-MM-DD",
+      "verifiedBy": "TODO team member name"
+    }
+  ],
+  "tags": [],
+  "appearsIf": {
+    "noneOf": []
+  },
+  "speaker": {
+    "vi": "TODO",
+    "en": "TODO"
+  },
+  "prompt": {
+    "vi": "TODO",
+    "en": "TODO"
+  },
+  "choices": [
+    {
+      "label": {
+        "vi": "TODO swipe-left label",
+        "en": "TODO"
+      },
+      "effects": {
+        "nghe": 0,
+        "sinh_ke": 0,
+        "tieng": 0,
+        "nguoi": 0
+      },
+      "grants": [],
+      "counters": {},
+      "outcome": {
+        "vi": "TODO consequence of THIS choice",
+        "en": "TODO"
+      },
+      "effectReasons": {
+        "TODO-statId": {
+          "vi": "TODO ≤8 từ — vì sao stat này đổi",
+          "en": "TODO <=8 words — why this stat moved"
+        }
+      },
+      "tag": "TODO-optional-one-word-memory"
+    },
+    {
+      "label": {
+        "vi": "TODO swipe-right label",
+        "en": "TODO"
+      },
+      "effects": {
+        "nghe": 0,
+        "sinh_ke": 0,
+        "tieng": 0,
+        "nguoi": 0
+      },
+      "grants": [],
+      "counters": {},
+      "outcome": {
+        "vi": "TODO consequence of THIS choice",
+        "en": "TODO"
+      },
+      "effectReasons": {
+        "TODO-statId": {
+          "vi": "TODO ≤8 từ — vì sao stat này đổi",
+          "en": "TODO <=8 words — why this stat moved"
+        }
+      }
+    }
+  ],
+  "historicalNote": {
+    "vi": "TODO what actually happened - identical after either choice, never bent to match the player's decision",
+    "en": "TODO"
+  }
+}

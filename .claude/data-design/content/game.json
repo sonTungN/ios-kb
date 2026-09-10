@@ -1,0 +1,122 @@
+{
+  "_note": "Game-wide configuration: everything that is not specific to the run's content. The run itself lives in content/dongho/game_contents.json. Run ../tools/validate_data.py to check.",
+  "id": "living-heritage",
+  "_difficultyNote": "TWO AXES, DELIBERATELY DIFFERENT JOBS. Difficulty ACROSS CHAPTERS is PROGRESSION: it comes from the shape of the problem and the danger profile (floors -> the trap era -> ceilings), never from harsher numbers, and BRIEF-05 §3 requires it. Difficulty INSIDE the run is ACCOMMODATION: the player-facing Dễ/Thường/Khó control, and it changes ONLY HOW MUCH THE GAME TELLS YOU AND HOW MUCH SLACK IT LEAVES. It never touches a starting stat, a choice cost, a flag or the victory rule. Hard mode is not a bigger bill; it is playing without hindsight. That distinction is the whole point: if difficulty scaled the numbers, a Khó victory and a Dễ victory would mean different things, the leaderboard would be meaningless, and the level's argument (that the historical path is affordable but only just) would be a different argument at every setting.",
+  "difficultyPolicy": {
+    "mayChange": [
+      "crisisBands",
+      "ledgerDisclosure",
+      "advisors",
+      "ambientCap",
+      "minigameHints"
+    ],
+    "neverChanges": {
+      "omens": true,
+      "runReview": "full",
+      "minigameCompletion": "always retryable until complete",
+      "effectReasons": "shown on the outcome screen at every difficulty"
+    },
+    "_neverChangesRationale": {
+      "omens": "Omens announce what was coming, and the households genuinely knew: war reached the district, offset calendars were already in the shops, the survey team was announced. Suppressing them at a higher difficulty would not be difficulty, it would be a false claim about what was knowable at the time.",
+      "runReview": "The run review is where a defeat becomes a lesson, which is the entire educational payload. Gating it behind a difficulty would hand the teaching to exactly the players who needed it least.",
+      "effectReasons": "The why-chips under each stat delta are teaching, not help. Difficulty withholds foresight (bands, ledger, advisors, hints), never hindsight: hiding the cause of a change that already happened would not make the game harder, only more arbitrary.",
+      "minigameCompletion": "A minigame is the ritual of a carrier flag, never an extra gate. If dexterity could permanently fail a flag, difficulty would change outcomes, which mayNotChange forbids. Khó strips hints; it never strips completion."
+    },
+    "mayNotChange": [
+      "stats.start",
+      "choices.effects",
+      "crises.rescue.effects",
+      "flags",
+      "finalTrial",
+      "weave",
+      "weavePolicy",
+      "card order"
+    ],
+    "_invariantRationale": "Every dial in mayChange is information or slack. Every item in mayNotChange is either a historical claim or part of the level's argument. The linter checks that no difficulty entry declares a key outside mayChange: the list is the enforcement, not a comment.",
+    "_weaveNote": "Difficulty deliberately does NOT bias the weave draw. The solvency invariant in weavePolicy is proved against a uniform draw; letting Khó deal a hostile hand would either break that proof or require re-deriving it per difficulty. Hard mode withholds help. It does not stack the deck.",
+    "reselectableMidRun": true,
+    "leaderboardTag": "lowest-difficulty-used",
+    "_reselectNote": "Difficulty may be changed at any time and applies immediately to the rest of the playthrough (an alert confirms the switch). This is SAFE precisely because of mayNotChange: no dial touches a number, a cost, a flag or the deal, so switching cannot alter winnability. Two sub-rules: crisis bands are evaluated at each card's resolve against the CURRENT difficulty, and spent-rescue state persists across switches (no refunds); the leaderboard records the LOWEST difficulty used at any point in the playthrough. Otherwise two easy chapters plus a last-card switch would count as a Kho win and difficulty tags would stop meaning anything.",
+    "_ledgerScopeNote": "ledgerDisclosure is a SCOPE dial (the chapter structure made timing moot): full-anytime = one big ledger across all three chapters, open from the start; per-chapter = three smaller ledgers, each showing only its own chapter's preparations; none = no ledger at all (Cuc kho). Kho keeping a ledger is deliberate: flags split across chapters + persistent stats are the hard part; taking the ledger too is what Cuc kho is for."
+  },
+  "difficulties": [
+    {
+      "id": "de",
+      "name": {
+        "vi": "Dễ",
+        "en": "Easy"
+      },
+      "blurb": {
+        "vi": "Nghề chỉ đường. Sổ gia truyền mở từ đầu, người nhà báo động sớm.",
+        "en": "The craft points the way. The ledger is open from the start, and the family warns you early."
+      },
+      "crisisBands": {
+        "low": 30,
+        "high": 70
+      },
+      "ledgerDisclosure": "full-anytime",
+      "advisors": true,
+      "ambientCap": 3,
+      "minigameHints": "labels shown on every tile",
+      "scoreMultiplier": 1.0
+    },
+    {
+      "id": "thuong",
+      "name": {
+        "vi": "Thường",
+        "en": "Normal"
+      },
+      "blurb": {
+        "vi": "Nghề chỉ lúc, không chỉ đường. Mỗi chương một cuốn sổ: thấy chương mình, không thấy cả đời.",
+        "en": "The craft tells you when, not what. One ledger per chapter: you see your chapter, not the whole life."
+      },
+      "crisisBands": {
+        "low": 20,
+        "high": 80
+      },
+      "ledgerDisclosure": "per-chapter",
+      "advisors": true,
+      "ambientCap": 3,
+      "minigameHints": "labels shown once, then hidden",
+      "scoreMultiplier": 1.15
+    },
+    {
+      "id": "kho",
+      "name": {
+        "vi": "Khó",
+        "en": "Hard"
+      },
+      "blurb": {
+        "vi": "Không ai mách nước, không dải cảnh báo, không đường lui. Sổ chỉ mở theo từng chương.",
+        "en": "No advisors, no warning bands, no way back from the edge. The ledger opens one chapter at a time."
+      },
+      "crisisBands": null,
+      "ledgerDisclosure": "per-chapter",
+      "advisors": false,
+      "ambientCap": 1,
+      "minigameHints": "icons only, no labels, no reference image",
+      "scoreMultiplier": 1.35
+    },
+    {
+      "id": "cuc-kho",
+      "name": {
+        "vi": "Cực khó",
+        "en": "Extreme"
+      },
+      "blurb": {
+        "vi": "Như Khó, và không có sổ. Ba chương, một mạch chỉ số, tự nhớ lấy mình còn thiếu gì.",
+        "en": "Everything Hard withholds, and no ledger at all. Three chapters, one unbroken run, and only your memory of what is still missing."
+      },
+      "crisisBands": null,
+      "ledgerDisclosure": "none",
+      "advisors": false,
+      "ambientCap": 1,
+      "minigameHints": "icons only, no labels, no reference image",
+      "scoreMultiplier": 1.6
+    }
+  ],
+  "_difficultyDesignNotes": {
+    "kho": "crisisBands: null means a stat touching 0 or 100 ends the run on the spot, with no rescue. That is the correct shape for the top difficulty: the households of those years had no safety net either.",
+    "ledgerDisclosure": "The three settings are the three answers to 'how much hindsight does the player get'. from-start names the preparations; after-first-flag reveals the shape once the player has secured one, keeping the when-not-what hint policy; at-final-trial means the player finds out what was required at the moment it is judged, which is what the households themselves experienced."
+  }
+}

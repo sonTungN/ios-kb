@@ -1,0 +1,169 @@
+{
+  "chapters": [
+    {
+      "id": "C1",
+      "title": {
+        "vi": "Giữ lửa",
+        "en": "Keeping the Flame"
+      },
+      "period": {
+        "from": 1938,
+        "to": 1954
+      },
+      "pages": [
+        {
+          "id": 1,
+          "image": "Chapter1-1",
+          "title": {
+            "vi": "Mùa chợ trên giấy điệp",
+            "en": "A Market on Shimmering Paper"
+          },
+          "description": {
+            "vi": "Năm 1938, mỗi dịp Tết, sân đình Đông Hồ sáng lên với giấy điệp, màu tự nhiên và những bộ ván khắc truyền qua nhiều đời. Nghề sống bằng bàn tay cả làng.",
+            "en": "In 1938, every Tết, the đình courtyard of Đông Hồ lit up with shimmering paper, natural colours and woodblocks passed down for generations. The craft lived in the hands of the whole village."
+          },
+          "quote": null
+        },
+        {
+          "id": 2,
+          "image": "Chapter1-2",
+          "title": {
+            "vi": "Khi làng bước qua lửa",
+            "en": "When the Village Passed Through Fire"
+          },
+          "description": {
+            "vi": "Nạn đói 1944 và 1945, rồi chiến tranh từ 1946, cắt đứt chợ, bữa ăn và những chuyến đi. Còn lại gian bếp vắng, gánh đồ, và những bộ ván phải rời nhà.",
+            "en": "The famine of 1944 and 1945, then war from 1946, cut off the markets, the meals and the journeys. What remained were quiet kitchens, bundles of belongings, and woodblocks that had to leave home."
+          },
+          "quote": null
+        },
+        {
+          "id": 3,
+          "image": "Chapter1-3",
+          "title": {
+            "vi": "Mang gì theo?",
+            "en": "What Will You Carry?"
+          },
+          "description": {
+            "vi": "Bạn bắt đầu giữa một thời biến động. Giữ ván, giữ bí quyết, giữ người học nghề là ba cách khác nhau để một làng không mất tên.",
+            "en": "You begin in a time of upheaval. Keeping the blocks, the recipe and the apprentices are three different ways to keep a village from losing its name."
+          },
+          "quote": {
+            "vi": "Khi làng quê đổi thay, phải mang theo điều gì để nghề không mất?",
+            "en": "When village life changes, what must be carried on so the craft does not disappear?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "C2",
+      "title": {
+        "vi": "Giữ nếp",
+        "en": "Keeping the Tradition"
+      },
+      "period": {
+        "from": 1967,
+        "to": 1990
+      },
+      "pages": [
+        {
+          "id": 1,
+          "image": "Chapter2-1",
+          "title": {
+            "vi": "Những bàn tay gặp lại",
+            "en": "Hands Reunited"
+          },
+          "description": {
+            "vi": "Năm 1967, khoảng năm mươi người làng vào hợp tác xã để khôi phục nghề tranh Đông Hồ. Họ gom lại ván cũ và chung sức giữ cho nghề không tắt.",
+            "en": "In 1967, around fifty villagers joined a cooperative to revive Đông Hồ printing. They gathered the old blocks and worked together to keep the craft alive."
+          },
+          "quote": null
+        },
+        {
+          "id": 2,
+          "image": "Chapter2-2",
+          "title": {
+            "vi": "Giữ nếp giữa thiếu thốn",
+            "en": "Keeping the Way Through Hard Years"
+          },
+          "description": {
+            "vi": "Hợp tác xã đem đến cách làm chung, nhưng cũng kéo theo tem phiếu, mẫu cải tiến, đơn xuất khẩu và sức ép làm nhanh. Mỗi lựa chọn đặt chất lượng và miếng ăn lên cùng một bàn in.",
+            "en": "The cooperative brought a shared way of working, and with it ration coupons, revised designs, export orders and pressure to work faster. Every choice put quality and livelihood on the same printing table."
+          },
+          "quote": null
+        },
+        {
+          "id": 3,
+          "image": "Chapter2-3",
+          "title": {
+            "vi": "Khi cánh cổng khép lại",
+            "en": "When the Gates Closed"
+          },
+          "description": {
+            "vi": "Đến năm 1990, tranh khó bán và hợp tác xã giải thể. Bạn phải giữ lấy phần cốt lõi của nghề, và giúp người thợ cùng gia đình đứng vững.",
+            "en": "By 1990 the prints were hard to sell and the cooperative closed. You must keep the heart of the craft, and help the artisans and their families stay on their feet."
+          },
+          "quote": {
+            "vi": "Giữ nghề nguyên vẹn, hay đổi để nghề còn sống?",
+            "en": "Keep the craft unchanged, or change so it can survive?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "C3",
+      "title": {
+        "vi": "Hồi sinh",
+        "en": "Revival"
+      },
+      "period": {
+        "from": 1992,
+        "to": 2025
+      },
+      "pages": [
+        {
+          "id": 1,
+          "image": "Chapter3-1",
+          "title": {
+            "vi": "Từ một tấm ván lưu lạc",
+            "en": "One Woodblock Far from Home"
+          },
+          "description": {
+            "vi": "Năm 1992, hợp tác xã không còn. Nhiều nhà trong làng đã chuyển sang hàng mã. Còn lại là từng nhà, từng tấm ván, và câu hỏi ai sẽ mở lại xưởng.",
+            "en": "In 1992 the cooperative was gone. Many families had turned to votive paper. What remained were single houses, scattered blocks, and the question of who would open a workshop again."
+          },
+          "quote": null
+        },
+        {
+          "id": 2,
+          "image": "Chapter3-2",
+          "title": {
+            "vi": "Mở cửa cho người mới",
+            "en": "Opening the Doors"
+          },
+          "description": {
+            "vi": "Khách nước ngoài, hàng du lịch, triển lãm, lớp trải nghiệm, đoàn học sinh và mạng xã hội đưa nghề ra khỏi sân đình. Cơ hội mới đi cùng việc ghi chép, giữ chuẩn và truyền tay.",
+            "en": "Foreign visitors, souvenirs, exhibitions, hands on classes, school groups and social media carried the craft beyond the đình courtyard. New chances came with new duties: to record, to keep the standard, and to pass it on."
+          },
+          "quote": null
+        },
+        {
+          "id": 3,
+          "image": "Chapter3-3",
+          "title": {
+            "vi": "Một nghề còn sống",
+            "en": "A Living Craft"
+          },
+          "description": {
+            "vi": "Năm 2025, UNESCO ghi danh nghề làm tranh Đông Hồ vào Danh sách di sản văn hóa phi vật thể cần bảo vệ khẩn cấp. Bạn phải gắn việc giữ nghề với truyền dạy và sinh kế, để xưởng còn người học, người làm và người nối tiếp.",
+            "en": "In 2025 UNESCO inscribed Đông Hồ woodblock printing on the List of Intangible Cultural Heritage in Need of Urgent Safeguarding. You must tie keeping the craft to teaching it and living from it, so the workshop still has learners, makers and someone to carry it on."
+          },
+          "quote": {
+            "vi": "Một di sản chỉ thật sự sống khi vẫn còn người học cách làm ra nó.",
+            "en": "Heritage is only truly alive while someone is still learning how to make it."
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -211,10 +211,3 @@ vendor/bundle/
 # Firebase
 **/GoogleService-Info.plist
 
-.claude/
-CLAUDE.md
-GEMINI.md
-AGENTS.md
-.agents/
-OVERVIEW.md
-docs/

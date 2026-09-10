@@ -1,0 +1,263 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "card.schema.json",
+  "title": "Event Card",
+  "description": "One decision card. Documented facts are fixed; only consequences branch on player choice.",
+  "type": "object",
+  "patternProperties": {
+    "^_": {}
+  },
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "levelId",
+    "order",
+    "historicity",
+    "sources",
+    "title",
+    "prompt",
+    "choices",
+    "historicalNote"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "Stable kebab-case key. Never reused, never renumbered."
+    },
+    "order": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Chronological slot within the level. Must be consistent with `year`."
+    },
+    "year": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Gregorian year of the underlying real event. null ONLY when historicity = invented."
+    },
+    "showYear": {
+      "type": "boolean",
+      "default": true,
+      "description": "False when the year is an ordering year only (marked b in the level map) and must never be printed in a player facing string; the card then shows its title alone. Card 7: the burning of the village has no sourced year."
+    },
+    "title": {
+      "$ref": "#/$defs/i18n",
+      "description": "The event's short name (2 to 5 words), shown beside the year on the card and on its outcome. Names the moment plainly; the year carries the history."
+    },
+    "historicity": {
+      "enum": [
+        "documented",
+        "simplified",
+        "invented"
+      ],
+      "description": "Maps 1:1 onto the three buckets Report section 2 must declare: authentic / simplified for gameplay / creative reinterpretation."
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "description": "At least one source per card. Cards with historicity=invented still need the source for the surrounding context they sit in.",
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Free labels for the How-To-Play search/filter requirement, e.g. craft, custom, market, transmission."
+    },
+    "appearsIf": {
+      "$ref": "#/$defs/condition",
+      "description": "Gate. Omit for cards always eligible."
+    },
+    "oneShot": {
+      "type": "boolean",
+      "default": true,
+      "description": "false only for generic pressure cards that may repeat."
+    },
+    "speaker": {
+      "$ref": "#/$defs/i18n"
+    },
+    "prompt": {
+      "$ref": "#/$defs/i18n"
+    },
+    "choices": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "$ref": "#/$defs/choice"
+      }
+    },
+    "historicalNote": {
+      "$ref": "#/$defs/i18n",
+      "description": "What actually happened. Shown after EITHER choice, unchanged. This is the accuracy guarantee: the player's counterfactual never overwrites the record."
+    },
+    "levelId": {
+      "type": "string"
+    }
+  },
+  "$defs": {
+    "i18n": {
+      "type": "object",
+      "patternProperties": {
+        "^_": {}
+      },
+      "additionalProperties": false,
+      "required": [
+        "vi",
+        "en"
+      ],
+      "properties": {
+        "vi": {
+          "type": "string",
+          "minLength": 1
+        },
+        "en": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "patternProperties": {
+        "^_": {}
+      },
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "type"
+      ],
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "primary",
+            "secondary",
+            "textbook",
+            "encyclopedia"
+          ],
+          "description": "encyclopedia (e.g. Wikipedia) is a starting point for finding sources, not an acceptable sole citation for the report."
+        },
+        "locator": {
+          "type": "string",
+          "description": "Page, chapter, or section."
+        },
+        "accessed": {
+          "type": "string",
+          "format": "date"
+        },
+        "verifiedBy": {
+          "type": "string",
+          "description": "Team member who checked this against the source."
+        }
+      }
+    },
+    "effects": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "description": "Stat deltas, keyed by statId declared in the level file."
+    },
+    "choice": {
+      "type": "object",
+      "patternProperties": {
+        "^_": {}
+      },
+      "additionalProperties": false,
+      "required": [
+        "label",
+        "effects",
+        "outcome"
+      ],
+      "properties": {
+        "label": {
+          "$ref": "#/$defs/i18n"
+        },
+        "effects": {
+          "$ref": "#/$defs/effects"
+        },
+        "grants": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Preparation flags set by this choice."
+        },
+        "revokes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Preparation flags removed by this choice. Legal only on a trap card — flags are otherwise sticky."
+        },
+        "counters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "description": "Deltas applied to tiered counters."
+        },
+        "outcome": {
+          "$ref": "#/$defs/i18n",
+          "description": "In-game consequence of THIS choice. May be counterfactual."
+        },
+        "effectReasons": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/i18n"
+          },
+          "description": "WHY each stat moved, one bilingual chip per nonzero effect key (<= 8 words / ~60 chars per language). Required for every nonzero effect — the linter errors on a missing or orphaned reason. Shown on the outcome screen under each stat delta and in the run review; never on the mid-drag preview."
+        },
+        "tag": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$",
+          "description": "One-word choice memory. Choosing this choice records chose:<tag> in the run; echoes and weave `conditions` reference it (e.g. card 11's sell choice declares tag 'sell' so noneOf:[chose:sell] can filter). The linter checks every referenced chose: token is declared by exactly one spine choice once cards exist."
+        }
+      }
+    },
+    "condition": {
+      "type": "object",
+      "patternProperties": {
+        "^_": {}
+      },
+      "additionalProperties": false,
+      "properties": {
+        "allOf": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "anyOf": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "noneOf": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "minOrder": {
+          "type": "integer"
+        },
+        "maxOrder": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}

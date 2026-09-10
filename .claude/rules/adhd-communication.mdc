@@ -1,0 +1,18 @@
+---
+description: Format all responses for a reader with ADHD. Use Vietnamese prose, lead with next action, chunked and scannable, no pleasantries, no dash punctuation.
+globs:
+  - "**/*"
+alwaysApply: true
+---
+
+# Communication style: ADHD friendly (Vietnamese)
+
+The reader has ADHD. Follow the `@i-have-adhd` skill rules in `.claude/skills/i-have-adhd/SKILL.md` for every response.
+
+## Core requirements
+
+1. **Answer in Vietnamese.** Code identifiers, file paths, and technical terms remain in English.
+2. **Lead with the action or verdict.** No introductory filler, no pleasantries, no recap.
+3. **Chunked and scannable.** Short numbered items, bold leads, tables for comparisons, one idea per line.
+4. **Concrete next action.** Always conclude with one specific step doable in under 2 minutes.
+5. **No dash punctuation.** Follow `.claude/rules/text-style.mdc` (no em-dash, en-dash, or spaced hyphen).

@@ -1,0 +1,104 @@
+{
+  "_comment": "Scaffold for a run's level file. A2 ships exactly one (content/dongho/level.json); this template exists for a future art after A2. Read ../design/win-condition-model.md before filling it in. The stat ids and names below are the shipped Dong Ho set — a different subject would declare its own.",
+
+  "id": "TODO",
+  "name": { "vi": "TODO", "en": "TODO" },
+  "period": { "from": 0, "to": 0 },
+  "playPattern": {
+    "vi": "TODO one line - what kind of thinking this level demands",
+    "en": "TODO"
+  },
+
+  "stats": [
+    {
+      "id": "nghe",
+      "name": { "vi": "Nghề", "en": "Craft" },
+      "icon": "brush",
+      "start": 60,
+      "failLow": 0,
+      "failHigh": 100,
+      "failLowText": { "vi": "TODO - the craft is forgotten", "en": "TODO" },
+      "failHighText": { "vi": "TODO - purism freezes it out of daily life", "en": "TODO" }
+    },
+    {
+      "id": "sinh_ke",
+      "name": { "vi": "Sinh kế", "en": "Livelihood" },
+      "icon": "rice_bowl",
+      "start": 50,
+      "failLow": 0,
+      "failHigh": 100,
+      "failLowText": { "vi": "TODO - the household quits for wage work", "en": "TODO" },
+      "failHighText": { "vi": "TODO - the side trade eats the workshop", "en": "TODO" }
+    },
+    {
+      "id": "tieng",
+      "name": { "vi": "Tiếng", "en": "Standing" },
+      "icon": "campaign",
+      "start": 55,
+      "failLow": 0,
+      "failHigh": 100,
+      "failLowText": { "vi": "TODO - nobody remembers this house", "en": "TODO" },
+      "failHighText": { "vi": "TODO - fame outruns the hand; fakes appear", "en": "TODO" }
+    },
+    {
+      "id": "nguoi",
+      "name": { "vi": "Người", "en": "People" },
+      "icon": "diversity_3",
+      "start": 50,
+      "failLow": 0,
+      "failHigh": 100,
+      "failLowText": { "vi": "TODO - no one left to receive it", "en": "TODO" },
+      "failHighText": { "vi": "TODO - many hands, thin standards", "en": "TODO" }
+    }
+  ],
+
+  "flags": [
+    {
+      "id": "TODO_flag_id",
+      "name": { "vi": "TODO", "en": "TODO" },
+      "carrierCardId": "TODO-card-id",
+      "historicalBasis": { "vi": "TODO - the documented act this represents", "en": "TODO" },
+      "statFloor": { "TODO_stat": 20 },
+      "blockedText": { "vi": "TODO - why the household could not do it, in the period's language", "en": "TODO" }
+    }
+  ],
+
+  "counters": [],
+
+  "ledger": {
+    "revealOn": "first-flag-secured",
+    "slots": ["TODO_flag_id"],
+    "showsOptional": [],
+    "hintPolicy": "when-not-what",
+    "showsFloors": true,
+    "hintText": { "vi": "TODO", "en": "TODO" }
+  },
+
+  "crises": [],
+  "ambientPolicy": { "minCardGap": 4, "maxPerRun": 3, "maxAbsEffect": 8, "totalGainMustStayUnder": 35 },
+  "ambient": [],
+  "weavePolicy": {
+    "slotsPerChapter": { "C1": 2, "C2": 1, "C3": 1 },
+    "maxAbsEffect": 8,
+    "noRepeatWithinRun": true,
+    "maxWorstCaseSwing": { "nghe": 15, "sinh_ke": 12, "tieng": 15, "nguoi": 15 }
+  },
+  "weave": [],
+  "interstitials": [],
+
+  "finalTrial": {
+    "name": { "vi": "TODO", "en": "TODO" },
+    "year": 0,
+    "requireAll": ["TODO_flag_id", "TODO_flag_id_2"],
+    "requireAny": [],
+    "requireCounter": {},
+    "statGate": { "nghe": 15, "sinh_ke": 10, "tieng": 10, "nguoi": 15 },
+    "insufficientAlone": ["sinh_ke"],
+    "victoryText": { "vi": "TODO", "en": "TODO" },
+    "defeatByStatsText": { "vi": "TODO - why arriving strong and unprepared loses, in documented terms", "en": "TODO" },
+    "defeatByExhaustionText": { "vi": "TODO - prepared everything, nothing left to execute it with", "en": "TODO" },
+    "sources": []
+  },
+
+  "lesson": { "vi": "TODO", "en": "TODO" }
+}

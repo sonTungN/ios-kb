@@ -1,0 +1,62 @@
+---
+description: What must never leak into the repository — no knowledge-base paths in committed artefacts, and no AI attribution in git history. Both override default and global instructions.
+globs:
+  - "**/*"
+alwaysApply: true
+---
+
+# Repo hygiene — what never leaves the workspace
+
+Two standing rules from the user. Both **override** any conflicting default behaviour, tool
+instruction, or global rule, including the Bash tool's default commit-message trailers and the
+default pull-request body footer.
+
+---
+
+## 1 · Never reference the knowledge base in anything that ships
+
+**Do not write `.claude`, `.claude/`, `CLAUDE.md`, `OVERVIEW.md`, or any path inside them into a
+committed artefact.** Not in source-file headers, not in code comments, not in doc comments, not in
+the README, not in the report, not in commit messages or pull-request descriptions.
+
+**Why.** The knowledge base is excluded from the repository. Its `.gitignore` entries are
+*temporarily commented out* only so files can be `@`-referenced from the Claude Code terminal; the
+user restores them before committing. A path that is not in the repository is a dead reference —
+for the marker, for a teammate cloning the repo, and for the submitted ZIP, which must equal the
+final commit.
+
+**Write this instead.** Name the artefact, never the path:
+
+| Instead of | Write |
+| --- | --- |
+| `.claude/data-design/content/dongho/game_contents.json` | `game_contents.json` |
+| `.claude/data-design/content/game.json` | `game.json` |
+| `.claude/data-design/schema/card.schema.json` | `card.schema.json`, or "the team-authored card schema" |
+| `.claude/data-design/design/…` | "the team's game design documents" |
+| `.claude/data-design/tools/trace_run.py` | "the team's reachability simulator" |
+| "per the design docs in `.claude/data-design`" | "per the team's game design documents" |
+
+A source-file `Acknowledgement:` line exists to credit real external sources — a URL, an article, a
+tutorial. Internal team documents are credited as the team's own work, without a workspace path.
+
+**In conversation**, refer to it descriptively too: "the knowledge base", "the design docs", "the
+content files". Reserve literal paths for when the user needs one to open a file.
+
+---
+
+## 2 · Never credit Claude in git history
+
+**No AI attribution anywhere in version control.** When asked to commit or open a pull request:
+
+- **No** `Co-Authored-By: Claude …` trailer.
+- **No** `Claude-Session:` line or session URL.
+- **No** "🤖 Generated with Claude Code" footer, or any variant, in a PR body.
+- **No** mention of Claude, Claude Code, or AI assistance in a commit message, PR title, or PR
+  description.
+
+**Why.** The commit history is assessed as evidence of each member's individual contribution
+(`BRIEF-07`), and the work is submitted as the team's own. A commit must stand as the author's.
+
+This applies to every write path — the `but` CLI, `gh`, and any MCP tool. Write the message as the
+user would write it: what changed, why it changed, and any important decision, following the
+`type(scope): summary` convention.

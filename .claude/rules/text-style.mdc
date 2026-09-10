@@ -1,0 +1,47 @@
+---
+description: Punctuation style for every text this workspace generates. No dash punctuation in prose, in any language. Applies to docs, content JSON, UI copy, code comments, commit messages and chat output.
+globs:
+  - "**/*"
+alwaysApply: true
+---
+
+# Text style: no dash punctuation
+
+Standing rule from the user (01/09/2026): generated text must not use a dash
+as a punctuation mark. That covers the em dash (—), the en dash (–), and a
+spaced hyphen ( - ) doing the same job. It reads as machine-written; the team
+wants prose that does not.
+
+## Instead of a dash
+
+| The dash was doing | Write instead | Example |
+| --- | --- | --- |
+| A dramatic break or afterthought | A period, or a comma | "Lửa không đợi. Nhà chạy được, ván thì không." |
+| Introducing an elaboration or list | A colon | "Cho ra hàng: đẹp vừa đủ, đúng hẹn" |
+| A parenthetical aside (paired dashes) | Parentheses, or paired commas | "một lớp nghĩa chúc tụng (sung túc, cộng sinh) mà..." |
+| Joining two parallel clauses ("— và", "— and") | A comma before the connective | "...tranh bắt đầu ẩu, và tiếng lớn là lúc..." |
+| An apposition ("the father — the child of 1972") | A comma | "The father, the child of 1972" |
+| Title separators ("Chương II · Giữ nếp — 1967") | The existing separator (·) or a colon | "Chương II · Giữ nếp · 1967" |
+
+Rewriting the sentence is always allowed and often best. Do not mechanically
+swap every dash for the same character; pick what the sentence needs.
+
+## Not covered (these stay)
+
+- Hyphens inside compound words and names: rotate-and-assemble, when-not-what
+- Kebab-case identifiers and file names: han-chot-31-3, level-map.md
+- Numeric ranges: 1938-2025, 2026-2035 (plain hyphen, no spaces)
+- Negative numbers, CLI flags (-v, --audit), YAML/Markdown syntax
+- Verbatim quotes of someone else's text, and user-authored strings
+
+## Scope
+
+Everything this workspace generates: Vietnamese and English prose alike, in
+game content JSON, docs/, KB files, code comments, commit messages, PR
+descriptions and assistant replies. game_contents.json was swept clean of all
+198 dashes on 01/09/2026; keep it that way. The content linter does not check
+this yet, so the rule is enforced by review.
+
+Legacy text predating the rule (docs/ and the .claude KB, 01/09/2026 and
+earlier) is exempt from retroactive cleanup by the user's decision: do not
+sweep it. The rule applies to text written or edited from now on.
